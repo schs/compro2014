@@ -2,7 +2,7 @@ class Greeter {
     element: HTMLElement;
     span: HTMLElement;
     timerToken: number;
-    test: string;
+    tree: string;
 
     constructor(element: HTMLElement) {
         this.element = element;
@@ -10,7 +10,7 @@ class Greeter {
         this.span = document.createElement('span');
         this.element.appendChild(this.span);
         this.span.innerText = new Date().toUTCString();
-        this.test = "test";
+        this.tree = "kap da foo";
 
     }
 
