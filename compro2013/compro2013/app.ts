@@ -11,6 +11,7 @@ class Greeter {
         this.element.appendChild(this.span);
         this.span.innerText = new Date().toUTCString();
         this.test = "test";
+        "You cant stop me"  
 
     }
 
