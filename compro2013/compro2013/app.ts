@@ -10,8 +10,7 @@ class Greeter {
         this.span = document.createElement('span');
         this.element.appendChild(this.span);
         this.span.innerText = new Date().toUTCString();
-        this.test = "test";
-        "You cant stop me"  
+        this.test = "testes";
 
     }
 
