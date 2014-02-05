@@ -27,6 +27,7 @@
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slime.ts" />
     <TypeScriptCompile Include="Source\Game.ts" />
+    <TypeScriptCompile Include="Source\GUI\LoadingScreen.ts" />
     <TypeScriptCompile Include="Source\Items\Item.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Sword.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\Entrance.ts" />
@@ -37,7 +38,7 @@
     <TypeScriptCompile Include="Source\Map\Walls\Walls.ts" />
     <TypeScriptCompile Include="Source\Enemies\Enemie.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
-    <TypeScriptCompile Include="Source\Player\HUD.ts" />
+    <TypeScriptCompile Include="Source\GUI\HUD.ts" />
     <TypeScriptCompile Include="Source\Player\Player.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +52,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Items\Weapons\" />
-    <Folder Include="Resources\Locations\" />
-    <Folder Include="Resources\Player\" />
+    <Folder Include="Resources\Audio\Enemies\" />
+    <Folder Include="Resources\Audio\Music\" />
+    <Folder Include="Resources\Audio\Player\" />
+    <Folder Include="Resources\Images\Items\Weapons\" />
+    <Folder Include="Resources\Images\Locations\" />
+    <Folder Include="Resources\Images\Player\" />
     <Folder Include="Source\Enemies\Bosses\" />
     <Folder Include="Source\Map\Locations\" />
   </ItemGroup>
