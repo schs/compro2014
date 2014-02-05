@@ -10,7 +10,7 @@ class Greeter {
         this.span = document.createElement('span');
         this.element.appendChild(this.span);
         this.span.innerText = new Date().toUTCString();
-        this.test = "yay";
+        this.test = "Go Hawks!";
 
     }
 
@@ -24,8 +24,3 @@ class Greeter {
 
 }
 
-window.onload = () => {
-    var el = document.getElementById('content');
-    var greeter = new Greeter(el);
-    greeter.start();
-};
