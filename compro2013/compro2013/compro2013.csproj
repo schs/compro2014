@@ -18,18 +18,44 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="default.htm" />
+    <Content Include="Scripts\endgate-0.2.1.js" />
+    <Content Include="Scripts\endgate-0.2.1.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Slime.ts" />
+    <TypeScriptCompile Include="Source\Game.ts" />
+    <TypeScriptCompile Include="Source\Items\Item.ts" />
+    <TypeScriptCompile Include="Source\Items\Weapons\Sword.ts" />
+    <TypeScriptCompile Include="Source\Map\Entrances\Entrance.ts" />
+    <TypeScriptCompile Include="Source\Map\Entrances\DungeonEntrance.ts" />
+    <TypeScriptCompile Include="Source\Map\Entrances\TentEntrance.ts" />
+    <TypeScriptCompile Include="Source\Map\MapGenerator.ts" />
+    <TypeScriptCompile Include="Source\Map\Walls\Tree.ts" />
+    <TypeScriptCompile Include="Source\Map\Walls\Walls.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Enemie.ts" />
+    <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
+    <TypeScriptCompile Include="Source\Player\HUD.ts" />
+    <TypeScriptCompile Include="Source\Player\Player.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\endgate-0.2.1.min.js.map" />
+    <Content Include="packages.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Items\Weapons\" />
+    <Folder Include="Resources\Locations\" />
+    <Folder Include="Resources\Player\" />
+    <Folder Include="Source\Enemies\Bosses\" />
+    <Folder Include="Source\Map\Locations\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
