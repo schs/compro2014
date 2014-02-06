@@ -2,12 +2,10 @@ class MapHandler {
     private mapLayers: eg.Graphics.SquareTileMap[];
     private Scene: eg.Rendering.Scene2d
     private propertyHooks: eg.MapLoaders.IPropertyHooks;
-    private test: string;
 
     constructor(Scene: eg.Rendering.Scene2d) {
         this.mapLayers = new Array<eg.Graphics.SquareTileMap>();
         this.Scene = Scene;
-        this.test = "test";
 
         this.propertyHooks = {
             ResourceTileHooks: { "passable": this.createCollisionMap.bind(this)},
@@ -54,7 +52,7 @@ class MapHandler {
     }
 
     private createCollisionMap(details){
-        alert(this.test);
+        //create collision boxes for tiles that are not passable
     }
 
 }

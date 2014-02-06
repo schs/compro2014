@@ -4,7 +4,6 @@ interface properties extends eg.MapLoaders.IPropertyHooks {
 class Game extends eg.Game {
     player: Player;
     mapHandler: MapHandler;
-    error: string;
 
 
 
@@ -18,7 +17,7 @@ class Game extends eg.Game {
     }
 
     Update(gameTime: eg.GameTime) {
-        this.error = "test";
+       
     }
 
 
