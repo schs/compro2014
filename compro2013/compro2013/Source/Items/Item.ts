@@ -7,9 +7,9 @@ class Item extends eg.Collision.Collidable {
 
     constructor(scene: eg.Rendering.Scene2d) {
         this.scene = scene;
-        this.sprite
+        this.sprite //set the sprite here
         this.scene.Add(this.sprite);
-        super();
+        super(this.sprite.GetDrawBounds());
     }
 
 

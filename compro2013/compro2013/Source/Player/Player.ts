@@ -8,7 +8,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
     
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d) {
         this.scene = scene;
-        super();
+
+        //add the sprite here
+        super(this.sprite.GetDrawBounds());
         this.speed = 200;
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, false);
         this.inputController = new eg.InputControllers.DirectionalInputController(input, (direction: string, startMoving: boolean) => {
