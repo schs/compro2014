@@ -18,7 +18,7 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="default.htm" />
-    <Content Include="Images\Black.png" />
+    <Content Include="Resources\Images\Black.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
@@ -30,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="dayNight.ts" />
+    <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slime.ts" />
@@ -49,7 +49,6 @@
     <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
     <TypeScriptCompile Include="Source\GUI\HUD.ts" />
     <TypeScriptCompile Include="Source\Player\Player.ts" />
-    <TypeScriptCompile Include="weather.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\endgate-0.2.1.min.js.map" />
