@@ -19,23 +19,30 @@
     <Content Include="app.css" />
     <Content Include="default.htm" />
     <Content Include="Images\Black.png" />
+    <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
+    <Content Include="Resources\Maps\TestMap.tmx" />
+    <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.0.js" />
+    <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="dayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slime.ts" />
     <TypeScriptCompile Include="Source\Game.ts" />
+    <TypeScriptCompile Include="Source\GUI\CameraController.ts" />
     <TypeScriptCompile Include="Source\GUI\LoadingScreen.ts" />
     <TypeScriptCompile Include="Source\Items\Item.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Sword.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\Entrance.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\DungeonEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\TentEntrance.ts" />
-    <TypeScriptCompile Include="Source\Map\MapGenerator.ts" />
+    <TypeScriptCompile Include="Source\Map\MapHandler.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Tree.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Walls.ts" />
     <TypeScriptCompile Include="Source\Enemies\Enemie.ts" />
@@ -47,6 +54,8 @@
   <ItemGroup>
     <Content Include="Scripts\endgate-0.2.1.min.js.map" />
     <Content Include="packages.config" />
+    <Content Include="Source\Map\Maps\TestMap.json" />
+    <Content Include="Scripts\jquery-2.1.0.min.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -59,10 +68,8 @@
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
     <Folder Include="Resources\Images\Items\Weapons\" />
-    <Folder Include="Resources\Images\Locations\" />
     <Folder Include="Resources\Images\Player\" />
     <Folder Include="Source\Enemies\Bosses\" />
-    <Folder Include="Source\Map\Locations\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
