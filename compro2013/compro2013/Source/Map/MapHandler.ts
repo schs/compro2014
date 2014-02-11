@@ -8,7 +8,7 @@ class MapHandler {
         this.Scene = Scene;
 
         this.propertyHooks = {
-            ResourceTileHooks: { "passable": this.createCollisionMap.bind(this)},
+            ResourceTileHooks: { "impassable": this.createCollisionMap.bind(this)},
             ResourceSheetHooks: {},
             LayerHooks: {}
         };
@@ -53,6 +53,7 @@ class MapHandler {
 
     private createCollisionMap(details){
         //create collision boxes for tiles that are not passable
+        var tile = details.Tile;
     }
 
 }
