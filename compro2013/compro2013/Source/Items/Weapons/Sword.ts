@@ -1,15 +1,16 @@
 class Sword extends Item {
-    name: "Sword";
-    size: //number
-    scene:
+    
+    size: number;
+    scene: eg.Rendering.Scene2d;
     lastCollision: eg.Collision.Collidable;
     sprite: eg.Graphics.Sprite2d;
 
-    constructor() {
-
-
-
-        super();
+    constructor(scene: eg.Rendering.Scene2d) {
+        name = "Sword";
+        this.sprite // new eg.spite Thien making art
+        super(name, scene, this.sprite);
+        this.scene.Add(this.sprite);
+      
     }
 
 
@@ -18,6 +19,7 @@ class Sword extends Item {
     }
 
     Update(gameTime: eg.GameTime) {
+
     }
 
 
