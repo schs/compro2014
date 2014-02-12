@@ -1,6 +1,7 @@
 class MapHandler {
     private mapLayers: eg.Graphics.SquareTileMap[];
     private Scene: eg.Rendering.Scene2d
+    private collisionManager: eg.Collision.CollisionManager;
     private propertyHooks: eg.MapLoaders.IPropertyHooks;
 
     constructor(Scene: eg.Rendering.Scene2d) {
