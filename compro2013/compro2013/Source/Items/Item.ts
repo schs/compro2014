@@ -5,7 +5,7 @@ class Item extends eg.Collision.Collidable {
     lastCollision: eg.Collision.Collidable;
     sprite: eg.Graphics.Sprite2d;
 
-    constructor(scene: eg.Rendering.Scene2d, sprite: eg.Graphics.Sprite2d) {
+    constructor(name: String, scene: eg.Rendering.Scene2d, sprite: eg.Graphics.Sprite2d) {
         this.scene = scene;
         this.sprite = sprite; 
         this.scene.Add(this.sprite);
