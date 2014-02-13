@@ -1,4 +1,4 @@
-class Item extends eg.Collision.Collidable {
+class Item extends eg.Collision.Collidable implements ICollidableTyped {
     type: String;
     scene: eg.Rendering.Scene2d;
     lastCollision: eg.Collision.Collidable;
