@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
@@ -43,8 +44,6 @@
     <TypeScriptCompile Include="Source\Map\Entrances\DungeonEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\TentEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\MapHandler.ts" />
-    <TypeScriptCompile Include="Source\Map\Walls\Tree.ts" />
-    <TypeScriptCompile Include="Source\Map\Walls\Walls.ts" />
     <TypeScriptCompile Include="Source\Enemies\Enemie.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
     <TypeScriptCompile Include="Source\GUI\HUD.ts" />
@@ -53,7 +52,7 @@
   <ItemGroup>
     <Content Include="Scripts\endgate-0.2.1.min.js.map" />
     <Content Include="packages.config" />
-    <Content Include="Source\Map\Maps\TestMap.json" />
+    <Content Include="Source\Map\Maps\OverWorld.json" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
