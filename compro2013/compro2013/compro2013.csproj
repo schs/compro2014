@@ -30,6 +30,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Source\Extensions\CollisionType.ts" />
+    <TypeScriptCompile Include="Source\Interfaces\ICollidableTyped.ts" />
     <TypeScriptCompile Include="Source\Items\MeleeWeapon.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
