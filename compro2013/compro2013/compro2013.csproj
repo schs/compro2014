@@ -19,6 +19,7 @@
     <Content Include="app.css" />
     <Content Include="default.htm" />
     <Content Include="Resources\Images\Black.png" />
+    <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Extensions\CollisionType.ts" />
     <TypeScriptCompile Include="Source\Interfaces\ICollidableTyped.ts" />
     <TypeScriptCompile Include="Source\Items\MeleeWeapon.ts" />
