@@ -7,6 +7,8 @@ class HUD extends eg.Game implements eg.IUpdateable {
     imageSource2: eg.Graphics.ImageSource;
     backgroundImage: eg.Graphics.Sprite2d;
     backgroundImage2: eg.Graphics.Sprite2d;
+    sword: eg.Graphics.Sprite2d;
+    fist: eg.Graphics.Sprite2d;
 
     constructor(scene: eg.Rendering.Scene2d) {
         super();
@@ -36,7 +38,7 @@ class HUD extends eg.Game implements eg.IUpdateable {
     }
 
     update(gameTime: eg.GameTime) {
-        if (this.sword == true) {
+        if (this.sword.Visible == true) {
             if (this.backgroundImage.Visible == true) {
             }
             if (this.fist.Visible == true) {
