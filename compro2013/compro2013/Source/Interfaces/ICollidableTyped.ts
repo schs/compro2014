@@ -1,0 +1,3 @@
+interface ICollidableTyped {
+    CollisionType: CollisionType;
+} 

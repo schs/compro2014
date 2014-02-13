@@ -1,17 +1,14 @@
-interface properties extends eg.MapLoaders.IPropertyHooks {
-
-}
 class Game extends eg.Game {
+    static DEBUG: boolean = true;
+
     player: Player;
     mapHandler: MapHandler;
-
-
 
     constructor() {
         super();
 
-        this.mapHandler = new MapHandler(this.Scene);
-        this.mapHandler.load("/Source/Map/Maps/TestMap.json", this.mapHandler.loadComplete);
+        this.mapHandler = new MapHandler(this.Scene, this.CollisionManager);
+        this.mapHandler.load("/Source/Map/Maps/OverWorld.json", this.mapHandler.loadComplete);
         
 
     }

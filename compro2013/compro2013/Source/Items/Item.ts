@@ -1,11 +1,11 @@
 class Item extends eg.Collision.Collidable {
-    name: String;
-    size: number;
+    type: String;
     scene: eg.Rendering.Scene2d;
     lastCollision: eg.Collision.Collidable;
     sprite: eg.Graphics.Sprite2d;
 
-    constructor(scene: eg.Rendering.Scene2d, sprite: eg.Graphics.Sprite2d) {
+    constructor(type: String, scene: eg.Rendering.Scene2d, sprite: eg.Graphics.Sprite2d) {
+        this.type = type;
         this.scene = scene;
         this.sprite = sprite; 
         this.scene.Add(this.sprite);
@@ -17,6 +17,7 @@ class Item extends eg.Collision.Collidable {
 
 
     }
+
     Update(gameTime: eg.GameTime) {
 
     }

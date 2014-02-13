@@ -40,7 +40,7 @@ class HUD extends eg.Game implements eg.IUpdateable {
             if (this.backgroundImage.Visible == true) {
             }
             if (this.fist.Visible == true) {
-                this.backgroundImage2.Visible = false;
+                this.backgroundImage2.Visible = true;
 
             }
         }

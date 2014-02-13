@@ -1,15 +1,20 @@
 class MapHandler {
     private mapLayers: eg.Graphics.SquareTileMap[];
     private Scene: eg.Rendering.Scene2d
+    private collisionManager: eg.Collision.CollisionManager;
     private propertyHooks: eg.MapLoaders.IPropertyHooks;
 
-    constructor(Scene: eg.Rendering.Scene2d) {
+    private walls: Wall[];
+
+    constructor(Scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.mapLayers = new Array<eg.Graphics.SquareTileMap>();
         this.Scene = Scene;
+        this.collisionManager = collisionManager;
+        this.walls = new Array();
 
         this.propertyHooks = {
-            ResourceTileHooks: { "impassable": this.createCollisionMap.bind(this)},
-            ResourceSheetHooks: {},
+            ResourceTileHooks: {},
+            ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
 
@@ -52,8 +57,9 @@ class MapHandler {
     }
 
     private createCollisionMap(details){
+        var tile: eg.Graphics.Sprite2d = details.Tile;
         //create collision boxes for tiles that are not passable
-        var tile = details.Tile;
+        this.walls.push(new Wall(tile.Position, tile.Size.Subtract(1), this.Scene, this.collisionManager));
     }
 
 }
