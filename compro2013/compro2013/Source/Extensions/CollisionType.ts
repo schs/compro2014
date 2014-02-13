@@ -1,25 +1,8 @@
 class CollisionType {
-    private static types = {
-        wall: true,
-        item: true,
-        enemy: true,
-        player: true,
-        projectile: true                        
-    }
-
-    public static Wall(): CollisionType {
-        return this.types.wall;
-    }
-    public static Item(): CollisionType {
-        return this.types.item;
-    }
-    public static Enemy(): CollisionType {
-        return this.types.enemy;
-    }
-    public static Player(): CollisionType {
-        return this.types.player;
-    }
-    public static Projectile(): CollisionType {
-        return this.types.projectile;
-    }
+    public static Wall: CollisionType = true;
+    public static Item: CollisionType = true;
+    public static Enemy: CollisionType = true;
+    public static Player: CollisionType = true;
+    public static Projectile: CollisionType = true;                      
+  
 } 
