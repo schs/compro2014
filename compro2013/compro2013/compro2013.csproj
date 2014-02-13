@@ -19,6 +19,8 @@
     <Content Include="app.css" />
     <Content Include="default.htm" />
     <Content Include="Images\Black.png" />
+    <Content Include="Images\Fist.png" />
+    <Content Include="Images\HUD sword 1.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
