@@ -1,5 +1,5 @@
 class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollidableTyped {
-    CollisionType: CollisionType;
+    collisionType: CollisionType;
     speed: number;
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
@@ -9,7 +9,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d) {
         this.scene = scene;
-        this.CollisionType = CollisionType.Player;
+        this.collisionType = CollisionType.Player;
         //add the sprite here
         super(this.sprite.GetDrawBounds());
         this.speed = 200;
