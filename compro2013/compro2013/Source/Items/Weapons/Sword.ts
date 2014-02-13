@@ -1,18 +1,11 @@
-class Sword extends Item {
+class Sword extends MeleeWeapon {
     
-    size: number;
-    scene: eg.Rendering.Scene2d;
-    lastCollision: eg.Collision.Collidable;
-    sprite: eg.Graphics.Sprite2d;
-
     constructor(scene: eg.Rendering.Scene2d) {
-        name = "Sword";
+        //Added melee weapon class, set the damage for this weapon through the super call to the MeleeWeapon class.
         this.sprite // new eg.spite Thien making art
-        super(name, scene, this.sprite);
+        super("Sword", scene, this.sprite);
         this.scene.Add(this.sprite);
-      
     }
-
 
     collision() {
 
