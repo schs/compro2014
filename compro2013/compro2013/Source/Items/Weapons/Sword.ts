@@ -7,8 +7,9 @@ class Sword extends MeleeWeapon {
         this.scene.Add(this.sprite);
     }
 
-    collision() {
-
+    collision(data: eg.Collision.CollisionData) {
+        if (this.lastCollision !== data.With) {
+        }
     }
 
     Update(gameTime: eg.GameTime) {
