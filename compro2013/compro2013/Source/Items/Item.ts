@@ -15,8 +15,10 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
 
-    collision() {
+    collision(data: eg.Collision.CollisionData) {
+        if (this.lastCollision !== data.With) {
 
+        }
 
     }
 
