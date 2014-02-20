@@ -8,6 +8,8 @@ class Game extends eg.Game {
     constructor() {
         super();
 
+        this.player = new Player(0,0,
+
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager);
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json", this.mapHandler.loadComplete);
         if (Game.DEBUG) {

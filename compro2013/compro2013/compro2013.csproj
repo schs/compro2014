@@ -43,7 +43,6 @@
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slime.ts" />
     <TypeScriptCompile Include="Source\Game.ts" />
-    <TypeScriptCompile Include="Source\GUI\CameraController.ts" />
     <TypeScriptCompile Include="Source\GUI\LoadingScreen.ts" />
     <TypeScriptCompile Include="Source\Items\Item.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Sword.ts" />
@@ -51,7 +50,7 @@
     <TypeScriptCompile Include="Source\Map\Entrances\DungeonEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\TentEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\MapHandler.ts" />
-    <TypeScriptCompile Include="Source\Enemies\Enemie.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Enemy.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
     <TypeScriptCompile Include="Source\GUI\HUD.ts" />
     <TypeScriptCompile Include="Source\Player\Player.ts" />
