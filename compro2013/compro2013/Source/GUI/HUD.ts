@@ -1,50 +1,24 @@
-class HUD extends eg.Game implements eg.IUpdateable {
-    playerHealth: number;
-    playerLevel: number;
-    text: eg.Graphics.Text2d;
+class HUD {
+    score: eg.Graphics.Text2d;
+    scorePosition: eg.Vector2d;
+
     scene: eg.Rendering.Scene2d;
-    imageSource: eg.Graphics.ImageSource;
-    imageSource2: eg.Graphics.ImageSource;
+    inventorySprites: eg.Graphics.Sprite2d;
     backgroundImage: eg.Graphics.Sprite2d;
-    backgroundImage2: eg.Graphics.Sprite2d;
-    sword: eg.Graphics.Sprite2d;
-    fist: eg.Graphics.Sprite2d;
 
     constructor(scene: eg.Rendering.Scene2d) {
-        super();
         this.scene = scene;
-        this.playerHealth = 100;
-        this.playerLevel = 0;
-        this.text = new eg.Graphics.Text2d(this.scene.DrawArea.width / 2, 50, "Score");
-        this.scene.Add(this.text);
-        this.text.Scale(5);
-        this.imageSource = new eg.Graphics.ImageSource("/Images/HUD sword 1.png", 576, 576);
-        this.backgroundImage = new eg.Graphics.Sprite2d(650, 375, this.imageSource, 200, 200);
-        this.imageSource2 = new eg.Graphics.ImageSource("/Images/Fist.png", 576, 576);
-        this.backgroundImage2 = new eg.Graphics.Sprite2d(650, 375, this.imageSource, 200, 200);
 
-    }
-    addPlayerHealth() {
-        this.playerHealth--;
-        this.text.Text = "Health: " + this.playerHealth + "Level:  " + this.playerLevel;
+        this.scorePosition = new eg.Vector2d(50, 50);
+        this.score = new eg.Graphics.Text2d(this.scene.Camera.TopLeft.X + this.scorePosition.X, this.scene.Camera.TopLeft.Y + this.scorePosition.Y, "Score: ");
+        this.score.Scale(5);
+        this.score.ZIndex = ZIndexing.HUD;
+        this.scene.Add(this.score);
+        
     }
 
-    addPlayerLevel() {
-        this.playerLevel++;
-        this.text.Text = "Health: " + this.playerHealth + "Level: " + this.playerLevel;
-    }
-    turnOnLightRed() {
-        this.backgroundImage.Visible = true;
-    }
-
-    update(gameTime: eg.GameTime) {
-        if (this.sword.Visible == true) {
-            if (this.backgroundImage.Visible == true) {
-            }
-            if (this.fist.Visible == true) {
-                this.backgroundImage2.Visible = true;
-
-            }
-        }
+    Update(gameTime: eg.GameTime, score: number) {
+        this.score.Position = this.scene.Camera.TopLeft.Add(this.scorePosition);
+        this.score.Text = "Score: " + score;
     }
 }
