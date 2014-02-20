@@ -22,6 +22,7 @@
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld_walls.png" />
+    <Content Include="Resources\Images\Player\Player.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
     <Content Include="Resources\Maps\TestMap.tmx" />
@@ -72,7 +73,6 @@
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
     <Folder Include="Resources\Images\Items\Weapons\" />
-    <Folder Include="Resources\Images\Player\" />
     <Folder Include="Source\Enemies\Bosses\" />
   </ItemGroup>
   <PropertyGroup>
