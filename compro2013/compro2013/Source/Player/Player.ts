@@ -7,7 +7,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
     sprite: eg.Graphics.Sprite2d;
     lastCollision: eg.Collision.Collidable;
     scene: eg.Rendering.Scene2d;
-    
+    health: number;
+    damage: number;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d) {
         this.scene = scene;
@@ -17,6 +18,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
         this.sprite.ZIndex = ZIndexing.Player;
         super(this.sprite.GetDrawBounds());
         this.scene.Add(this.sprite);
+        this.health = 100;
+        this.damage = 20;
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, true);
         this.inputController = new eg.InputControllers.DirectionalInputController(input, (direction: string, startMoving: boolean) => {
             this.movementController.Move(direction, startMoving);
@@ -25,8 +28,12 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
         this.hud = new HUD(this.scene);
     }
 
-    Attack() {
+    DamageTaken() {
+        
+    }
 
+    Attack() {
+        
     }
 
     Collision(data: eg.Collision.CollisionData) {
