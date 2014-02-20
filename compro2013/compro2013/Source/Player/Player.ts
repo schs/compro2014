@@ -11,9 +11,10 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
         this.scene = scene;
         this.speed = 200;
         this.sprite = new eg.Graphics.Sprite2d(x, y, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 64, 64));
+        this.sprite.ZIndex = ZIndexing.Player;
         super(this.sprite.GetDrawBounds());
         this.scene.Add(this.sprite);
-        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, false);
+        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, true);
         this.inputController = new eg.InputControllers.DirectionalInputController(input, (direction: string, startMoving: boolean) => {
             this.movementController.Move(direction, startMoving);
         }, upKeys, rightKeys, downKeys, leftKeys);
@@ -23,11 +24,12 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
 
     }
 
-    Collision() {
+    Collision(data: eg.Collision.CollisionData) {
 
     }
 
     Update(gameTime: eg.GameTime) {
+        this.movementController.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
     }
 } 

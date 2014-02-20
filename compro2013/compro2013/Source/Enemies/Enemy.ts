@@ -21,7 +21,7 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
         this.damage = damage;
         this.attackspeed = attackspeed;
         this.scene.Add(this.sprite);
-        this.movementcontroller = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite) this.speed, false);
+        this.movementcontroller = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, false);
 
         super(this.sprite.GetDrawBounds());
 
