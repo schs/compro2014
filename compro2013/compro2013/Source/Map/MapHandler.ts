@@ -56,7 +56,7 @@ class MapHandler {
         }
     }
 
-    private createCollisionMap(details){
+    private createCollisionMap(details: eg.Graphics.Assets.ITileDetails, propertyValue: string){
         var tile: eg.Graphics.Sprite2d = details.Tile;
         //create collision boxes for tiles that are not passable
         this.walls.push(new Wall(tile.Position, tile.Size.Subtract(1), this.Scene, this.collisionManager));
