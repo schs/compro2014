@@ -3,6 +3,8 @@ class Game extends eg.Game {
     fps: eg.Graphics.Text2d;
 
     player: Player;
+    testEnemy: Enemy;
+
     mapHandler: MapHandler;
 
     constructor() {
@@ -11,7 +13,7 @@ class Game extends eg.Game {
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager);
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json", this.mapHandler.loadComplete);
         this.player = new Player(100, 100, ["Up"], ["Down"], ["Left"], ["Right"], this.Input.Keyboard, this.Scene);
-
+        this.testEnemy = new BrownSmear(50, 50, this.Scene, this.CollisionManager); 
         if (Game.DEBUG) {
             this.fps = new eg.Graphics.Text2d(this.Scene.Camera.TopLeft.X + 20, this.Scene.Camera.TopLeft.Y + 20, "FPS", eg.Graphics.Color.White);
             this.fps.ZIndex = 10;

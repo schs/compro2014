@@ -1,0 +1,7 @@
+class EnemyHandler {
+    Enemy: Enemy[];
+
+
+
+
+}
