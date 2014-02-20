@@ -1,9 +1,10 @@
 class Game extends eg.Game {
     static DEBUG: boolean = true;
     fps: eg.Graphics.Text2d;
-
+    items: Item[];
     player: Player;
     mapHandler: MapHandler;
+   
 
     constructor() {
         super();
