@@ -29,20 +29,21 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
         this.speed = speed;
         this.scene.Add(this.sprite);
         this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 500));
+
+        this.range.OnCollision.Bind(this.RangeCollided.bind(this));
         this.collisionManager.Monitor(this.range);
-        this.range.OnCollision = this.RangeCollision.bind(this);
         this.collisionManager.Monitor(this);
         this.movementcontroller = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, false);
         
         
     }
 
-    RangeCollision(data: eg.Collision.CollisionData) {
-        alert("test");
+    RangeCollided(data: eg.Collision.CollisionData) {
+
     }
 
-    Collision(data: eg.Collision.CollisionData) {
-
+    Collided(data: eg.Collision.CollisionData) {
+        
     }
 
    

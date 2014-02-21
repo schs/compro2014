@@ -36,8 +36,8 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
-    <TypeScriptCompile Include="Source\Extensions\CollisionType.ts" />
-    <TypeScriptCompile Include="Source\Extensions\ZIndexing.ts" />
+    <TypeScriptCompile Include="Source\Enums\CollisionType.ts" />
+    <TypeScriptCompile Include="Source\Enums\ZIndexing.ts" />
     <TypeScriptCompile Include="Source\Interfaces\ICollidableTyped.ts" />
     <TypeScriptCompile Include="Source\Items\MeleeWeapon.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
@@ -74,6 +74,7 @@
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
     <Folder Include="Resources\Images\Items\Weapons\" />
+    <Folder Include="Source\CollisionManager\" />
     <Folder Include="Source\Enemies\Bosses\" />
   </ItemGroup>
   <PropertyGroup>

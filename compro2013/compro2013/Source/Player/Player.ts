@@ -7,11 +7,13 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
     sprite: eg.Graphics.Sprite2d;
     lastCollision: eg.Collision.Collidable;
     scene: eg.Rendering.Scene2d;
+    collisionManager: eg.Collision.CollisionManager;
     health: number;
     damage: number;
 
-    constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d) {
+    constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.scene = scene;
+        this.collisionManager = collisionManager;
         this.speed = 200;
         this.score = 0;
         this.sprite = new eg.Graphics.Sprite2d(x, y, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 64, 64));
@@ -24,7 +26,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
         this.inputController = new eg.InputControllers.DirectionalInputController(input, (direction: string, startMoving: boolean) => {
             this.movementController.Move(direction, startMoving);
         }, upKeys, rightKeys, downKeys, leftKeys);
-
+        this.collisionManager.Monitor(this);
         this.hud = new HUD(this.scene);
     }
 
@@ -36,7 +38,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
         
     }
 
-    Collision(data: eg.Collision.CollisionData) {
+    Collided(data: eg.Collision.CollisionData) {
 
     }
 
