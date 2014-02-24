@@ -1,6 +1,7 @@
 class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidableTyped {
     collisionType: CollisionType;
     circle: eg.Graphics.Circle;
+    attacking: boolean;
     health: number;
     damage: number;
     attackspeed: number;
@@ -38,7 +39,20 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
     }
 
     RangeCollided(data: eg.Collision.CollisionData) {
-
+        var collider: ICollidableTyped = <ICollidableTyped>data.With;
+        if (collider.collisionType == CollisionType.Player && !this.attacking) {
+            var xSide: number = this.movementController.Position.X - (<Player>collider).movementController.Position.X;
+            var ySide: number = this.movementController.Position.Y - (<Player>collider).movementController.Position.Y;
+            var rotation: number = Math.atan2(xSide, ySide);
+            this.movementController.Rotation = -rotation;
+            this.movementController.Position.X -= this.speed * Math.sin(rotation);
+            this.movementController.Position.Y -= this.speed * Math.cos(rotation);
+            
+           
+        }
+        if (collider.collisionType == CollisionType.Player && this.IsCollidingWith(collider)) {
+            this.attacking = false;
+        }
     }
 
     Collided(data: eg.Collision.CollisionData) {
@@ -54,6 +68,9 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
                 this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y);
 
             }
+        }
+        if (collider.collisionType == CollisionType.Player) {
+            this.attacking = true;
         }
     }
 
