@@ -37,7 +37,7 @@ class HUD {
         this.health.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.health);
 
-        this.goldPosition = new eg.Vector2d(50, 150);
+        this.goldPosition = new eg.Vector2d(-50, -50);
         this.gold = new eg.Graphics.Text2d(this.scene.Camera.BotLeft.X + this.goldPosition.X, this.scene.Camera.BotLeft.Y + this.goldPosition.Y, "Gold: ");
         this.gold.Scale(3);
         this.gold.ZIndex = ZIndexing.HUD;
@@ -58,7 +58,7 @@ class HUD {
         this.health.Position = this.scene.Camera.BotLeft.Add(this.healthPosition);
         this.health.Text = "Health: " + health;
 
-        this.health.Position = this.scene.Camera.BotLeft.Add(this.healthPosition);
-        this.health.Text = "Gold: " + gold;
+        this.gold.Position = this.scene.Camera.BotRight.Add(this.goldPosition);
+        this.gold.Text = "Gold: " + gold;
     }
 }
