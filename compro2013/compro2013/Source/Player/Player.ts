@@ -36,8 +36,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.hud = new HUD(this.scene);
     }
 
-    DamageTaken() {
-        
+    TakeDamage(amount: number) {
+        this.health -= amount;
+        console.log(this.health);
     }
 
     Attack() {

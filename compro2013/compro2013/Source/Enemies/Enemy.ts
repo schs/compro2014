@@ -6,6 +6,8 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
     damage: number;
     attackspeed: number;
     speed: number;
+    targetedPlayer: Player;
+    attackTimer: number;
     range: eg.Collision.Collidable;
     collisionManager: eg.Collision.CollisionManager;
     lastCollision: eg.Collision.Collidable;
@@ -20,7 +22,8 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
         this.collisionType = CollisionType.Enemy;
         this.imageSource = imageSource;
         this.sprite = new eg.Graphics.Sprite2d(x, y, this.imageSource);
-
+        this.attackTimer = 0;
+        this.attacking = false;
         this.sprite.ZIndex = ZIndexing.Enemy;
         super(this.sprite.GetDrawBounds());
         this.scene = scene;
@@ -40,6 +43,7 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
 
     RangeCollided(data: eg.Collision.CollisionData) {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
+        this.targetedPlayer = (<Player>collider);
         if (collider.collisionType == CollisionType.Player && !this.attacking) {
             var xSide: number = this.movementController.Position.X - (<Player>collider).movementController.Position.X;
             var ySide: number = this.movementController.Position.Y - (<Player>collider).movementController.Position.Y;
@@ -50,7 +54,7 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
             
            
         }
-        if (collider.collisionType == CollisionType.Player && this.IsCollidingWith(collider)) {
+        if (collider.collisionType == CollisionType.Player && !this.IsCollidingWith(collider)) {
             this.attacking = false;
         }
     }
@@ -71,12 +75,17 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
         }
         if (collider.collisionType == CollisionType.Player) {
             this.attacking = true;
+            
         }
     }
 
    
     Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
+        this.attackTimer += gameTime.Elapsed.Seconds;
+        if (this.attacking && this.attackTimer > 60/ this.attackspeed) {
+            this.targetedPlayer.TakeDamage(this.damage);
+        }
     }
 
 
