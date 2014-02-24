@@ -8,6 +8,9 @@ class HUD {
     health: eg.Graphics.Text2d;
     healthPosition: eg.Vector2d;
 
+    gold: eg.Graphics.Text2d;
+    goldPosition: eg.Vector2d;
+
     scene: eg.Rendering.Scene2d;
     inventorySprites: eg.Graphics.Sprite2d;
     backgroundImage: eg.Graphics.Sprite2d;
@@ -28,16 +31,21 @@ class HUD {
             this.fps.ZIndex = 10;
             this.scene.Add(this.fps);
         }
-        this.healthPosition = new eg.Vector2d(-50, -50);
-        this.health = new eg.Graphics.Text2d(this.scene.Camera.BotLeft.X + this.scorePosition.X, this.scene.Camera.BotLeft.Y + this.scorePosition.Y, "Score: ");
+        this.healthPosition = new eg.Vector2d(70, -50);
+        this.health = new eg.Graphics.Text2d(this.scene.Camera.BotLeft.X + this.healthPosition.X, this.scene.Camera.BotLeft.Y + this.healthPosition.Y, "Health: ");
         this.health.Scale(3);
         this.health.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.health);
 
+        this.goldPosition = new eg.Vector2d(50, 150);
+        this.gold = new eg.Graphics.Text2d(this.scene.Camera.BotLeft.X + this.goldPosition.X, this.scene.Camera.BotLeft.Y + this.goldPosition.Y, "Gold: ");
+        this.gold.Scale(3);
+        this.gold.ZIndex = ZIndexing.HUD;
+        this.scene.Add(this.gold);
         
     }
 
-    Update(gameTime: eg.GameTime, score: number, health: number) {
+    Update(gameTime: eg.GameTime, score: number, health: number, gold: number) {
         this.score.Position = this.scene.Camera.TopLeft.Add(this.scorePosition);
         this.score.Text = "Score: " + score;
 
@@ -49,5 +57,8 @@ class HUD {
 
         this.health.Position = this.scene.Camera.BotLeft.Add(this.healthPosition);
         this.health.Text = "Health: " + health;
+
+        this.health.Position = this.scene.Camera.BotLeft.Add(this.healthPosition);
+        this.health.Text = "Gold: " + gold;
     }
 }

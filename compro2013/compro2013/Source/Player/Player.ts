@@ -13,6 +13,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     collisionManager: eg.Collision.CollisionManager;
     health: number;
     damage: number;
+    gold: number;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.collisionType = CollisionType.Player;
@@ -65,6 +66,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         
         this.movementController.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
-        this.hud.Update(gameTime, this.score, this.health);
+        this.hud.Update(gameTime, this.score, this.health, this.gold);
     }
 } 
