@@ -590,6 +590,7 @@ declare module EndGate.Bounds {
     * Abstract bounds type that is used to detect intersections.
     */
     class Bounds2d implements EndGate.IMoveable { 
+        public _type: string;
         /**
         * Gets or sets the Position of the bounds.
         */

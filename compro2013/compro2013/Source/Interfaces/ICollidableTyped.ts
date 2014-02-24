@@ -1,3 +1,0 @@
-interface ICollidableTyped {
-    collisionType: CollisionType;
-} 

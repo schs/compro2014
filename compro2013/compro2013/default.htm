@@ -4,14 +4,24 @@
 <head>
     <meta charset="utf-8" />
     <title>ComPro 2014</title>
+    <style>
+        body, html {
+            margin: 0;
+            border: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+
 </head>
 <body>
     <script src="/Scripts/endgate-0.2.1.js"></script>
     <script src="/Scripts/jquery-2.1.0.js"></script>
 
-    <script src="/Source/Interfaces/ICollidableTyped.js"></script>
-    <script src="/Source/Enums/CollisionType.js"></script>
-    <script src="/Source/Enums/ZIndexing.js"></script>
+    <script src="/Source/Helpers/Interfaces/ICollidableTyped.js"></script>
+    <script src="/Source/Helpers/Enums/CollisionType.js"></script>
+    <script src="/Source/Helpers/Enums/ZIndexing.js"></script>
+    <script src="Source/Helpers/BoundsHelper.js"></script>
 
     <script src="/Source/Enemies/Enemy.js"></script>
     <script src="/Source/Enemies/Mobs/Slime.js"></script>
