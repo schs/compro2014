@@ -43,6 +43,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable {
     Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
-        this.hud.Update(gameTime, this.score);
+        this.hud.Update(gameTime, this.score, this.health);
     }
 } 
