@@ -36,10 +36,10 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Helpers\BoundsHelper.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\CollisionType.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\ZIndexing.ts" />
     <TypeScriptCompile Include="Source\Helpers\Interfaces\ICollidableTyped.ts" />
-    <TypeScriptCompile Include="Source\Helpers\BoundsHelper.ts" />
     <TypeScriptCompile Include="Source\Items\MeleeWeapon.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
