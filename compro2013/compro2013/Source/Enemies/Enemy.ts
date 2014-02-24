@@ -1,4 +1,4 @@
-class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidableTyped {
+class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     collisionType: CollisionType;
     circle: eg.Graphics.Circle;
     attacking: boolean;
@@ -22,7 +22,7 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
         this.collisionType = CollisionType.Enemy;
         this.imageSource = imageSource;
         this.sprite = new eg.Graphics.Sprite2d(x, y, this.imageSource);
-        this.attackTimer = 0;
+        this.attackTimer = 60;
         this.attacking = false;
         this.sprite.ZIndex = ZIndexing.Enemy;
         super(this.sprite.GetDrawBounds());
@@ -33,31 +33,38 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
         this.speed = speed;
         this.scene.Add(this.sprite);
         this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 500));
-        this.range.OnCollision.Bind(this.RangeCollided.bind(this));
-        this.collisionManager.Monitor(this.range);
         this.collisionManager.Monitor(this);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
-        
-        
+   }
+
+    Move() {
+        var xSide: number = this.movementController.Position.X - this.targetedPlayer.movementController.Position.X;
+        var ySide: number = this.movementController.Position.Y - this.targetedPlayer.movementController.Position.Y;
+        var rotation: number = Math.atan2(xSide, ySide);
+        this.movementController.Rotation = -rotation;
+        this.movementController.Position.X -= this.speed * Math.sin(rotation);
+        this.movementController.Position.Y -= this.speed * Math.cos(rotation);
     }
 
-    RangeCollided(data: eg.Collision.CollisionData) {
-        var collider: ICollidableTyped = <ICollidableTyped>data.With;
-        this.targetedPlayer = (<Player>collider);
-        if (collider.collisionType == CollisionType.Player && !this.attacking) {
-            var xSide: number = this.movementController.Position.X - (<Player>collider).movementController.Position.X;
-            var ySide: number = this.movementController.Position.Y - (<Player>collider).movementController.Position.Y;
-            var rotation: number = Math.atan2(xSide, ySide);
-            this.movementController.Rotation = -rotation;
-            this.movementController.Position.X -= this.speed * Math.sin(rotation);
-            this.movementController.Position.Y -= this.speed * Math.cos(rotation);
-            
-           
+    TargetPlayer(player: Player) {
+        //Target Player
+        if (player != this.targetedPlayer)
+            if (!this.targetedPlayer || BoundsHelper.PythagoreanTheorem(this.movementController.Position.X - (<Player>player).movementController.Position.X,
+                this.movementController.Position.Y - (<Player>player).movementController.Position.Y) >
+                BoundsHelper.PythagoreanTheorem(this.movementController.Position.X - this.targetedPlayer.movementController.Position.X,
+                    this.movementController.Position.Y - this.targetedPlayer.movementController.Position.Y)) {
+                this.targetedPlayer = (<Player>player);
+            }
+        //Move to Player
+        if (!this.attacking) {
+            this.Move();
         }
-        if (collider.collisionType == CollisionType.Player && !this.IsCollidingWith(collider)) {
+        //Start moving if not attacking
+        if (!this.IsCollidingWith(this.targetedPlayer)) {
             this.attacking = false;
         }
     }
+
 
     Collided(data: eg.Collision.CollisionData) {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
@@ -73,21 +80,25 @@ class Enemy extends eg.Collision.Collidable implements eg.IUpdateable, ICollidab
 
             }
         }
-        if (collider.collisionType == CollisionType.Player) {
+        if (collider == this.targetedPlayer) {
             this.attacking = true;
             
         }
     }
 
-   
-    Update(gameTime: eg.GameTime) {
+    Update(gameTime: eg.GameTime, players: Player[]) {
         this.movementController.Update(gameTime);
+
+        for (var i in players) {
+            if(this.range.IsCollidingWith(players[i]))
+                this.TargetPlayer(players[i]);
+        }
+
         this.attackTimer += gameTime.Elapsed.Seconds;
         if (this.attacking && this.attackTimer > 60/ this.attackspeed) {
             this.targetedPlayer.TakeDamage(this.damage);
+            this.attackTimer = 0;
         }
     }
-
-
 }
 

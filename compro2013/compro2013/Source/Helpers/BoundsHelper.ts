@@ -30,4 +30,11 @@ class BoundsHelper {
             return new eg.Vector2d(depthX, depthY);
         }
     }
+
+    public static PythagoreanTheorem(X: number, Y: number): number {
+        var absX: number = Math.abs(X);
+        var absY: number = Math.abs(Y);
+        var left = (absX * absX) + (absY * absY);
+        return Math.sqrt(left);
+    }
 } 
