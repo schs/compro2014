@@ -5,11 +5,12 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
     sprite: eg.Graphics.Sprite2d;
     collisionType: CollisionType;
 
-    constructor(type: String, scene: eg.Rendering.Scene2d, sprite: eg.Graphics.Sprite2d) {
+    constructor(x: number, y: number, type: String, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource) {
         this.collisionType = CollisionType.Item;
         this.type = type;
         this.scene = scene;
-        this.sprite = sprite; 
+        this.sprite = new eg.Graphics.Sprite2d(x, y, spriteImage) 
+        this.sprite.ZIndex = ZIndexing.Item;
         this.scene.Add(this.sprite);
         super(this.sprite.GetDrawBounds());
     }
@@ -19,11 +20,5 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
         if (this.lastCollision !== data.With) {
 
         }
-
     }
-
-    Update(gameTime: eg.GameTime) {
-
-    }
-
 } 

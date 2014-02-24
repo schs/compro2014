@@ -2,9 +2,9 @@ class MeleeWeapon extends Item {
     name: string;
     damage: number;
 
-    constructor(name: string, scene: eg.Rendering.Scene2d, sprite: eg.Graphics.ImageSource, damage: number) {
+    constructor(x: number, y: number, damage: number, name: string, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource) {
         this.damage = damage;
         this.name = name;
-        super("MeleeWeapon", scene, sprite);
+        super(x, y, "MeleeWeapon", scene, spriteImage);
     }
 }

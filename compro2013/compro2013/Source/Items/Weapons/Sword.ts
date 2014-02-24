@@ -1,26 +1,8 @@
 class Sword extends MeleeWeapon {
     
-    constructor(scene: eg.Rendering.Scene2d, damage: number) {
-        this.damage= 50;
-        this.sprite= new eg.Graphics.Sprite2d(25,25, new eg.Graphics.ImageSource("/Images/Items/Weapons/Sword.png", 50 ,50)); 
-        super("Sword", scene, this.sprite, 10);
-        this.scene.Add(this.sprite);
-    }
-
-    collision(data: eg.Collision.CollisionData) {
-        if (this.lastCollision !== data.With) {
-        }
-    }
-
-    Update(gameTime: eg.GameTime) {
+    constructor(x: number, y: number, scene: eg.Rendering.Scene2d, damage: number, sprite: eg.Graphics.ImageSource) {
+        
+        super(x,y,50,"Sword", scene, new eg.Graphics.ImageSource("/Images/Items/Weapons/Sword.png", 64, 64));
 
     }
-
-
-
-
-
-
-
-
 }
