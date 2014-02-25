@@ -22,27 +22,27 @@ class HUD {
 
         this.hudLocation = this.scene.Camera.TopLeft.Clone();
 
-        this.scorePosition = new eg.Vector2d(80, 10);
-        this.score = new eg.Graphics.Text2d(0, 0, "Score: ");
+        this.scorePosition = new eg.Vector2d(80, 30);
+        this.score = new eg.Graphics.Text2d(0, 0, "Score: ", eg.Graphics.Color.White);
         this.score.Scale(3);
         this.score.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.score);
         
         //FPS Text only enabled when debug is on
         if (Game.DEBUG) {
-            this.fpsPosition = new eg.Vector2d(80, 30);
+            this.fpsPosition = new eg.Vector2d(80, 10);
             this.fps = new eg.Graphics.Text2d(0, 0, "FPS", eg.Graphics.Color.White);
             this.fps.ZIndex = 10;
             this.scene.Add(this.fps);
         }
-        this.healthPosition = new eg.Vector2d(80, 50);
-        this.health = new eg.Graphics.Text2d(0, 0, "Health: ");
+        this.healthPosition = new eg.Vector2d(85, 50);
+        this.health = new eg.Graphics.Text2d(0, 0, "Health: ", eg.Graphics.Color.White);
         this.health.Scale(3);
         this.health.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.health);
 
         this.goldPosition = new eg.Vector2d(100, 70);
-        this.gold = new eg.Graphics.Text2d(0, 0, "Gold: ");
+        this.gold = new eg.Graphics.Text2d(0, 0, "Gold: ", eg.Graphics.Color.White);
         this.gold.Scale(3);
         this.gold.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.gold);
