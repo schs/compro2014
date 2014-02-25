@@ -22,7 +22,7 @@ class HUD {
 
         this.hudLocation = this.scene.Camera.TopLeft.Clone();
 
-        this.scorePosition = new eg.Vector2d(50, 10);
+        this.scorePosition = new eg.Vector2d(60, 10);
         this.score = new eg.Graphics.Text2d(0, 0, "Score: ");
         this.score.Scale(3);
         this.score.ZIndex = ZIndexing.HUD;
@@ -35,13 +35,13 @@ class HUD {
             this.fps.ZIndex = 10;
             this.scene.Add(this.fps);
         }
-        this.healthPosition = new eg.Vector2d(50, 50);
+        this.healthPosition = new eg.Vector2d(60, 50);
         this.health = new eg.Graphics.Text2d(0, 0, "Health: ");
         this.health.Scale(3);
         this.health.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.health);
 
-        this.goldPosition = new eg.Vector2d(50, 70);
+        this.goldPosition = new eg.Vector2d(70, 70);
         this.gold = new eg.Graphics.Text2d(0, 0, "Gold: ");
         this.gold.Scale(3);
         this.gold.ZIndex = ZIndexing.HUD;
