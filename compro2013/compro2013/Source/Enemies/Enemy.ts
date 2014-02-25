@@ -64,7 +64,18 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             this.attacking = false;
         }
     }
+    TakeDamage(amount: number) {
+            this.health -= amount;
+            console.log(this.health);
+        if (this.health < 1) {
+            this.Die();
+        }
+    }
 
+    Die() {
+        this.Dispose();
+        this.sprite.Dispose();
+    }
 
     Collided(data: eg.Collision.CollisionData) {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
@@ -95,10 +106,12 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         }
 
         this.attackTimer += gameTime.Elapsed.Seconds;
-        if (this.attacking && this.attackTimer > 60/ this.attackspeed) {
+        if (this.attacking && this.attackTimer > .5/ this.attackspeed) {
             this.targetedPlayer.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
+        this.TakeDamage(10);
+
     }
 }
 

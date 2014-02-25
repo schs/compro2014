@@ -1,5 +1,5 @@
 class Game extends eg.Game {
-    static DEBUG: boolean = true;
+    static DEBUG: boolean = false;
     fps: eg.Graphics.Text2d;
     items: Item[];
     players: Player[];
