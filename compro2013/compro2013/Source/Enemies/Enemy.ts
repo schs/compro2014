@@ -68,12 +68,14 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             this.health -= amount;
             console.log(this.health);
         if (this.health < 1) {
-            this.Die();
+          //  this.Die();
         }
     }
 
     Die() {
         this.Dispose();
+
+
         this.sprite.Dispose();
     }
 
