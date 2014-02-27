@@ -8,6 +8,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
     sprite: eg.Graphics.Sprite2d;
+    animation: eg.Graphics.SpriteAnimation;
     lastCollision: eg.Collision.Collidable;
     scene: eg.Rendering.Scene2d;
     collisionManager: eg.Collision.CollisionManager;
@@ -22,7 +23,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.collisionManager = collisionManager;
         this.speed = 200;
         this.score = 0;
-        this.sprite = new eg.Graphics.Sprite2d(x, y, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 64, 64));
+        this.sprite = new eg.Graphics.Sprite2d(x, y, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
+        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
         this.sprite.ZIndex = ZIndexing.Player;
         super(this.sprite.GetDrawBounds());
         this.scene.Add(this.sprite);
@@ -34,6 +36,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         }, upKeys, rightKeys, downKeys, leftKeys);
         this.collisionManager.Monitor(this);
         this.hud = new HUD(this.scene);
+        this.animation.Play(true);
     }
 
     TakeDamage(amount: number) {
@@ -42,7 +45,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        
+
     }
 
     Collided(data: eg.Collision.CollisionData) {
@@ -64,8 +67,12 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Update(gameTime: eg.GameTime) {
-        
         this.movementController.Update(gameTime);
+        if (this.movementController.IsMoving() && !this.animation.IsPlaying())
+            this.animation.Play(true);
+        else if (!this.movementController.IsMoving())
+            this.animation.Stop(true);
+        this.animation.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold);
     }
