@@ -14,6 +14,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     sprite: eg.Graphics.Sprite2d;
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
+    pathfinding: eg.Vector2d;
     movementController: eg.MovementControllers.LinearMovementController;
     
 
@@ -35,7 +36,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 500));
         this.collisionManager.Monitor(this);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
-   }
+        this.pathfinding = new eg.Vector2d(0, 0);
+    }
 
     Move() {
         var xSide: number = this.movementController.Position.X - this.targetedPlayer.movementController.Position.X;
@@ -86,10 +88,12 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             var tempPostion = this.movementController.Position.Clone();
             var depth: eg.Vector2d = BoundsHelper.GetIntersectionDepth(this.Bounds, collider.Bounds);
             if (Math.abs(depth.Y) < Math.abs(depth.X)) {
-                this.movementController.Position = new eg.Vector2d(this.movementController.Position.X, tempPostion.Y + depth.Y);
+
+                this.movementController.Position = new eg.Vector2d(this.movementController.Position.X - this.pathfinding.X, tempPostion.Y + depth.Y);
             }
             else {
-                this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y);
+
+                this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y - this.pathfinding.Y);
 
             }
         }
