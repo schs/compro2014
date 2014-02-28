@@ -11,6 +11,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     range: eg.Collision.Collidable;
     collisionManager: eg.Collision.CollisionManager;
     lastCollision: eg.Collision.Collidable;
+    lastPosition: eg.Vector2d;
+    pathfind: eg.Vector2d;
     sprite: eg.Graphics.Sprite2d;
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
@@ -35,7 +37,9 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 500));
         this.collisionManager.Monitor(this);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
-   }
+        this.pathfind = new eg.Vector2d(this.speed, this.speed);
+        this.lastPosition = this.movementController.Position.Clone();
+    }
 
     Move() {
         var xSide: number = this.movementController.Position.X - this.targetedPlayer.movementController.Position.X;
@@ -81,18 +85,42 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
 
     Collided(data: eg.Collision.CollisionData) {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
-
+        
         if (collider.collisionType == CollisionType.Wall) {
             var tempPostion = this.movementController.Position.Clone();
             var depth: eg.Vector2d = BoundsHelper.GetIntersectionDepth(this.Bounds, collider.Bounds);
+
             if (Math.abs(depth.Y) < Math.abs(depth.X)) {
-                this.movementController.Position = new eg.Vector2d(this.movementController.Position.X, tempPostion.Y + depth.Y);
+                if ((Math.abs(this.movementController.Position.X - this.lastPosition.X) <= this.speed / 2)) {
+                    if (Math.abs(this.movementController.Position.X - collider.Bounds.Position.X) < (<eg.Bounds.BoundingRectangle>this.Bounds).Size.Width / 2)
+                        this.pathfind.X *= -1;
+                    else if (Math.abs(this.movementController.Position.Y - this.lastPosition.Y) <= this.speed / 2) {
+                        this.pathfind.X *= -1;
+                        this.movementController.Position.X += depth.X;
+                        this.movementController.Position.Y += depth.Y;
+                    }
+                }
+  
+                this.lastPosition = this.movementController.Position.Clone();
+                this.movementController.Position = new eg.Vector2d(this.movementController.Position.X + this.pathfind.X, tempPostion.Y + depth.Y);
             }
-            else {
-                this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y);
+            else if (Math.abs(depth.Y) > Math.abs(depth.X)) {
+                if (Math.abs(this.movementController.Position.Y - this.lastPosition.Y) <= this.speed / 2) {
+                    if (Math.abs(this.movementController.Position.Y - collider.Bounds.Position.Y) < (<eg.Bounds.BoundingRectangle>this.Bounds).Size.Height / 2)
+                        this.pathfind.Y *= -1;
+                    else if (Math.abs(this.movementController.Position.X - this.lastPosition.X) <= this.speed / 2) {
+                        this.pathfind.Y *= -1;
+                        this.movementController.Position.Y += depth.Y;
+                        this.movementController.Position.X += depth.X;
+                    }
+                }
+                this.lastPosition = this.movementController.Position.Clone();
+                this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y + this.pathfind.Y);
 
             }
+        
         }
+
         if (collider == this.targetedPlayer) {
             this.attacking = true;
             
