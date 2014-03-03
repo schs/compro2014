@@ -33,6 +33,7 @@ class MapHandler {
     }
 
     public loadComplete() {
+      
     }
 
     private loadLayers(layers: eg.Graphics.SquareTileMap[]): void {

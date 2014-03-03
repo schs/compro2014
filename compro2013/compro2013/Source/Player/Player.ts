@@ -41,7 +41,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     TakeDamage(amount: number) {
         this.health -= amount;
-        console.log(this.health);
     }
 
     Attack() {
