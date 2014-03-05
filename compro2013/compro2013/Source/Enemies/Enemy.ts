@@ -14,18 +14,21 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     lastPosition: eg.Vector2d;
     pathfind: eg.Vector2d;
     sprite: eg.Graphics.Sprite2d;
+    animation: eg.Graphics.SpriteAnimation;
+
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
     
 
-    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, imageSource: eg.Graphics.ImageSource, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, imageSource: eg.Graphics.ImageSource, frameCount: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.collisionManager = collisionManager;
         this.collisionType = CollisionType.Enemy;
         this.imageSource = imageSource;
         this.sprite = new eg.Graphics.Sprite2d(x, y, this.imageSource);
         this.attackTimer = 60;
         this.attacking = false;
+        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), frameCount);
         this.sprite.ZIndex = ZIndexing.Enemy;
         super(this.sprite.GetDrawBounds());
         this.scene = scene;
@@ -39,6 +42,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
+        this.animation.Play(true);
    }
 
     Move() {
