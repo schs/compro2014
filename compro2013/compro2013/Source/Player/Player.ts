@@ -5,6 +5,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     speed: number;
     score: number;
     hud: HUD;
+    inventory: Item[];
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
     sprite: eg.Graphics.Sprite2d;
@@ -17,6 +18,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     gold: number;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+        this.inventory = [];
         this.collisionType = CollisionType.Player;
         this.scene = scene;
         this.collisions = 0;
@@ -37,6 +39,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.collisionManager.Monitor(this);
         this.hud = new HUD(this.scene);
         this.animation.Play(true);
+        this.inventory.push(new Sword(0, 0, scene, collisionManager));
+        this.inventory.push(new Axe(0, 0, scene, collisionManager));
     }
 
     TakeDamage(amount: number) {
@@ -51,13 +55,13 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
 
         if (collider.collisionType == CollisionType.Wall) {
-            var tempPostion = this.movementController.Position.Clone();
+            var tempPosition = this.movementController.Position.Clone();
             var depth: eg.Vector2d = BoundsHelper.GetIntersectionDepth(this.Bounds, collider.Bounds);
             if (Math.abs(depth.Y) < Math.abs(depth.X)) {
-                this.movementController.Position = new eg.Vector2d(this.movementController.Position.X, tempPostion.Y + depth.Y);
+                this.movementController.Position = new eg.Vector2d(this.movementController.Position.X, tempPosition.Y + depth.Y);
             }
             else {
-                this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y);
+                this.movementController.Position = new eg.Vector2d(tempPosition.X + depth.X, this.movementController.Position.Y);
 
             }
         }
@@ -73,6 +77,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             this.animation.Stop(true);
         this.animation.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
-        this.hud.Update(gameTime, this.score, this.health, this.gold);
+        this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
     }
 } 
