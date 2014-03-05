@@ -5,7 +5,7 @@ class Attack {
 
     constructor() {
 
-        super()
+        
 
          }
 

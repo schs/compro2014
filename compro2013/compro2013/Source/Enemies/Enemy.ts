@@ -17,12 +17,11 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
-    
+    animation: eg.Graphics.SpriteAnimation;
 
-    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, imageSource: eg.Graphics.ImageSource, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.collisionManager = collisionManager;
         this.collisionType = CollisionType.Enemy;
-        this.imageSource = imageSource;
         this.sprite = new eg.Graphics.Sprite2d(x, y, this.imageSource);
         this.attackTimer = 60;
         this.attacking = false;
@@ -141,6 +140,11 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         }
         this.TakeDamage(10);
 
+        if (this.movementController.IsMoving() && !this.animation.IsPlaying())
+            this.animation.Play(true);
+        else if (!this.movementController.IsMoving())
+            this.animation.Stop(true);
+        this.animation.Update(gameTime);
     }
 }
 
