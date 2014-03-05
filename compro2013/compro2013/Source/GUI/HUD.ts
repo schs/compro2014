@@ -11,16 +11,22 @@ class HUD {
     gold: eg.Graphics.Text2d;
     goldPosition: eg.Vector2d;
 
+    inventoryPosition: eg.Vector2d;
+    inventorySprites: eg.Graphics.Sprite2d[];
+
     scene: eg.Rendering.Scene2d;
-    inventorySprites: eg.Graphics.Sprite2d;
+    
     backgroundImage: eg.Graphics.Sprite2d;
+
+
 
     hudLocation: eg.Vector2d;
 
     constructor(scene: eg.Rendering.Scene2d) {
         this.scene = scene;
 
-        this.hudLocation = this.scene.Camera.TopLeft.Clone();
+        this.hudLocation = this.scene.Camera.TopLeft.Clone(); 
+        this.inventoryPosition = new eg.Vector2d(50, 125); 
 
         this.scorePosition = new eg.Vector2d(80, 30);
         this.score = new eg.Graphics.Text2d(0, 0, "Score: ", eg.Graphics.Color.White);
@@ -49,7 +55,7 @@ class HUD {
         
     }
 
-    Update(gameTime: eg.GameTime, score: number, health: number, gold: number) {
+    Update(gameTime: eg.GameTime, score: number, health: number, gold: number, inventory: Item[]) {
         this.hudLocation = this.scene.Camera.TopLeft.Clone();
 
         this.score.Position = this.hudLocation.Add(this.scorePosition);
@@ -66,5 +72,12 @@ class HUD {
 
         this.gold.Position = this.hudLocation.Add(this.goldPosition);
         this.gold.Text = "Gold: " + gold;
+
+        
+        for (var i in inventory) {
+            inventory[i].sprite.Visible = true;
+            inventory[i].sprite.Position.Y = this.hudLocation.Y + this.inventoryPosition.Y;
+            inventory[i].sprite.Position.X = this.inventoryPosition.X + this.hudLocation.X + (inventory[i].sprite.Size.Width * i);
+        }
     }
 }
