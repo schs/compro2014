@@ -15,8 +15,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     health: number;
     damage: number;
     gold: number;
+    
 
-    constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.KeyboardHandler, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.collisionType = CollisionType.Player;
         this.scene = scene;
         this.collisions = 0;
@@ -31,9 +32,10 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.health = 100;
         this.damage = 20;
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, true);
-        this.inputController = new eg.InputControllers.DirectionalInputController(input, (direction: string, startMoving: boolean) => {
+        this.inputController = new eg.InputControllers.DirectionalInputController(input.Keyboard, (direction: string, startMoving: boolean) => {
             this.movementController.Move(direction, startMoving);
         }, upKeys, rightKeys, downKeys, leftKeys);
+        input.Mouse.OnClick.Bind(this.Attack.bind(this));
         this.collisionManager.Monitor(this);
         this.hud = new HUD(this.scene);
         this.animation.Play(true);
@@ -43,7 +45,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.health -= amount;
     }
 
-    Attack() {
+    Attack(event: eg.Input.IMouseClickEvent) {
+        
 
     }
 
