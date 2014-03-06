@@ -14,18 +14,21 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     lastPosition: eg.Vector2d;
     pathfind: eg.Vector2d;
     sprite: eg.Graphics.Sprite2d;
+    animation: eg.Graphics.SpriteAnimation;
+
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
-    
 
-    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, imageSource: eg.Graphics.ImageSource, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+
+    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, imageSource: eg.Graphics.ImageSource, frameCount: number, fps: number, imageSize: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.collisionManager = collisionManager;
         this.collisionType = CollisionType.Enemy;
-        this.imageSource = imageSource;
-        this.sprite = new eg.Graphics.Sprite2d(x, y, this.imageSource);
         this.attackTimer = 60;
         this.attacking = false;
+        this.sprite = new eg.Graphics.Sprite2d(x, y, imageSource, imageSize, imageSize);
+
+        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, fps, new eg.Size2d(imageSize), frameCount);
         this.sprite.ZIndex = ZIndexing.Enemy;
         super(this.sprite.GetDrawBounds());
         this.scene = scene;
@@ -39,7 +42,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
-   }
+        this.animation.Play(true);
+    }
 
     Move() {
         var xSide: number = this.movementController.Position.X - this.targetedPlayer.movementController.Position.X;
@@ -48,6 +52,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.movementController.Rotation = -rotation;
         this.movementController.Position.X -= this.speed * Math.sin(rotation);
         this.movementController.Position.Y -= this.speed * Math.cos(rotation);
+        if (!this.animation.IsPlaying())
+            this.animation.Play(true);
     }
 
     TargetPlayer(player: Player) {
@@ -69,10 +75,10 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         }
     }
     TakeDamage(amount: number) {
-            this.health -= amount;
-            console.log(this.health);
+        this.health -= amount;
+        console.log(this.health);
         if (this.health < 1) {
-          //  this.Die();
+            //  this.Die();
         }
     }
 
@@ -91,7 +97,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             var depth: eg.Vector2d = BoundsHelper.GetIntersectionDepth(this.Bounds, collider.Bounds);
 
             if (Math.abs(depth.Y) < Math.abs(depth.X)) {
-                if ((Math.abs(this.movementController.Position.X - this.lastPosition.X) <= this.speed/1.5)) {
+                if ((Math.abs(this.movementController.Position.X - this.lastPosition.X) <= this.speed / 1.5)) {
                     if (Math.abs(this.movementController.Position.X - collider.Bounds.Position.X) < (<eg.Bounds.BoundingRectangle>this.Bounds).Size.Width / 2)
                         this.pathfind.X *= -1;
                     else if (Math.abs(this.movementController.Position.Y - this.lastPosition.Y) <= this.speed / 2) {
@@ -105,7 +111,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
                 this.movementController.Position = new eg.Vector2d(this.movementController.Position.X + this.pathfind.X, tempPostion.Y + depth.Y);
             }
             else if (Math.abs(depth.Y) > Math.abs(depth.X)) {
-                if (Math.abs(this.movementController.Position.Y - this.lastPosition.Y) <= this.speed/1.5) {
+                if (Math.abs(this.movementController.Position.Y - this.lastPosition.Y) <= this.speed / 1.5) {
                     if (Math.abs(this.movementController.Position.Y - collider.Bounds.Position.Y) < (<eg.Bounds.BoundingRectangle>this.Bounds).Size.Height / 2)
                         this.pathfind.Y *= -1;
                     else if (Math.abs(this.movementController.Position.X - this.lastPosition.X) <= this.speed / 2) {
@@ -124,23 +130,26 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
 
         }
     }
-  
+
 
     Update(gameTime: eg.GameTime, players: Player[]) {
         this.movementController.Update(gameTime);
 
         for (var i in players) {
-            if(this.range.IsCollidingWith(players[i]))
+            if (this.range.IsCollidingWith(players[i]))
                 this.TargetPlayer(players[i]);
         }
 
         this.attackTimer += gameTime.Elapsed.Seconds;
-        if (this.attacking && this.attackTimer > .5/ this.attackspeed) {
+        if (this.attacking && this.attackTimer > .5 / this.attackspeed) {
             this.targetedPlayer.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
         this.TakeDamage(10);
 
+
+
+        this.animation.Update(gameTime);
     }
 }
 
