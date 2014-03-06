@@ -16,6 +16,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     health: number;
     damage: number;
     gold: number;
+    currentAttack: Attack;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.inventory = [];
@@ -50,6 +51,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     Attack(event: eg.Input.IMouseClickEvent) {
         
+
 
     }
 
