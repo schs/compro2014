@@ -3,6 +3,7 @@ class MapHandler {
     private Scene: eg.Rendering.Scene2d
     private collisionManager: eg.Collision.CollisionManager;
     private propertyHooks: eg.MapLoaders.IPropertyHooks;
+    zone: string;
 
     private walls: Wall[];
 
