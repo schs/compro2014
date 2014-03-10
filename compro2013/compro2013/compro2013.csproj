@@ -68,6 +68,7 @@
     <Content Include="Scripts\endgate-0.2.1.min.js.map" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
+    <Content Include="Source\Map\Maps\Dungeon01.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

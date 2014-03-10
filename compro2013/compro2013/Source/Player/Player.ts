@@ -49,8 +49,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.health -= amount;
     }
 
-    Attack(event: eg.Input.IMouseClickEvent) {
-        
+    Attack() {
+
 
 
     }
@@ -69,6 +69,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
             }
         }
+
+
+    
 
         super.Collided(data);
     }
