@@ -14,10 +14,11 @@ class MapHandler {
         this.Scene = Scene;
         this.collisionManager = collisionManager;
         this.walls = new Array();
+        this.entrances = new Array();
 
         this.propertyHooks = {
-            ResourceTileHooks: {},
-            ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this), "entrance": this.createEntrance.bind(this)  },
+            ResourceTileHooks: { "entrance": this.createEntrance.bind(this) },
+            ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
 
@@ -37,6 +38,15 @@ class MapHandler {
 
     public loadComplete() {
       
+    }
+
+    public unloadMap() {
+        for (var i in this.walls) {
+            this.walls[i].Dispose();
+        }
+        this.walls = [];
+        this.entrances = [];
+        this.mapLayers = [];
     }
 
     private loadLayers(layers: eg.Graphics.SquareTileMap[]): void {
