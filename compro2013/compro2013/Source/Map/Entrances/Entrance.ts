@@ -6,10 +6,10 @@ class Entrance extends eg.Collision.Collidable implements ICollidableTyped {
     loading: boolean;
 
     constructor(position: eg.Vector2d, mapHandler: MapHandler, collisionManager: eg.Collision.CollisionManager) {
-        mapHandler: MapHandler;
+        this.mapHandler = mapHandler;
         this.collisionType = CollisionType.Entrance;
         this.imageSource = new eg.Graphics.ImageSource("/images/Shop.png", 64, 64);
-        this.sprite = new eg.Graphics.Sprite2d(position.X, position.Y, this.imageSource);
+        this.sprite = new eg.Graphics.Sprite2d(position.X, position.Y, this.imageSource, 64, 64);
         super(this.sprite.GetDrawBounds());
         (<eg.Bounds.BoundingRectangle>this.Bounds).Size.Subtract(1);
         this.sprite.ZIndex = ZIndexing.Entrance;
@@ -24,9 +24,8 @@ class Entrance extends eg.Collision.Collidable implements ICollidableTyped {
         if (collider.collisionType == CollisionType.Player && !this.loading) {
             this.loading = true;
 
-            this.mapHandler.walls = [];
-            this.mapHandler.entrances = [];
-            this.mapHandler.load("/Source/Map/Maps/OverWorld.json", this.mapHandler.loadComplete.bind(this.mapHandler));
+            this.mapHandler.unloadMap();
+            this.mapHandler.load("/Source/Map/Maps/Dungeon01.json", this.mapHandler.loadComplete.bind(this.mapHandler));
 
         }
     }
