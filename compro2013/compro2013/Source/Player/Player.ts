@@ -6,6 +6,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     score: number;
     hud: HUD;
     inventory: Item[];
+    leftHand: MeleeWeapon;
+    //rightHand: RangedWeapon;
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
     sprite: eg.Graphics.Sprite2d;
@@ -20,6 +22,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.inventory = [];
+        this.scene
         this.collisionType = CollisionType.Player;
         this.scene = scene;
         this.collisions = 0;
@@ -42,6 +45,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.hud = new HUD(this.scene);
         this.animation.Play(true);
         this.inventory.push(new Sword(0, 0, scene, collisionManager));
+        this.EquipLeftHand(0);
         this.inventory.push(new Axe(0, 0, scene, collisionManager));
     }
 
@@ -50,8 +54,17 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
+        if (this.leftHand)
+            this.leftHand.Attack();
 
 
+    }
+
+    EquipLeftHand(inventoryindex: number) {
+        this.leftHand = <Sword>this.inventory[inventoryindex];
+        this.inventory[inventoryindex] = null;
+        this.sprite.AddChild(this.leftHand.sprite);
+        this.leftHand.sprite.Rotation = .8;
 
     }
 
@@ -70,7 +83,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             }
         }
 
-
+        
     
 
         super.Collided(data);
@@ -83,6 +96,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         else if (!this.movementController.IsMoving())
             this.animation.Stop(true);
         this.animation.Update(gameTime);
+        if (this.leftHand)
+            this.leftHand.Update(gameTime, this.movementController.Position);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
     }
