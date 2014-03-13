@@ -73,11 +73,14 @@ class HUD {
         this.gold.Position = this.hudLocation.Add(this.goldPosition);
         this.gold.Text = "Gold: " + gold;
 
-        
+
         for (var i in inventory) {
-            inventory[i].sprite.Visible = true;
-            inventory[i].sprite.Position.Y = this.hudLocation.Y + this.inventoryPosition.Y;
-            inventory[i].sprite.Position.X = this.inventoryPosition.X + this.hudLocation.X + (inventory[i].sprite.Size.Width * i);
+            if (inventory[i]) {
+                inventory[i].sprite.Visible = true;
+                inventory[i].sprite.Position.Y = this.hudLocation.Y + this.inventoryPosition.Y;
+                inventory[i].sprite.Position.X = this.inventoryPosition.X + this.hudLocation.X + (inventory[i].sprite.Size.Width * i);
+
+            }
         }
     }
 }

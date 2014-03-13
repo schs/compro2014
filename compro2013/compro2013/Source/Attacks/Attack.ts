@@ -7,16 +7,12 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     knockback: number;
     attacking: boolean;
 
-        
-
     constructor(position: eg.Vector2d, size: eg.Size2d, damage: number, knockback: number) {
         this.knockback = knockback;
         this.damage = damage;
 
         super(new eg.Bounds.BoundingRectangle(position, size))
         
-
-
 
     }   
 
