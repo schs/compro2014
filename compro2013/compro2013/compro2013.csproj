@@ -38,6 +38,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
+    <TypeScriptCompile Include="Source\Attacks\SwingAttack.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Axe01.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
