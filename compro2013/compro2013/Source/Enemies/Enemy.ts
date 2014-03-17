@@ -152,4 +152,4 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.animation.Update(gameTime);
     }
 }
-
+// I like trains

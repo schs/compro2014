@@ -20,7 +20,7 @@
     <Content Include="default.htm" />
     <Content Include="Resources\Images\Black.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
-    <Content Include="Resources\Images\Items\Weapons\Axe1.png" />
+    <Content Include="Resources\Images\Items\Weapons\Axe.png" />
     <Content Include="Resources\Images\Items\Weapons\Sword.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld_walls.png" />
@@ -37,7 +37,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
-    <TypeScriptCompile Include="Source\Items\Weapons\Axe1.ts" />
+    <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\landipus.ts" />
@@ -80,7 +80,7 @@
     <Folder Include="Resources\Audio\Enemies\" />
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
-    <Folder Include="Source\Enemies\Bosses\" />
+    <Folder Include="Source\Enemies\Mobs\Bosses\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
