@@ -75,7 +75,7 @@ class MapHandler {
         //create collision boxes for tiles that are not passable
         this.walls.push(new Wall(tile.Position, tile.Size.Subtract(1), this.Scene, this.collisionManager));
     }
-    createEntrance(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
+    private createEntrance(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
         this.entrances.push(new Entrance(tile.Position, this, this.collisionManager));
 

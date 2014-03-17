@@ -4,6 +4,6 @@ enum CollisionType {
     Enemy,
     Player,
     Projectile,
-    Weapon,
+    Attack,
     Entrance                 
 } 
