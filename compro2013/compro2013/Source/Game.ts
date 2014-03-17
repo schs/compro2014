@@ -17,7 +17,8 @@ class Game extends eg.Game {
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager);
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json", this.mapHandler.loadComplete);
         this.players.push(new Player(100, 100, ["Up"], ["Down"], ["Left"], ["Right"], this.Input, this.Scene, this.CollisionManager));
-
+        
+           
         for (var i = 0; i < 50; i++) {
             this.items.push(new Axe((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
         }
@@ -28,6 +29,8 @@ class Game extends eg.Game {
             this.enemies.push(new BrownSmear((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
 
         } 
+
+       
     }
 
     Update(gameTime: eg.GameTime) {

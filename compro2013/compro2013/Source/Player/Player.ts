@@ -4,6 +4,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     wallCollision: boolean;
     speed: number;
     score: number;
+    pet: Pet;
     hud: HUD;
     inventory: Item[];
     leftHand: MeleeWeapon;
@@ -51,6 +52,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.inventory.push(new Sword(0, 0, scene, collisionManager));
         this.EquipLeftHand(0);
         this.inventory.push(new Axe(0, 0, scene, collisionManager));
+        this.pet = new Dennis(x, y, this, scene, collisionManager);
     }
 
     TakeDamage(amount: number) {
