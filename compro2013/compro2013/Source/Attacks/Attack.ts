@@ -1,11 +1,11 @@
 class Attack extends eg.Collision.Collidable implements ICollidableTyped {
-    sprite: eg.Graphics.Sprite2d;
     collisionType: CollisionType;
     speed: number;
     timer: number;
     damage: number;
     knockback: number;
     attacking: boolean;
+
 
     constructor(position: eg.Vector2d, size: eg.Size2d, damage: number, knockback: number) {
         this.knockback = knockback;

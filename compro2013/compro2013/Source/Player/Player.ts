@@ -7,6 +7,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     hud: HUD;
     inventory: Item[];
     leftHand: MeleeWeapon;
+    boundingShape: eg.Graphics.Rectangle;
     //rightHand: RangedWeapon;
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
@@ -29,14 +30,17 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.collisionManager = collisionManager;
         this.speed = 200;
         this.score = 0;
-        this.sprite = new eg.Graphics.Sprite2d(x, y, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
+        this.boundingShape = new eg.Graphics.Rectangle(x, y, 64, 64, eg.Graphics.Color.Transparent);
+        this.boundingShape.ZIndex = ZIndexing.Player;
+        this.sprite = new eg.Graphics.Sprite2d(0, 0, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
         this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
         this.sprite.ZIndex = ZIndexing.Player;
-        super(this.sprite.GetDrawBounds());
-        this.scene.Add(this.sprite);
+        super(this.boundingShape.GetDrawBounds());
+        this.scene.Add(this.boundingShape);
+        this.boundingShape.AddChild(this.sprite);
         this.health = 100;
         this.damage = 20;
-        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite), this.speed, true);
+        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
         this.inputController = new eg.InputControllers.DirectionalInputController(input.Keyboard, (direction: string, startMoving: boolean) => {
             this.movementController.Move(direction, startMoving);
         }, upKeys, rightKeys, downKeys, leftKeys);
@@ -55,7 +59,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     Attack() {
         if (this.leftHand)
-            this.leftHand.Attack();
+            this
 
 
     }
@@ -63,8 +67,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     EquipLeftHand(inventoryindex: number) {
         this.leftHand = <Sword>this.inventory[inventoryindex];
         this.inventory[inventoryindex] = null;
-        this.sprite.AddChild(this.leftHand.sprite);
-        this.leftHand.sprite.Rotation = .8;
+        
+        this.boundingShape.AddChild(this.leftHand.sprite);
+        this.leftHand.sprite.Position.X = 27;
+        this.leftHand.sprite.Position.Y = 20;
+        this.leftHand.sprite.Rotation = 1.5;
 
     }
 
@@ -97,7 +104,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             this.animation.Stop(true);
         this.animation.Update(gameTime);
         if (this.leftHand)
-            this.leftHand.Update(gameTime, this.movementController.Position);
+
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
     }

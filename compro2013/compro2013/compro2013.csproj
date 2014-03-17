@@ -80,7 +80,7 @@
     <Folder Include="Resources\Audio\Enemies\" />
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
-    <Folder Include="Source\Enemies\Bosses\" />
+    <Folder Include="Source\Enemies\Mobs\Bosses\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
