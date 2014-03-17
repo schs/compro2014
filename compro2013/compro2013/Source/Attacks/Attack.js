@@ -6,14 +6,22 @@ var __extends = this.__extends || function (d, b) {
 };
 var Attack = (function (_super) {
     __extends(Attack, _super);
-    function Attack(position, size) {
+    function Attack(position, size, damage, knockback) {
+        this.knockback = knockback;
+        this.damage = damage;
+
         _super.call(this, new eg.Bounds.BoundingRectangle(position, size));
     }
     Attack.prototype.Excute = function () {
         this.attacking = true;
     };
 
-    Attack.prototype.Update = function (gameTime) {
+    Attack.prototype.Collided = function (data) {
+        var collider = data.With;
+    };
+
+    Attack.prototype.Update = function (gameTime, position) {
+        this.Bounds.Position = position.Clone();
     };
     return Attack;
 })(eg.Collision.Collidable);
