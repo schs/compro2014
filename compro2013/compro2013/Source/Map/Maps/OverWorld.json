@@ -31,7 +31,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"../../../Resources/Images/Locations/tileset_overworld.png",
+         "image":"H:\/Visual Studio 2013\/Repos\/compro2013\/compro2013\/compro2013\/Resources\/Images\/Locations\/tileset_overworld.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,
@@ -46,7 +46,7 @@
         }, 
         {
          "firstgid":101,
-         "image":"../../../Resources/Images/Locations/tileset_overworld_walls.png",
+         "image":"H:\/Visual Studio 2013\/Repos\/compro2013\/compro2013\/compro2013\/Resources\/Images\/Locations\/tileset_overworld_walls.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,
