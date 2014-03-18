@@ -62,6 +62,8 @@
     <TypeScriptCompile Include="Source\Enemies\Enemy.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
     <TypeScriptCompile Include="Source\GUI\HUD.ts" />
+    <TypeScriptCompile Include="Source\NPC\Dennis.ts" />
+    <TypeScriptCompile Include="Source\NPC\Pet.ts" />
     <TypeScriptCompile Include="Source\Player\Player.ts" />
   </ItemGroup>
   <ItemGroup>
