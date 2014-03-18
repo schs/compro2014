@@ -105,8 +105,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         else if (!this.movementController.IsMoving())
             this.animation.Stop(true);
         this.animation.Update(gameTime);
-        if (this.leftHand)
-
+        // if (this.leftHand)
+        this.pet.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
     }

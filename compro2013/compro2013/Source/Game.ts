@@ -41,6 +41,7 @@ class Game extends eg.Game {
             this.enemies[i].Update(gameTime, this.players);
         }
         this.updateCanvasSize();
+      
     }
 
     public updateCanvasSize() {
