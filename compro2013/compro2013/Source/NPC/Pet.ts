@@ -29,7 +29,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.sprite = new eg.Graphics.Sprite2d(x, y, imageSource, imageSize, imageSize);
         this.targetedPlayer = targetPlayer;
         this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, fps, new eg.Size2d(imageSize), frameCount);
-        this.sprite.ZIndex = ZIndexing.Enemy;
+        this.sprite.ZIndex = ZIndexing.Pet;
         super(this.sprite.GetDrawBounds());
         this.scene = scene;
         this.health = health;
@@ -37,17 +37,18 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.attackspeed = attackspeed;
         this.speed = speed;
         this.scene.Add(this.sprite);
-        this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 500));
+        this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 75));
         this.collisionManager.Monitor(this);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
+        this.collisionManager.Monitor(this.range);
     }
 
-    Move() {
-        var xSide: number = this.movementController.Position.X - this.targetedPlayer.movementController.Position.X;
-        var ySide: number = this.movementController.Position.Y - this.targetedPlayer.movementController.Position.Y;
+    Move(position: eg.Vector2d) {
+        var xSide: number = this.movementController.Position.X - position.X;
+        var ySide: number = this.movementController.Position.Y - position.Y;
         var rotation: number = Math.atan2(xSide, ySide);
         this.movementController.Rotation = -rotation;
         this.movementController.Position.X -= this.speed * Math.sin(rotation);
@@ -115,7 +116,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
 
-    Update(gameTime: eg.GameTime, players: Player[]) {
+    Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
 
         
@@ -126,7 +127,11 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             this.attackTimer = 0;
         }
         
+        if (!this.range.IsCollidingWith(this.targetedPlayer)) {
+            this.Move(this.targetedPlayer.movementController.Position);
 
+        }
+        
 
 
         this.animation.Update(gameTime);
