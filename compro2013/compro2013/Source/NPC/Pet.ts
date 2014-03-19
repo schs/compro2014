@@ -45,6 +45,8 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.animation.Play(true);
         this.range.OnCollision.Bind(this.RangeCollision.bind(this));
         this.collisionManager.Monitor(this.range);
+        this.hurt = false;
+        
     }
 
     RangeCollision(data: eg.Collision.CollisionData) {
@@ -65,11 +67,13 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     
     TakeDamage(amount: number) {
+        
         this.health -= amount;
         console.log(this.health);
         if (this.health < 1) {
             //  this.Die();
         }
+        
     }
 
     Die() {
@@ -115,8 +119,8 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
                 this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y + this.pathfind.Y);
             }
         }
-        if (collider == this.targetedEnemy) {
-            this.attacking = true;
+        if (collider == this.targetedPlayer) {
+            this.attacking = false;
 
         }
     }
