@@ -22,6 +22,8 @@
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Items\Weapons\Axe.png" />
     <Content Include="Resources\Images\Items\Weapons\Sword.png" />
+    <Content Include="Resources\Images\Locations\Store\tileset_store_walls.png" />
+    <Content Include="Resources\Images\Locations\Store\tileset_store.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld_walls.png" />
     <Content Include="Resources\Images\Player\Player.png" />
