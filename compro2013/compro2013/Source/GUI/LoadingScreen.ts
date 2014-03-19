@@ -14,9 +14,10 @@ class LoadingScreen implements eg.IUpdateable{
 
 
     Update(gameTime: eg.GameTime) {
-        
-
-
+        this.picture.Position.X = this.scene.Camera.Position.X;
+        this.picture.Position.Y = this.scene.Camera.Position.Y;
+        this.picture.Size.Width = this.scene.Camera.Size.Width;
+        this.picture.Size.Height = this.scene.Camera.Size.Height;
     }
 
 
