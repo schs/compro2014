@@ -19,6 +19,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
+    hurt: boolean;
 
 
     constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, targetPlayer: Player, imageSource: eg.Graphics.ImageSource, frameCount: number, fps: number, imageSize: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
@@ -44,6 +45,8 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
         this.collisionManager.Monitor(this.range);
+        this.hurt = false;
+        
     }
 
     Move(position: eg.Vector2d) {
@@ -59,11 +62,13 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     
     TakeDamage(amount: number) {
-        this.health -= amount;
-        console.log(this.health);
-        if (this.health < 1) {
-            //  this.Die();
-        }
+        
+            this.health -= amount;
+            console.log(this.health);
+            if (this.health < 1) {
+                //  this.Die();
+            }
+        
     }
 
     Die() {
@@ -110,7 +115,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             }
         }
         if (collider == this.targetedPlayer) {
-            this.attacking = true;
+            this.attacking = false;
 
         }
     }
