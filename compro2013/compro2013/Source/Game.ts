@@ -34,6 +34,7 @@ class Game extends eg.Game {
     }
 
     Update(gameTime: eg.GameTime) {
+
         for (var i in this.players) {
             this.players[i].Update(gameTime);
         }
