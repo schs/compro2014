@@ -6,7 +6,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
     attackspeed: number;
     speed: number;
     targetedPlayer: Player;
-    targetEnemy: Enemy;
+    targetedEnemy: Enemy;
     attackTimer: number;
     range: eg.Collision.Collidable;
     collisionManager: eg.Collision.CollisionManager;
@@ -43,7 +43,15 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
+        this.range.OnCollision.Bind(this.RangeCollision.bind(this));
         this.collisionManager.Monitor(this.range);
+        this.hurt = false;
+        
+    }
+
+    RangeCollision(data: eg.Collision.CollisionData) {
+        var collider: ICollidableTyped = <ICollidableTyped>data.With;
+        
     }
 
     Move(position: eg.Vector2d) {
@@ -59,11 +67,13 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     
     TakeDamage(amount: number) {
+        
         this.health -= amount;
         console.log(this.health);
         if (this.health < 1) {
             //  this.Die();
         }
+        
     }
 
     Die() {
@@ -110,7 +120,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             }
         }
         if (collider == this.targetedPlayer) {
-            this.attacking = true;
+            this.attacking = false;
 
         }
     }
@@ -123,7 +133,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
         this.attackTimer += gameTime.Elapsed.Seconds;
         if (this.attacking && this.attackTimer > .5 / this.attackspeed) {
-            this.targetedPlayer.TakeDamage(this.damage);
+            this.targetedEnemy.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
         
