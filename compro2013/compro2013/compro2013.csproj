@@ -26,6 +26,7 @@
     <Content Include="Resources\Images\Locations\Store\tileset_store_walls.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld_walls.png" />
+    <Content Include="Resources\Images\Locations\tileset_spawn.png" />
     <Content Include="Resources\Images\Player\Player.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
@@ -39,6 +40,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
+    <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
