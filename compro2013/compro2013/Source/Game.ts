@@ -3,14 +3,14 @@ class Game extends eg.Game {
     fps: eg.Graphics.Text2d;
     items: Item[];
     players: Player[];
-    enemies: Enemy[];
+    
     loadingScreen: LoadingScreen;
     mapHandler: MapHandler;
    
 
     constructor() {
         super();
-        this.enemies = [];
+        
         this.players = [];
         this.items = [];
         this.Scene.DrawArea.style.backgroundColor = "black";
@@ -25,10 +25,7 @@ class Game extends eg.Game {
         for (var i = 0; i < 50; i++) {
             this.items.push(new Sword((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
         }
-        for (var i = 0; i < 50; i++) {
-            this.enemies.push(new BrownSmear((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
 
-        } 
 
        
     }
@@ -37,8 +34,8 @@ class Game extends eg.Game {
         for (var i in this.players) {
             this.players[i].Update(gameTime);
         }
-        for (var i in this.enemies) {
-            this.enemies[i].Update(gameTime, this.players);
+        for (var i in this.mapHandler.enemies) {
+           this.mapHandler.enemies[i].Update(gameTime, this.players);
         }
         this.updateCanvasSize();
        // this.loadingScreen.Update(gameTime);
