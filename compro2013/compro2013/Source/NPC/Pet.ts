@@ -45,7 +45,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.animation.Play(true);
         this.range.OnCollision.Bind(this.RangeCollision.bind(this));
         this.collisionManager.Monitor(this.range);
-        this.hurt = false;
+
         
     }
 
