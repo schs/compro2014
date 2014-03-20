@@ -45,7 +45,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.animation.Play(true);
         this.range.OnCollision.Bind(this.RangeCollision.bind(this));
         this.collisionManager.Monitor(this.range);
-
+        
     }
 
     RangeCollision(data: eg.Collision.CollisionData) {
@@ -56,7 +56,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             
         
     }
-    
+
     TargetEnemy (enemy: Enemy) {
 
         if (enemy != this.targetedEnemy)
@@ -151,7 +151,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             this.targetedEnemy.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
-
+        
         if (!this.range.IsCollidingWith(this.targetedPlayer)) {
             this.Move(this.targetedPlayer.movementController.Position);
 
