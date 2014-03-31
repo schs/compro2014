@@ -26,6 +26,7 @@
     <Content Include="Resources\Images\Locations\Store\tileset_store_walls.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld_walls.png" />
+    <Content Include="Resources\Images\Locations\tileset_spawn.png" />
     <Content Include="Resources\Images\Player\Player.png" />
     <Content Include="Scripts\endgate-0.2.1.js" />
     <Content Include="Scripts\endgate-0.2.1.min.js" />
@@ -39,6 +40,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
+    <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
@@ -48,6 +51,7 @@
     <TypeScriptCompile Include="Source\Helpers\Enums\ZIndexing.ts" />
     <TypeScriptCompile Include="Source\Helpers\Interfaces\ICollidableTyped.ts" />
     <TypeScriptCompile Include="Source\Items\MeleeWeapon.ts" />
+    <TypeScriptCompile Include="Source\Items\Weapons\Crossbow.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
