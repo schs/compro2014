@@ -100,6 +100,7 @@ class MapHandler {
     }
 
     public Update(gameTime: eg.GameTime) {
+        
         this.loadingScreen.Update(gameTime);
     }
 

@@ -35,9 +35,11 @@ class Game extends eg.Game {
         for (var i in this.players) {
             this.players[i].Update(gameTime);
         }
-        for (var i in this.mapHandler.enemies) {
-           this.mapHandler.enemies[i].Update(gameTime, this.players);
-        }
+        if(this.mapHandler.loadingScreen.loading = true){
+                for (var i in this.mapHandler.enemies) {
+                this.mapHandler.enemies[i].Update(gameTime, this.players);
+            }
+        }   
         this.updateCanvasSize();
         this.mapHandler.Update(gameTime);
       
