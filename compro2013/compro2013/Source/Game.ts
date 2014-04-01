@@ -15,9 +15,9 @@ class Game extends eg.Game {
         this.items = [];
         this.Scene.DrawArea.style.backgroundColor = "black";
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager);
-        this.mapHandler.load("/Source/Map/Maps/OverWorld.json", this.mapHandler.loadComplete);
+        this.mapHandler.load("/Source/Map/Maps/OverWorld.json");
         this.players.push(new Player(100, 100, ["Up"], ["Down"], ["Left"], ["Right"], this.Input, this.Scene, this.CollisionManager));
-      //  this.loadingScreen = new LoadingScreen(this.Scene);
+
            
         for (var i = 0; i < 50; i++) {
             this.items.push(new Axe((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
@@ -35,11 +35,13 @@ class Game extends eg.Game {
         for (var i in this.players) {
             this.players[i].Update(gameTime);
         }
-        for (var i in this.mapHandler.enemies) {
-           this.mapHandler.enemies[i].Update(gameTime, this.players);
-        }
+        if(this.mapHandler.loadingScreen.loading = true){
+                for (var i in this.mapHandler.enemies) {
+                this.mapHandler.enemies[i].Update(gameTime, this.players);
+            }
+        }   
         this.updateCanvasSize();
-       // this.loadingScreen.Update(gameTime);
+        this.mapHandler.Update(gameTime);
       
     }
 

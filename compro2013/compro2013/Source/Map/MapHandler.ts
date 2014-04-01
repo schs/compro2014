@@ -4,7 +4,7 @@ class MapHandler {
     private collisionManager: eg.Collision.CollisionManager;
     private propertyHooks: eg.MapLoaders.IPropertyHooks;
     enemies: Enemy[];
-
+    loadingScreen: LoadingScreen;
     zone: string;
 
     public entrances: Entrance[];
@@ -22,23 +22,30 @@ class MapHandler {
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
+        this.loadingScreen = new LoadingScreen(this.Scene);
+
 
     }
 
-    public load(url: string, loadComplete: () => void): void {
+    public mapLoadTick(percent: number) {
+        this.loadingScreen.tick(percent);
+    }
+    
+    public load(url: string): void {
         $.getJSON(url, (mapJson) => {
             var preloadInfo = eg.MapLoaders.JSONLoader.Load(mapJson,
                 (result: eg.MapLoaders.IMapLoadedResult) => {
                     this.loadLayers((<eg.Graphics.SquareTileMap[]>result.Layers))
-                    loadComplete();
+                    this.loadComplete();
                 }, this.propertyHooks);
+            preloadInfo.OnPercentLoaded.Bind(this.mapLoadTick.bind(this));
         }).fail((d, textStatus, error) => {
                 console.error("getJSON failed, status: " + textStatus + ", error: " + error)
         });
     }
 
     public loadComplete() {
-      
+        this.loadingScreen.clearScreen();
     }
 
     public unloadMap() {
@@ -87,9 +94,14 @@ class MapHandler {
         var tile: eg.Graphics.Sprite2d = details.Tile;
         if (propertyValue == "BrownSmear") {
             if(Math.random() > .95)
-                this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager));
+            this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager));
         }
 
+    }
+
+    public Update(gameTime: eg.GameTime) {
+        
+        this.loadingScreen.Update(gameTime);
     }
 
 
