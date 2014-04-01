@@ -25,7 +25,7 @@ class Entrance extends eg.Collision.Collidable implements ICollidableTyped {
             this.loading = true;
 
             this.mapHandler.unloadMap();
-            this.mapHandler.load("/Source/Map/Maps/Dungeon01.json", this.mapHandler.loadComplete.bind(this.mapHandler));
+            this.mapHandler.load("/Source/Map/Maps/Dungeon01.json");
 
         }
     }
