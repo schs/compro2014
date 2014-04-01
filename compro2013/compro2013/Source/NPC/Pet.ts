@@ -73,7 +73,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         var xSide: number = this.movementController.Position.X - position.X;
         var ySide: number = this.movementController.Position.Y - position.Y;
         var rotation: number = Math.atan2(xSide, ySide);
-        this.movementController.Rotation = -rotation;
+        this.movementController.Rotation = -rotation - 1.5;
         this.movementController.Position.X -= this.speed * Math.sin(rotation);
         this.movementController.Position.Y -= this.speed * Math.cos(rotation);
         if (!this.animation.IsPlaying())
