@@ -94,7 +94,7 @@ class MapHandler {
         var tile: eg.Graphics.Sprite2d = details.Tile;
         if (propertyValue == "BrownSmear") {
             if(Math.random() > .95)
-                this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager));
+            this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager));
         }
 
     }
