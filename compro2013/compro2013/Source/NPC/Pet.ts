@@ -143,7 +143,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
-
+      
         
 
         this.attackTimer += gameTime.Elapsed.Seconds;
@@ -151,14 +151,17 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             this.targetedEnemy.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
-        
+
         if (!this.range.IsCollidingWith(this.targetedPlayer)) {
             this.Move(this.targetedPlayer.movementController.Position);
 
         }
-        else if (this.targetedEnemy)
-             this.Move(this.targetedEnemy.movementController.Position);
-        
+        else if (this.targetedEnemy) {
+            this.Move(this.targetedEnemy.movementController.Position);
+        }
+        else {
+            this.animation.Stop(true);   
+        }
 
 
         this.animation.Update(gameTime);

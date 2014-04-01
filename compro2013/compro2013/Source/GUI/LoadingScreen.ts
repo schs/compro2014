@@ -4,6 +4,7 @@ class LoadingScreen implements eg.IUpdateable{
     scene: eg.Rendering.Scene2d;
     text: eg.Graphics.Text2d;
     annoyingMessage: eg.Graphics.Text2d;
+
     constructor(scene: eg.Rendering.Scene2d) {
         this.scene = scene;
         this.picture = new eg.Graphics.Rectangle(this.scene.Camera.Position.X, this.scene.Camera.Position.Y, this.scene.Camera.Size.Width, this.scene.Camera.Size.Height);
@@ -12,7 +13,7 @@ class LoadingScreen implements eg.IUpdateable{
         this.text.ZIndex = 11;
         this.text.Scale(3);
         this.annoyingMessage = new eg.Graphics.Text2d(this.scene.Camera.Position.X, this.scene.Camera.Position.Y-100, "Loading", eg.Graphics.Color.Aqua);
-
+        
         this.scene.Add(this.picture);
         this.scene.Add(this.text);
 
@@ -33,7 +34,7 @@ class LoadingScreen implements eg.IUpdateable{
     }
 
     clearScreen() {
-
+        this.loading = false;
         this.text.Visible = false;
         this.picture.Visible = false;
     }
