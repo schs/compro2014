@@ -15,19 +15,26 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     pathfind: eg.Vector2d;
     sprite: eg.Graphics.Sprite2d;
     animation: eg.Graphics.SpriteAnimation;
+    enemies: Enemy[];
 
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
 
 
-    constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, imageSource: eg.Graphics.ImageSource, frameCount: number, fps: number, imageSize: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    constructor(health: number, damage: number,
+        attackspeed: number, speed: number,
+        x: number, y: number, imageSource: eg.Graphics.ImageSource,
+        frameCount: number, fps: number, imageSize: number,
+        scene: eg.Rendering.Scene2d, collisionManager:
+        eg.Collision.CollisionManager, enemies: Enemy[])
+    {
         this.collisionManager = collisionManager;
         this.collisionType = CollisionType.Enemy;
         this.attackTimer = 60;
         this.attacking = false;
         this.sprite = new eg.Graphics.Sprite2d(x, y, imageSource, imageSize, imageSize);
-
+        this.enemies = enemies;
         this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, fps, new eg.Size2d(imageSize), frameCount);
         this.sprite.ZIndex = ZIndexing.Enemy;
         super(this.sprite.GetDrawBounds());
@@ -83,9 +90,9 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
     Die() {
+        this.enemies.splice(this.enemies.indexOf(this, 0), 1);
         this.Dispose();
-
-
+        this.range.Dispose();
         this.sprite.Dispose();
     }
 
