@@ -9,6 +9,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     inventory: Item[];
     leftHand: MeleeWeapon;
     boundingShape: eg.Graphics.Rectangle;
+    rightHand: RangedWeapon;
     //rightHand: RangedWeapon;
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
