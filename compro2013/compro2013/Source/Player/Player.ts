@@ -24,7 +24,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.inventory = [];
-        this.scene
         this.collisionType = CollisionType.Player;
         this.scene = scene;
         this.collisions = 0;
@@ -61,7 +60,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     Attack() {
         if (this.leftHand)
-            this
+            this.Attack.e
 
 
     }
