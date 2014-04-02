@@ -4,8 +4,9 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
     lastCollision: eg.Collision.Collidable;
     sprite: eg.Graphics.Sprite2d;
     collisionType: CollisionType;
+    collisionManager: eg.Collision.CollisionManager;
 
-    constructor(x: number, y: number, type: String, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource) {
+    constructor(x: number, y: number, type: String, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager) {
         this.collisionType = CollisionType.Item;
         this.type = type;
         this.scene = scene;
@@ -15,12 +16,11 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
         this.scene.Add(this.sprite);
         super(this.sprite.GetDrawBounds());
         this.Bounds.Position = this.sprite.Position;
+        this.collisionManager = collisionManager;
+        this.collisionManager.Monitor(this, true);
     }
 
 
     Collided(data: eg.Collision.CollisionData) {
-        if (this.lastCollision !== data.With) {
-
-        }
     }
 } 
