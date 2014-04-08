@@ -3,7 +3,8 @@ class MapHandler {
     private Scene: eg.Rendering.Scene2d
     private collisionManager: eg.Collision.CollisionManager;
     private propertyHooks: eg.MapLoaders.IPropertyHooks;
-
+    enemies: Enemy[];
+    loadingScreen: LoadingScreen;
     zone: string;
 
     public entrances: Entrance[];
@@ -15,29 +16,36 @@ class MapHandler {
         this.collisionManager = collisionManager;
         this.walls = new Array();
         this.entrances = new Array();
-
+        this.enemies = [];
         this.propertyHooks = {
-            ResourceTileHooks: { "entrance": this.createEntrance.bind(this) },
+            ResourceTileHooks: { "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this)  },
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
+        this.loadingScreen = new LoadingScreen(this.Scene);
+
 
     }
 
-    public load(url: string, loadComplete: () => void): void {
+    public mapLoadTick(percent: number) {
+        this.loadingScreen.tick(percent);
+    }
+    
+    public load(url: string): void {
         $.getJSON(url, (mapJson) => {
             var preloadInfo = eg.MapLoaders.JSONLoader.Load(mapJson,
                 (result: eg.MapLoaders.IMapLoadedResult) => {
                     this.loadLayers((<eg.Graphics.SquareTileMap[]>result.Layers))
-                    loadComplete();
+                    this.loadComplete();
                 }, this.propertyHooks);
+            preloadInfo.OnPercentLoaded.Bind(this.mapLoadTick.bind(this));
         }).fail((d, textStatus, error) => {
                 console.error("getJSON failed, status: " + textStatus + ", error: " + error)
         });
     }
 
     public loadComplete() {
-      
+        this.loadingScreen.clearScreen();
     }
 
     public unloadMap() {
@@ -80,6 +88,20 @@ class MapHandler {
         this.entrances.push(new Entrance(tile.Position, this, this.collisionManager));
 
 
+    }
+
+    private spawn(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
+        var tile: eg.Graphics.Sprite2d = details.Tile;
+        if (propertyValue == "BrownSmear") {
+            if(Math.random() > .95)
+            this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
+        }
+
+    }
+
+    public Update(gameTime: eg.GameTime) {
+        
+        this.loadingScreen.Update(gameTime);
     }
 
 

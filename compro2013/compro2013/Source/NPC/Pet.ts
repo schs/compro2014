@@ -6,7 +6,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
     attackspeed: number;
     speed: number;
     targetedPlayer: Player;
-    targetEnemy: Enemy;
+    targetedEnemy: Enemy;
     attackTimer: number;
     range: eg.Collision.Collidable;
     collisionManager: eg.Collision.CollisionManager;
@@ -43,14 +43,37 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
+        this.range.OnCollision.Bind(this.RangeCollision.bind(this));
         this.collisionManager.Monitor(this.range);
+        
     }
+
+    RangeCollision(data: eg.Collision.CollisionData) {
+        var collider: ICollidableTyped = <ICollidableTyped>data.With;
+        if (collider.collisionType == CollisionType.Enemy) {
+            this.TargetEnemy(<Enemy>collider)
+        }
+            
+        
+    }
+
+    TargetEnemy (enemy: Enemy) {
+
+        if (enemy != this.targetedEnemy)
+            if (!this.targetedPlayer || BoundsHelper.PythagoreanTheorem(this.movementController.Position.X - (<Enemy>enemy).movementController.Position.X,
+                this.movementController.Position.Y - (<Enemy>enemy).movementController.Position.Y) >
+                BoundsHelper.PythagoreanTheorem(this.movementController.Position.X - this.targetedPlayer.movementController.Position.X,
+                    this.movementController.Position.Y - this.targetedPlayer.movementController.Position.Y)) {
+                        this.targetedEnemy = (<Enemy>enemy);
+            }
+        
+}
 
     Move(position: eg.Vector2d) {
         var xSide: number = this.movementController.Position.X - position.X;
         var ySide: number = this.movementController.Position.Y - position.Y;
         var rotation: number = Math.atan2(xSide, ySide);
-        this.movementController.Rotation = -rotation;
+        this.movementController.Rotation = -rotation - 1.5;
         this.movementController.Position.X -= this.speed * Math.sin(rotation);
         this.movementController.Position.Y -= this.speed * Math.cos(rotation);
         if (!this.animation.IsPlaying())
@@ -59,11 +82,13 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     
     TakeDamage(amount: number) {
+        
         this.health -= amount;
         console.log(this.health);
         if (this.health < 1) {
             //  this.Die();
         }
+        
     }
 
     Die() {
@@ -110,7 +135,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
             }
         }
         if (collider == this.targetedPlayer) {
-            this.attacking = true;
+            this.attacking = false;
 
         }
     }
@@ -118,20 +143,25 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
-
+      
         
 
         this.attackTimer += gameTime.Elapsed.Seconds;
         if (this.attacking && this.attackTimer > .5 / this.attackspeed) {
-            this.targetedPlayer.TakeDamage(this.damage);
+            this.targetedEnemy.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
-        
+
         if (!this.range.IsCollidingWith(this.targetedPlayer)) {
             this.Move(this.targetedPlayer.movementController.Position);
 
         }
-        
+        else if (this.targetedEnemy) {
+            this.Move(this.targetedEnemy.movementController.Position);
+        }
+        else {
+            this.animation.Stop(true);   
+        }
 
 
         this.animation.Update(gameTime);

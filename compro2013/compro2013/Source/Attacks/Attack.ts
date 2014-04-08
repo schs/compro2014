@@ -16,7 +16,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
 
     }   
 
-    Excute () {
+    Execute () {
         this.attacking = true;
 
 
