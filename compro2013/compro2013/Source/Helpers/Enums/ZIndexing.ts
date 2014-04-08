@@ -3,7 +3,7 @@ enum ZIndexing {
     Player = 3,
     Enemy = 3,
     Pet = 2,
-    Item = 1,
-    Entrance = 3
-
+    Item = 2,
+    Entrance = 3,
+    Wall = 1
 } 

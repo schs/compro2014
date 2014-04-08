@@ -9,7 +9,7 @@ class Wall extends eg.Collision.Collidable implements ICollidableTyped{
         this.scene = scene;
         this.collisionManager = collisionManager;
         this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Height, size.Width, eg.Graphics.Color.FromRGBA(200, 0, 0, .4));
-        this.shape.ZIndex = 6;
+        this.shape.ZIndex = ZIndexing.Wall;
 
         super(this.shape.GetDrawBounds());
         if(Game.DEBUG)
