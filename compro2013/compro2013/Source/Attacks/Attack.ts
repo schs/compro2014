@@ -30,8 +30,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
 
-    Update (gameTime: eg.GameTime, position: eg.Vector2d) {
-        this.Bounds.Position = position.Clone();
+    Update (gameTime: eg.GameTime) {
 
     }
 
