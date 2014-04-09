@@ -21,7 +21,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     health: number;
     damage: number;
     gold: number;
-    currentAttack: Attack;
+  
     pickUpItem: boolean;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
@@ -32,7 +32,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.collisionManager = collisionManager;
         this.speed = 200;
         this.score = 0;
-        this.pickUpItem = false;
+        this.pickingUp = false;
         this.boundingShape = new eg.Graphics.Rectangle(x, y, 64, 64, eg.Graphics.Color.Transparent);
         this.boundingShape.ZIndex = ZIndexing.Player;
         this.sprite = new eg.Graphics.Sprite2d(0, 0, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
@@ -64,11 +64,21 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     }
 
+    pickUpItems(item: Item) {
+        if (this.inventory.length < 10) { 
+            item.sprite.ZIndex = ZIndexing.HUD;
+            this.inventory.push(item);
+        }
+    }
+
+
+
     EquipLeftHand(inventoryindex: number) {
         if (this.inventory.length > inventoryindex) {
             var tempItem = <MeleeWeapon>this.inventory.splice(inventoryindex, 1)[0];
             if (this.leftHand) {
                 this.boundingShape.RemoveChild(this.leftHand.sprite);
+                this.leftHand.sprite.ZIndex = ZIndexing.HUD;
                 this.inventory.push(this.leftHand);
             }
             this.leftHand = tempItem;
@@ -76,6 +86,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             this.leftHand.sprite.Position.X = 27;
             this.leftHand.sprite.Position.Y = 20;
             this.leftHand.sprite.Rotation = 1.5;
+            this.leftHand.sprite.ZIndex = ZIndexing.Item;
         }
     }
 
@@ -96,9 +107,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
 
         if (collider.collisionType == CollisionType.Item) {
-            if (this.pickUpItem) {
-                if(this.inventory.length < 10)
-                    this.inventory.push(<Item>collider);
+            if (this.pickingUp) {
+                this.pickUpItems(<Item>collider);
             }
         }
 
@@ -107,6 +117,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
         super.Collided(data);
     }
+
 
     Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
@@ -129,10 +140,10 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         input.Mouse.OnClick.Bind(this.Attack.bind(this));
 
         input.Keyboard.OnCommandDown("e", () => {
-            this.pickUpItem = true;
+            this.pickingUp = true;
         });
         input.Keyboard.OnCommandUp("e", () => {
-            this.pickUpItem = false;
+            this.pickingUp = false;
         });
 
         input.Keyboard.OnCommandUp("1", () => {
