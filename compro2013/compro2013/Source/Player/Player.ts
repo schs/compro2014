@@ -21,6 +21,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     health: number;
     damage: number;
     gold: number;
+    pickingUp: boolean;
   
     pickUpItem: boolean;
 
