@@ -21,6 +21,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     health: number;
     damage: number;
     gold: number;
+    pickingUp: boolean;
   
     pickUpItem: boolean;
 
@@ -59,8 +60,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        //if (this.leftHand)
-            //this.Attack.e
+        this.leftHand.attack.Execute();
 
 
     }
