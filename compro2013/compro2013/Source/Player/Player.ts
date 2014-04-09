@@ -59,8 +59,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        //if (this.leftHand)
-            //this.Attack.e
+        this.leftHand.attack.Execute();
 
 
     }
