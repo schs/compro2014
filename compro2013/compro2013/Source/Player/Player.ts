@@ -46,7 +46,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.damage = 20;
         this.inventory.push(new Sword(0, 0, scene, collisionManager));
         this.EquipLeftHand(0);
+        
         this.attack = new Attack(new eg.Vector2d(x, y), new eg.Size2d(32, 64), this.leftHand.damage, this.leftHand.knockback, collisionManager);
+        this.scene.Add(this.attack.shape);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape, this.attack.Bounds), this.speed, true);
         this.BindInputs(upKeys, downKeys, leftKeys, rightKeys, input);
         
