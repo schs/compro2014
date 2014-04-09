@@ -96,6 +96,10 @@ class MapHandler {
             if(Math.random() > .95)
             this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
         }
+        if (propertyValue == "Landipus") {
+            if (Math.random() > .95)
+                this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
+        }
 
     }
 
