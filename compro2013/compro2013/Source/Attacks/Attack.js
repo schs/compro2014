@@ -12,7 +12,7 @@ var Attack = (function (_super) {
 
         _super.call(this, new eg.Bounds.BoundingRectangle(position, size));
     }
-    Attack.prototype.Excute = function () {
+    Attack.prototype.Execute = function () {
         this.attacking = true;
     };
 
