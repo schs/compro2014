@@ -1,19 +1,19 @@
 class MeleeWeapon extends Item {
     name: string;
     damage: number;
-    private attack: Attack;
     knockback: number;
+    public attack: Attack;
+  
+    
 
 
-
-    constructor(x: number, y: number, knockback: number, damage: number, name: string, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager) {
-        this.damage = damage;
+    constructor(x: number, y: number, damage: number, knockback: number, name: string, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager) {
+       
         this.name = name;
+        this.damage = damage;
         this.knockback = knockback;
 
         super(x, y, "MeleeWeapon", scene, spriteImage, collisionManager);
     }
-
-
 
 }

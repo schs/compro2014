@@ -52,6 +52,7 @@ class HUD {
         this.gold.Scale(3);
         this.gold.ZIndex = ZIndexing.HUD;
         this.scene.Add(this.gold);
+        //test
         
     }
 

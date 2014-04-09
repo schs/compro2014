@@ -5,15 +5,17 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     damage: number;
     knockback: number;
     attacking: boolean;
+    shape: eg.Graphics.Rectangle;
     collisionManager: eg.Collision.CollisionManager;
 
     constructor(position: eg.Vector2d, size: eg.Size2d, damage: number, knockback: number, collisionManager: eg.Collision.CollisionManager) {
         this.knockback = knockback;
         this.damage = damage;
         this.collisionManager = collisionManager;
+        this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Width, size.Height);
         super(new eg.Bounds.BoundingRectangle(position, size))
         this.collisionManager.Monitor(this)
-
+        this.shape.ZIndex = 10;
     }   
 
     Execute () {
@@ -30,9 +32,8 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
 
-    Update (gameTime: eg.GameTime, position: eg.Vector2d) {
-        this.Bounds.Position = position.Clone();
-
+    Update (gameTime: eg.GameTime) {
+        this.shape.Position = this.Bounds.Position
     }
 
 

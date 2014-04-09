@@ -21,8 +21,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     health: number;
     damage: number;
     gold: number;
-    currentAttack: Attack;
     pickingUp: boolean;
+    attack: Attack;
+    pickUpItem: boolean;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.inventory = [];
@@ -43,14 +44,18 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.boundingShape.AddChild(this.sprite);
         this.health = 100;
         this.damage = 20;
-        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
+        this.inventory.push(new Sword(0, 0, scene, collisionManager));
+        this.EquipLeftHand(0);
+        
+        this.attack = new Attack(new eg.Vector2d(x, y), new eg.Size2d(32, 64), this.leftHand.damage, this.leftHand.knockback, collisionManager);
+        this.scene.Add(this.attack.shape);
+        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape, this.attack.Bounds), this.speed, true);
         this.BindInputs(upKeys, downKeys, leftKeys, rightKeys, input);
-
+        
         this.collisionManager.Monitor(this);
         this.hud = new HUD(this.scene);
         this.animation.Play(true);
-        this.inventory.push(new Sword(0, 0, scene, collisionManager));
-        this.EquipLeftHand(0);
+        
         this.pet = new Dennis(x, y, this, scene, collisionManager);
     }
 
@@ -59,8 +64,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        //if (this.leftHand)
-            //this.Attack.e
+        this.leftHand.attack.Execute();
 
 
     }
@@ -131,6 +135,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.pet.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
+        if (this.leftHand)
+            this.attack.Update(gameTime);
     }
 
     BindInputs(upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager) {
