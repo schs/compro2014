@@ -131,6 +131,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.pet.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
+        if (this.leftHand)
+            this.leftHand.Update(gameTime, this.movementController.Position);
     }
 
     BindInputs(upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager) {
