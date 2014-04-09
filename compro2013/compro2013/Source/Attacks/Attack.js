@@ -6,11 +6,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var Attack = (function (_super) {
     __extends(Attack, _super);
-    function Attack(position, size, damage, knockback) {
+    function Attack(position, size, damage, knockback, collisionManager) {
         this.knockback = knockback;
         this.damage = damage;
-
+        this.collisionManager = collisionManager;
         _super.call(this, new eg.Bounds.BoundingRectangle(position, size));
+        this.collisionManager.Monitor(this);
     }
     Attack.prototype.Execute = function () {
         this.attacking = true;
@@ -18,6 +19,9 @@ var Attack = (function (_super) {
 
     Attack.prototype.Collided = function (data) {
         var collider = data.With;
+        if (collider.collisionType == CollisionType.Enemy && this.attacking) {
+            (collider).TakeDamage(this.damage);
+        }
     };
 
     Attack.prototype.Update = function (gameTime, position) {
