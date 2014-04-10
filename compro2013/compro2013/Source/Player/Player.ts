@@ -49,7 +49,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         
         this.attack = new Attack(new eg.Vector2d(x, y), new eg.Size2d(32, 64), this.leftHand.damage, this.leftHand.knockback, collisionManager);
         this.scene.Add(this.attack.shape);
-        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape, this.attack.Bounds), this.speed, true);
+        this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
         this.BindInputs(upKeys, downKeys, leftKeys, rightKeys, input);
         
         this.collisionManager.Monitor(this);
@@ -64,10 +64,12 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        this.leftHand.attack.Execute();
-
+        this.attack.Execute(this.leftHand);
+        
 
     }
+
+
 
     pickUpItems(item: Item) {
         if (this.inventory.length < 10) { 
@@ -136,7 +138,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
         if (this.leftHand)
-            this.attack.Update(gameTime);
+            this.attack.Update(gameTime, this.boundingShape.Position, this.leftHand.sprite.AbsolutePosition,  this.boundingShape.Rotation);
     }
 
     BindInputs(upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager) {

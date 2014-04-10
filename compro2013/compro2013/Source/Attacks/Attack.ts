@@ -7,6 +7,8 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     attacking: boolean;
     shape: eg.Graphics.Rectangle;
     collisionManager: eg.Collision.CollisionManager;
+    attackRotation: number;
+    attackPosition: eg.Vector2d;
 
     constructor(position: eg.Vector2d, size: eg.Size2d, damage: number, knockback: number, collisionManager: eg.Collision.CollisionManager) {
         this.knockback = knockback;
@@ -16,11 +18,13 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
         super(new eg.Bounds.BoundingRectangle(position, size))
         this.collisionManager.Monitor(this)
         this.shape.ZIndex = 10;
+        this.attackRotation = 0;
+        this.attackPosition = new eg.Vector2d(0,0);
     }   
 
-    Execute () {
+    Execute (weapon: Item) {
         this.attacking = true;
-
+        
     }
 
     Collided(data: eg.Collision.CollisionData) {
@@ -32,8 +36,24 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
 
-    Update (gameTime: eg.GameTime) {
-        this.shape.Position = this.Bounds.Position
+    Update(gameTime: eg.GameTime, position: eg.Vector2d, absolutePosition: eg.Vector2d, rotation: number) {
+
+        if (this.attacking) {
+            this.attackRotation -= .05;
+           
+        }
+        else {
+            this.attackRotation = 0;
+            
+        }
+
+        this.Bounds.Position = absolutePosition.RotateAround(position, rotation);
+         //this.attackPosition = new eg.Vector2d(absolutePosition.X, absolutePosition.Y -(<eg.Bounds.BoundingRectangle>this.Bounds).Size.HalfHeight);
+         //   this.Bounds.Position = absolutePosition.RotateAround(this.attackPosition, this.Bounds.Rotation);
+        this.Bounds.Rotation = rotation + 1.5 + this.attackRotation;
+        this.shape.Position = this.Bounds.Position;
+        this.shape.Rotation = this.Bounds.Rotation;
+        
     }
 
 
