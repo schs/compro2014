@@ -24,7 +24,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
 
     Execute (weapon: Item) {
         this.attacking = true;
-        
+        this.attackRotation = 1;
     }
 
     Collided(data: eg.Collision.CollisionData) {
@@ -39,7 +39,8 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     Update(gameTime: eg.GameTime, position: eg.Vector2d, absolutePosition: eg.Vector2d, rotation: number) {
 
         if (this.attacking) {
-            this.attackRotation -= .05;
+
+            this.attackRotation -= .1;
            
         }
         else {
@@ -47,7 +48,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
             
         }
 
-        this.Bounds.Position = absolutePosition.RotateAround(position, rotation);
+        this.Bounds.Position = absolutePosition.RotateAround(position, rotation + this.attackRotation);
          //this.attackPosition = new eg.Vector2d(absolutePosition.X, absolutePosition.Y -(<eg.Bounds.BoundingRectangle>this.Bounds).Size.HalfHeight);
          //   this.Bounds.Position = absolutePosition.RotateAround(this.attackPosition, this.Bounds.Rotation);
         this.Bounds.Rotation = rotation + 1.5 + this.attackRotation;
