@@ -7,6 +7,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     pet: Pet;
     hud: HUD;
     inventory: Item[];
+    handLocation: eg.Vector2d;
     leftHand: MeleeWeapon;
     boundingShape: eg.Graphics.Rectangle;
     rightHand: RangedWeapon;
@@ -30,6 +31,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.collisionType = CollisionType.Player;
         this.scene = scene;
         this.collisions = 0;
+        this.handLocation = new eg.Vector2d(x, y);
         this.collisionManager = collisionManager;
         this.speed = 200;
         this.score = 0;
@@ -84,14 +86,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         if (this.inventory.length > inventoryindex) {
             var tempItem = <MeleeWeapon>this.inventory.splice(inventoryindex, 1)[0];
             if (this.leftHand) {
-                this.boundingShape.RemoveChild(this.leftHand.sprite);
                 this.leftHand.sprite.ZIndex = ZIndexing.HUD;
                 this.inventory.push(this.leftHand);
             }
             this.leftHand = tempItem;
-            this.boundingShape.AddChild(this.leftHand.sprite);
-            this.leftHand.sprite.Position.X = 27;
-            this.leftHand.sprite.Position.Y = 20;
+
             this.leftHand.sprite.Rotation = 1.5;
             this.leftHand.sprite.ZIndex = ZIndexing.Item;
         }
@@ -127,7 +126,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
 
     Update(gameTime: eg.GameTime) {
+
         this.movementController.Update(gameTime);
+        this.handLocation = new eg.Vector2d(this.movementController.Position.X + 27, this.movementController.Position.Y + 20).RotateAround(this.movementController.Position, this.movementController.Rotation)
         if (this.movementController.IsMoving() && !this.animation.IsPlaying())
             this.animation.Play(true);
         else if (!this.movementController.IsMoving())
@@ -137,8 +138,12 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.pet.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
-        if (this.leftHand)
-            this.attack.Update(gameTime, this.boundingShape.Position, this.leftHand.sprite.AbsolutePosition,  this.boundingShape.Rotation);
+        if (this.leftHand) {
+
+            this.leftHand.sprite.Position = this.handLocation.Clone();
+            this.leftHand.sprite.Rotation = this.movementController.Rotation + 1.5;
+            this.attack.Update(gameTime, this.leftHand.sprite.Position, this.leftHand.sprite.Rotation, this.leftHand.sprite);
+        }
     }
 
     BindInputs(upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager) {
