@@ -2,11 +2,15 @@ class SwingAttack extends Attack {
     
 
 
-    constructor(damage: number, knockback: number) {
+    constructor(position: eg.Vector2d, size: eg.Size2d, damage: number, knockback: number, collisionManager) {
 
-        super(new eg.Vector2d(27, 27), new eg.Size2d(64, 25), damage, knockback);
+        super(position, size, damage, knockback, collisionManager);
 
     }
 
+    Execute(meleeWeapon: MeleeWeapon) {
+
+
+    }
 
 }

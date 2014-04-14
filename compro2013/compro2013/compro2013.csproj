@@ -20,6 +20,7 @@
     <Content Include="default.htm" />
     <Content Include="Resources\Images\Black.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
+    <Content Include="Resources\Images\Enemies\Landipus.png" />
     <Content Include="Resources\Images\Items\Weapons\Axe1.png" />
     <Content Include="Resources\Images\Items\Weapons\Crossbow.png" />
     <Content Include="Resources\Images\Items\Weapons\Sword.png" />
@@ -42,12 +43,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
+    <TypeScriptCompile Include="Source\Attacks\SwingAttack.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
-    <TypeScriptCompile Include="Source\Enemies\Mobs\landipus.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Landipus.ts" />
     <TypeScriptCompile Include="Source\Helpers\BoundsHelper.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\CollisionType.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\ZIndexing.ts" />
@@ -106,7 +108,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60276</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
