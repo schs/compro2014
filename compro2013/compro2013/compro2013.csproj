@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="Source\Helpers\Interfaces\ICollidableTyped.ts" />
     <TypeScriptCompile Include="Source\Items\MeleeWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Crossbow.ts" />
+    <TypeScriptCompile Include="Source\Items\Projectile.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
