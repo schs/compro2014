@@ -48,7 +48,9 @@
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
-    <TypeScriptCompile Include="Source\Items\Weapon.ts" />
+    <TypeScriptCompile Include="Source\Items\Weapon.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
