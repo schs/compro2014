@@ -8,10 +8,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     hud: HUD;
     inventory: Item[];
     handLocation: eg.Vector2d;
-    leftHand: MeleeWeapon;
+    hand: Weapon;
     boundingShape: eg.Graphics.Rectangle;
-    rightHand: RangedWeapon;
-    //rightHand: RangedWeapon;
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
     sprite: eg.Graphics.Sprite2d;
@@ -51,7 +49,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.inventory.push(new Sword(0, 0, scene, collisionManager));
         this.EquipLeftHand(0);
         this.attackRotation = 0;
-        this.attack = new Attack(new eg.Vector2d(x, y), new eg.Size2d(32, 64), this.leftHand.damage, this.leftHand.knockback, collisionManager);
+
         this.scene.Add(this.attack.shape);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
         this.BindInputs(upKeys, downKeys, leftKeys, rightKeys, input);
@@ -68,7 +66,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        this.attack.Execute(this.leftHand);
+        this.attack.Execute(this.hand);
         this.attacking = true;
 
     }
@@ -87,14 +85,14 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     EquipLeftHand(inventoryindex: number) {
         if (this.inventory.length > inventoryindex) {
             var tempItem = <MeleeWeapon>this.inventory.splice(inventoryindex, 1)[0];
-            if (this.leftHand) {
-                this.leftHand.sprite.ZIndex = ZIndexing.HUD;
-                this.inventory.push(this.leftHand);
+            if (this.hand) {
+                this.hand.sprite.ZIndex = ZIndexing.HUD;
+                this.inventory.push(this.hand);
             }
-            this.leftHand = tempItem;
-
-            this.leftHand.sprite.Rotation = 1.5;
-            this.leftHand.sprite.ZIndex = ZIndexing.Item;
+            this.hand = tempItem;
+            this.hand.Equip();
+            this.hand.sprite.Rotation = 1.5;
+            this.hand.sprite.ZIndex = ZIndexing.Item;
         }
     }
 
@@ -142,11 +140,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
         //if (this.attacking)
         //    this.leftHand.sprite.Rotation.
-        if (this.leftHand) {
-
-            this.leftHand.sprite.Position = this.handLocation.Add(new eg.Vector2d(0, 20)).RotateAround(this.handLocation, this.movementController.Rotation);
-            this.leftHand.sprite.Rotation = this.movementController.Rotation + 1.5;
-            this.attack.Update(gameTime, this.leftHand.sprite.Position, this.leftHand.sprite.Rotation, this.leftHand.sprite);
+        if (this.hand) {
+            this.hand.Update(gameTime, this.handLocation, this.movementController.Rotation);
         }
     }
 
