@@ -16,7 +16,11 @@ class Weapon extends Item {
     }
 
     Equip() {
-        
+        //abstract method
+    }
+
+    ExecuteAttack() {
+        //abstract method
     }
 
     Update(gameTime: eg.GameTime, handLocation: eg.Vector2d, playerRotation: number) {

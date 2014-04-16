@@ -6,6 +6,7 @@ class MeleeWeapon extends Weapon {
 
     Equip() {
         this.attack = new Attack(this.sprite.Position, new eg.Size2d(32, 64), this.damage, this.knockback, this.collisionManager);
+        this.scene.Add(this.attack.shape);
     }
 
     Update(gameTime: eg.GameTime, handLocation: eg.Vector2d, playerRotation: number) {

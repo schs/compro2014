@@ -22,7 +22,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     gold: number;
     pickingUp: boolean;
     attackRotation: number;
-    attack: Attack;
     attacking: boolean;
     pickUpItem: boolean;
 
@@ -50,7 +49,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.EquipLeftHand(0);
         this.attackRotation = 0;
 
-        this.scene.Add(this.attack.shape);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
         this.BindInputs(upKeys, downKeys, leftKeys, rightKeys, input);
 
@@ -66,7 +64,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        this.attack.Execute(this.hand);
+        this.hand.ExecuteAttack();
         this.attacking = true;
 
     }

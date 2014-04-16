@@ -5,4 +5,8 @@
         super(x, y, 10, 1, "Crossbow", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Weapons/Crossbow.png", 64, 64), collisionManager);
     }
 
+    ExecuteAttack() {
+        this.projectiles.push(new Projectile(this.sprite.Position.X, this.sprite.Position.Y, this.damage, 10, 10, this.sprite.Rotation, this.knockback, this.scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Weapons/Crossbow.png", 64, 64), this.collisionManager));
+    }
+
 }
