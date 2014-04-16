@@ -14,7 +14,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
         this.knockback = knockback;
         this.damage = damage;
         this.collisionManager = collisionManager;
-        this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Width, size.Height);
+        this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Width, size.Height, new eg.Graphics.Color(10,10,10,.3));
         super(new eg.Bounds.BoundingRectangle(position, size))
         this.collisionManager.Monitor(this)
         this.shape.ZIndex = 10;
@@ -47,8 +47,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
             this.attackRotation = 0;
             
         }
-
-        this.Bounds.Position = position.RotateAround(new eg.Vector2d(position.X, position.Y), this.attackRotation);
+        this.Bounds.Position = position;
         this.Bounds.Rotation = rotation;
         this.shape.Position = this.Bounds.Position;
         this.shape.Rotation = this.Bounds.Rotation;

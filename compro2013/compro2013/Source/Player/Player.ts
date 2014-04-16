@@ -8,10 +8,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     hud: HUD;
     inventory: Item[];
     handLocation: eg.Vector2d;
-    leftHand: MeleeWeapon;
+    hand: Weapon;
     boundingShape: eg.Graphics.Rectangle;
-    rightHand: RangedWeapon;
-    //rightHand: RangedWeapon;
     inputController: eg.InputControllers.DirectionalInputController;
     movementController: eg.MovementControllers.LinearMovementController;
     sprite: eg.Graphics.Sprite2d;
@@ -23,7 +21,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     damage: number;
     gold: number;
     pickingUp: boolean;
+    attackRotation: number;
     attack: Attack;
+    attacking: boolean;
     pickUpItem: boolean;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
@@ -48,12 +48,12 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.damage = 20;
         this.inventory.push(new Sword(0, 0, scene, collisionManager));
         this.EquipLeftHand(0);
-        
-        this.attack = new Attack(new eg.Vector2d(x, y), new eg.Size2d(32, 64), this.leftHand.damage, this.leftHand.knockback, collisionManager);
+        this.attackRotation = 0;
+
         this.scene.Add(this.attack.shape);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
         this.BindInputs(upKeys, downKeys, leftKeys, rightKeys, input);
-        
+
         this.collisionManager.Monitor(this);
         this.hud = new HUD(this.scene);
         this.animation.Play(true);
@@ -66,8 +66,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        this.attack.Execute(this.leftHand);
-        
+        this.attack.Execute(this.hand);
+        this.attacking = true;
 
     }
 
@@ -85,14 +85,14 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     EquipLeftHand(inventoryindex: number) {
         if (this.inventory.length > inventoryindex) {
             var tempItem = <MeleeWeapon>this.inventory.splice(inventoryindex, 1)[0];
-            if (this.leftHand) {
-                this.leftHand.sprite.ZIndex = ZIndexing.HUD;
-                this.inventory.push(this.leftHand);
+            if (this.hand) {
+                this.hand.sprite.ZIndex = ZIndexing.HUD;
+                this.inventory.push(this.hand);
             }
-            this.leftHand = tempItem;
-
-            this.leftHand.sprite.Rotation = 1.5;
-            this.leftHand.sprite.ZIndex = ZIndexing.Item;
+            this.hand = tempItem;
+            this.hand.Equip();
+            this.hand.sprite.Rotation = 1.5;
+            this.hand.sprite.ZIndex = ZIndexing.Item;
         }
     }
 
@@ -128,7 +128,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     Update(gameTime: eg.GameTime) {
 
         this.movementController.Update(gameTime);
-        this.handLocation = new eg.Vector2d(this.movementController.Position.X + 27, this.movementController.Position.Y + 20).RotateAround(this.movementController.Position, this.movementController.Rotation)
+        this.handLocation = new eg.Vector2d(this.movementController.Position.X + 27, this.movementController.Position.Y).RotateAround(this.movementController.Position, this.movementController.Rotation)
         if (this.movementController.IsMoving() && !this.animation.IsPlaying())
             this.animation.Play(true);
         else if (!this.movementController.IsMoving())
@@ -138,11 +138,10 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.pet.Update(gameTime);
         this.scene.Camera.Position = this.movementController.Position.Clone();
         this.hud.Update(gameTime, this.score, this.health, this.gold, this.inventory);
-        if (this.leftHand) {
-
-            this.leftHand.sprite.Position = this.handLocation.Clone();
-            this.leftHand.sprite.Rotation = this.movementController.Rotation + 1.5;
-            this.attack.Update(gameTime, this.leftHand.sprite.Position, this.leftHand.sprite.Rotation, this.leftHand.sprite);
+        //if (this.attacking)
+        //    this.leftHand.sprite.Rotation.
+        if (this.hand) {
+            this.hand.Update(gameTime, this.handLocation, this.movementController.Rotation);
         }
     }
 
