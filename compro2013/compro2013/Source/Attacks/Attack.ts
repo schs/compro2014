@@ -14,7 +14,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
         this.knockback = knockback;
         this.damage = damage;
         this.collisionManager = collisionManager;
-        this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Width, size.Height);
+        this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Width, size.Height, new eg.Graphics.Color(10,10,10,.3));
         super(new eg.Bounds.BoundingRectangle(position, size))
         this.collisionManager.Monitor(this)
         this.shape.ZIndex = 10;
@@ -22,9 +22,9 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
         this.attackPosition = new eg.Vector2d(0,0);
     }   
 
-    Execute (weapon: Item) {
+    Execute(weapon: Item) {
         this.attacking = true;
-        this.attackRotation = 1;
+        this.attackRotation = -1.5;
     }
 
     Collided(data: eg.Collision.CollisionData) {
@@ -36,22 +36,19 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
 
-    Update(gameTime: eg.GameTime, position: eg.Vector2d, absolutePosition: eg.Vector2d, rotation: number) {
+    Update(gameTime: eg.GameTime, position: eg.Vector2d, rotation: number, sprite: eg.Graphics.Sprite2d) {
 
         if (this.attacking) {
 
-            this.attackRotation -= .1;
+            this.attackRotation += .55;
            
         }
         else {
             this.attackRotation = 0;
             
         }
-
-        this.Bounds.Position = absolutePosition.RotateAround(position, rotation + this.attackRotation);
-         //this.attackPosition = new eg.Vector2d(absolutePosition.X, absolutePosition.Y -(<eg.Bounds.BoundingRectangle>this.Bounds).Size.HalfHeight);
-         //   this.Bounds.Position = absolutePosition.RotateAround(this.attackPosition, this.Bounds.Rotation);
-        this.Bounds.Rotation = rotation + 1.5 + this.attackRotation;
+        this.Bounds.Position = position;
+        this.Bounds.Rotation = rotation;
         this.shape.Position = this.Bounds.Position;
         this.shape.Rotation = this.Bounds.Rotation;
         

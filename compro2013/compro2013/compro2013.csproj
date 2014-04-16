@@ -26,6 +26,8 @@
     <Content Include="Resources\Images\Items\Weapons\Sword.png" />
     <Content Include="Resources\Images\Locations\Store\tileset_store.png" />
     <Content Include="Resources\Images\Locations\Store\tileset_store_walls.png" />
+    <Content Include="Resources\Images\Locations\tileset_dungeon.png" />
+    <Content Include="Resources\Images\Locations\tileset_dungeon_walls.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld.png" />
     <Content Include="Resources\Images\Locations\tileset_overworld_walls.png" />
     <Content Include="Resources\Images\Locations\tileset_spawn.png" />
@@ -37,15 +39,18 @@
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <Content Include="Source\Map\Maps\Medium Dungeon02.json" />
     <Content Include="Source\Map\Maps\OverWorld.json" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Attacks\Attack.ts" />
-    <TypeScriptCompile Include="Source\Attacks\SwingAttack.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
+    <TypeScriptCompile Include="Source\Items\Weapon.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
@@ -83,6 +88,8 @@
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <Content Include="Source\Map\Maps\Dungeon01.json" />
     <Content Include="Source\Map\Maps\Store.json" />
+    <Content Include="Source\Map\Maps\Easy Dungeon01.json" />
+    <Content Include="Source\Map\Maps\Hard Dungeon03.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
