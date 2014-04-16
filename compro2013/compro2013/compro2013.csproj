@@ -90,6 +90,7 @@
     <Content Include="Source\Map\Maps\Store.json" />
     <Content Include="Source\Map\Maps\Easy Dungeon01.json" />
     <Content Include="Source\Map\Maps\Hard Dungeon03.json" />
+    <Content Include="Source\Map\Maps\Hard Dungeon04.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
