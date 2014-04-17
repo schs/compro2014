@@ -19,6 +19,9 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
         this.collisionManager.Monitor(this, true);
     }
 
+    Equip() {
+        this.collisionManager.Unmonitor(this)
+    }
 
     Collided(data: eg.Collision.CollisionData) {
 

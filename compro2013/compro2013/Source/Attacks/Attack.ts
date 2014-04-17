@@ -17,7 +17,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
         this.shape = new eg.Graphics.Rectangle(position.X, position.Y, size.Width, size.Height, new eg.Graphics.Color(10,10,10,.3));
         super(new eg.Bounds.BoundingRectangle(position, size))
         this.collisionManager.Monitor(this)
-        this.shape.ZIndex = 10;
+        this.shape.ZIndex = 10; 
         this.attackRotation = 0;
         this.attackPosition = new eg.Vector2d(0,0);
     }   

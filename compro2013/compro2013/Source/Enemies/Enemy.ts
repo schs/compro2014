@@ -85,7 +85,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.health -= amount;
         console.log(this.health);
         if (this.health < 1) {
-            //  this.Die();
+            this.Die();
         }
     }
 
@@ -152,7 +152,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             this.targetedPlayer.TakeDamage(this.damage);
             this.attackTimer = 0;
         }
-        this.TakeDamage(10);
+       
 
 
 
