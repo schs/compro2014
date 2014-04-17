@@ -18,7 +18,6 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     scene: eg.Rendering.Scene2d;
     collisionManager: eg.Collision.CollisionManager;
     health: number;
-    damage: number;
     gold: number;
     pickingUp: boolean;
     attackRotation: number;
@@ -44,9 +43,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.scene.Add(this.boundingShape);
         this.boundingShape.AddChild(this.sprite);
         this.health = 100;
-        this.damage = 20;
+        this.gold = 0;
         this.inventory.push(new Sword(0, 0, scene, collisionManager));
-        this.EquipLeftHand(0);
+        this.EquipItem(0);
         this.attackRotation = 0;
 
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.Bounds, this.boundingShape), this.speed, true);
@@ -73,24 +72,22 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     pickUpItems(item: Item) {
         if (this.inventory.length < 10) { 
-            item.sprite.ZIndex = ZIndexing.HUD;
+            item.PickUp();
             this.inventory.push(item);
         }
     }
 
 
 
-    EquipLeftHand(inventoryindex: number) {
+    EquipItem(inventoryindex: number) {
         if (this.inventory.length > inventoryindex) {
             var tempItem = <MeleeWeapon>this.inventory.splice(inventoryindex, 1)[0];
             if (this.hand) {
-                this.hand.sprite.ZIndex = ZIndexing.HUD;
+                this.hand.UnEquip();
                 this.inventory.push(this.hand);
             }
             this.hand = tempItem;
             this.hand.Equip();
-            this.hand.sprite.Rotation = 1.5;
-            this.hand.sprite.ZIndex = ZIndexing.Item;
         }
     }
 
@@ -126,7 +123,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     Update(gameTime: eg.GameTime) {
 
         this.movementController.Update(gameTime);
-        this.handLocation = new eg.Vector2d(this.movementController.Position.X + 27, this.movementController.Position.Y).RotateAround(this.movementController.Position, this.movementController.Rotation)
+        this.handLocation = new eg.Vector2d(this.movementController.Position.X, this.movementController.Position.Y + 20).RotateAround(this.movementController.Position, this.movementController.Rotation)
         if (this.movementController.IsMoving() && !this.animation.IsPlaying())
             this.animation.Play(true);
         else if (!this.movementController.IsMoving())
@@ -158,25 +155,25 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         });
 
         input.Keyboard.OnCommandUp("1", () => {
-            this.EquipLeftHand(0);
+            this.EquipItem(0);
         }); input.Keyboard.OnCommandUp("2", () => {
-            this.EquipLeftHand(1);
+            this.EquipItem(1);
         }); input.Keyboard.OnCommandUp("3", () => {
-            this.EquipLeftHand(2);
+            this.EquipItem(2);
         }); input.Keyboard.OnCommandUp("4", () => {
-            this.EquipLeftHand(3);
+            this.EquipItem(3);
         }); input.Keyboard.OnCommandUp("5", () => {
-            this.EquipLeftHand(4);
+            this.EquipItem(4);
         }); input.Keyboard.OnCommandUp("6", () => {
-            this.EquipLeftHand(5);
+            this.EquipItem(5);
         }); input.Keyboard.OnCommandUp("7", () => {
-            this.EquipLeftHand(6);
+            this.EquipItem(6);
         }); input.Keyboard.OnCommandUp("8", () => {
-            this.EquipLeftHand(7);
+            this.EquipItem(7);
         }); input.Keyboard.OnCommandUp("9", () => {
-            this.EquipLeftHand(8);
+            this.EquipItem(8);
         }); input.Keyboard.OnCommandUp("0", () => {
-            this.EquipLeftHand(9);
+            this.EquipItem(9);
         });
     }
 } 

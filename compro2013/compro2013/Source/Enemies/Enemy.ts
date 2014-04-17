@@ -81,7 +81,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             this.attacking = false;
         }
     }
-    TakeDamage(amount: number) {
+    TakeDamage(amount: number, knockback: number;) {
         this.health -= amount;
         console.log(this.health);
         if (this.health < 1) {

@@ -2,6 +2,7 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
     type: String;
     scene: eg.Rendering.Scene2d;
     lastCollision: eg.Collision.Collidable;
+
     sprite: eg.Graphics.Sprite2d;
     collisionType: CollisionType;
     collisionManager: eg.Collision.CollisionManager;
@@ -19,8 +20,17 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
         this.collisionManager.Monitor(this, true);
     }
 
+    PickUp() {
+        this.collisionManager.Unmonitor(this);
+    }
+
     Equip() {
-        this.collisionManager.Unmonitor(this)
+        this.sprite.ZIndex = ZIndexing.Item;
+    }
+
+    UnEquip() {
+        this.sprite.Rotation = 0;
+        this.sprite.ZIndex = ZIndexing.HUD;
     }
 
     Collided(data: eg.Collision.CollisionData) {
