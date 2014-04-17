@@ -103,6 +103,7 @@
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
     <Folder Include="Source\Enemies\Mobs\Bosses\" />
+    <Folder Include="Source\Items\Projectiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

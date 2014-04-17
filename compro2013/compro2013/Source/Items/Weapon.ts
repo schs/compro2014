@@ -2,10 +2,7 @@ class Weapon extends Item {
     name: string;
     damage: number;
     knockback: number;
-    public attack: Attack;
-
-
-
+    attackBounds: eg.Bounds.BoundingRectangle;
 
     constructor(x: number, y: number, damage: number, knockback: number, type: string, name: string, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager) {
         this.name = name;
@@ -16,7 +13,11 @@ class Weapon extends Item {
     }
 
     Equip() {
-        
+        //abstract method
+    }
+
+    ExecuteAttack() {
+        //abstract method
     }
 
     Update(gameTime: eg.GameTime, handLocation: eg.Vector2d, playerRotation: number) {
