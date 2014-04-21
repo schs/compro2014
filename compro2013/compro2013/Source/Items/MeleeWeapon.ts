@@ -42,7 +42,7 @@ class MeleeWeapon extends Weapon {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
 
         if (collider.collisionType == CollisionType.Enemy && this.attacking)
-            (<Enemy>collider).TakeDamage(this.damage); 
+            (<Enemy>collider).TakeDamage(this.damage, this.knockback); 
     }
 
     Update(gameTime: eg.GameTime, handLocation: eg.Vector2d, playerRotation: number) {

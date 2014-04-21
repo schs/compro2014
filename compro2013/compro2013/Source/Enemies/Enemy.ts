@@ -81,9 +81,20 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             this.attacking = false;
         }
     }
-    TakeDamage(amount: number, knockback: number;) {
+
+    AppyKnockback(distance: number) {
+        var angle = -this.movementController.Rotation;
+        var hypotenuse = distance;
+        var newPosition = new eg.Vector2d(Math.sin(angle) * hypotenuse, Math.cos(angle) * hypotenuse);
+
+        this.movementController.Position = this.movementController.Position.Add(newPosition);
+
+    }
+
+    TakeDamage(amount: number, knockback: number) {
         this.health -= amount;
         console.log(this.health);
+        this.AppyKnockback(knockback);
         if (this.health < 1) {
             this.Die();
         }

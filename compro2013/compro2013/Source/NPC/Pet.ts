@@ -15,7 +15,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
     pathfind: eg.Vector2d;
     sprite: eg.Graphics.Sprite2d;
     animation: eg.Graphics.SpriteAnimation;
-
+    knockback: number;
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
@@ -36,6 +36,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.damage = damage;
         this.attackspeed = attackspeed;
         this.speed = speed;
+        this.knockback = 2;
         this.scene.Add(this.sprite);
         this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 75));
         this.collisionManager.Monitor(this);
@@ -148,7 +149,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
         this.attackTimer += gameTime.Elapsed.Seconds;
         if (this.attacking && this.attackTimer > .5 / this.attackspeed) {
-            this.targetedEnemy.TakeDamage(this.damage);
+            this.targetedEnemy.TakeDamage(this.damage, this.knockback);
             this.attackTimer = 0;
         }
 

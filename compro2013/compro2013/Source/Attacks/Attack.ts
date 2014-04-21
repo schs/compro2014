@@ -30,7 +30,7 @@ class Attack extends eg.Collision.Collidable implements ICollidableTyped {
     Collided(data: eg.Collision.CollisionData) {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
         if (collider.collisionType == CollisionType.Enemy && this.attacking) {
-            (<Enemy>collider).TakeDamage(this.damage);
+            (<Enemy>collider).TakeDamage(this.damage, this.knockback);
 
         }
     }

@@ -12,7 +12,6 @@
     sprite: eg.Graphics.Sprite2d;
 
 
-
     constructor(x: number, y: number, damage: number, xVelocity: number, yVelocity: number, rotation: number, knockback: number, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager) {
         this.name = name;
         this.damage = damage;
@@ -28,6 +27,12 @@
         this.sprite.ZIndex = ZIndexing.Projectiles;
         this.collisionManager.Monitor(this);
         this.scene.Add(this.sprite);
+    }
+
+    Move() {
+        var angle = this.movementController.Rotation;
+
+
     }
 
     Update(gameTime: eg.GameTime) {
