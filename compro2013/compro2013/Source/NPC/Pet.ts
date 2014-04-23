@@ -23,7 +23,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
 
     constructor(health: number, damage: number, attackspeed: number, speed: number, x: number, y: number, targetPlayer: Player, imageSource: eg.Graphics.ImageSource, frameCount: number, fps: number, imageSize: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.collisionManager = collisionManager;
-        this.collisionType = CollisionType.Enemy;
+        this.collisionType = CollisionType.Pet;
         this.attackTimer = 60;
         this.attacking = false;
         this.sprite = new eg.Graphics.Sprite2d(x, y, imageSource, imageSize, imageSize);

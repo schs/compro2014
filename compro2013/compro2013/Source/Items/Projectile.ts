@@ -23,7 +23,7 @@
         this.scene = scene;
         this.collisionManager = collisionManager;
         this.sprite = new eg.Graphics.Sprite2d(x, y, spriteImage) 
-        super(this.sprite.GetDrawBounds());
+        super(new eg.Bounds.BoundingRectangle(this.sprite.Position, new eg.Size2d(this.sprite.Size.HalfWidth, this.sprite.Size.HalfHeight/2)));
         this.movementController = new eg.MovementControllers.MovementController(new Array<eg.IMoveable>(this.Bounds, this.sprite));
         this.movementController.Rotation = rotation;
         this.sprite.Visible = false;
@@ -44,8 +44,7 @@
     Dispose() {
         if (this.active) {
             this.active = false;
-            this.projectiles.splice((this.projectiles.indexOf(this, 0), 1));
-
+            this.projectiles.splice(this.projectiles.indexOf(this, 0), 1);
             super.Dispose();
             this.sprite.Dispose();
         }
@@ -60,9 +59,13 @@
     Collided(data: eg.Collision.CollisionData) {
         var collider: ICollidableTyped = <ICollidableTyped>data.With;
 
-        if (collider.collisionType == CollisionType.Wall) {
-            
+        if (collider.collisionType == CollisionType.Wall) {     
             this.Dispose();
+        }
+
+        if (collider.collisionType == CollisionType.Enemy) {
+            this.Dispose();
+            (<Enemy>collider).TakeDamage(this.damage, this.knockback);
         }
     }
 }
