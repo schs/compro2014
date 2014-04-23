@@ -16,7 +16,7 @@ class Game extends eg.Game {
         this.Scene.DrawArea.style.backgroundColor = "black";
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager);
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json");
-        this.players.push(new Player(100, 100, ["Up"], ["Down"], ["Left"], ["Right"], this.Input, this.Scene, this.CollisionManager));
+        this.players.push(new Player(100, 100, ["Up", "W"], ["Down", "S"], ["Left", "A"], ["Right", "D"], this.Input, this.Scene, this.CollisionManager));
 
            
         for (var i = 0; i < 50; i++) {
