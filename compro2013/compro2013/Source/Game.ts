@@ -31,6 +31,9 @@ class Game extends eg.Game {
         for (var i = 0; i < 50; i++) {
             this.items.push(new BattleAxe((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
         }
+        for (var i = 0; i < 50; i++) {
+            this.items.push(new Lightsaber((Math.random() * 3000) - 1500, (Math.random() * 3000) - 1500, this.Scene, this.CollisionManager));
+        }
 
        
     }
