@@ -7,6 +7,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     pet: Pet;
     hud: HUD;
     inventory: Item[];
+    projectiles: Projectile[];
     handLocation: eg.Vector2d;
     hand: Weapon;
     boundingShape: eg.Graphics.Rectangle;
@@ -26,6 +27,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
         this.inventory = [];
+        this.projectiles = [];
         this.collisionType = CollisionType.Player;
         this.scene = scene;
         this.collisions = 0;
@@ -63,7 +65,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     }
 
     Attack() {
-        this.hand.ExecuteAttack();
+
+         if (this.hand.type == "RangedWeapon")
+            this.hand.ExecuteAttack(this.projectiles);
+        else
+            this.hand.ExecuteAttack();
         this.attacking = true;
 
     }
@@ -137,6 +143,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         //    this.leftHand.sprite.Rotation.
         if (this.hand) {
             this.hand.Update(gameTime, this.handLocation, this.movementController.Rotation);
+        }
+        for (var projectile in this.projectiles) {
+            this.projectiles[projectile].Update(gameTime);
         }
     }
 
