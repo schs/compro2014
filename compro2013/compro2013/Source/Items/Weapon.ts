@@ -21,8 +21,7 @@ class Weapon extends Item {
     UnEquip() {
         super.UnEquip();
     }
-
-    ExecuteAttack() {
+    ExecuteAttack(projectile?: Projectile[]) {
         //abstract method
     }
 
