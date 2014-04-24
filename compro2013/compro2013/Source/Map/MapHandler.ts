@@ -22,8 +22,8 @@ class MapHandler {
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
+        
         this.loadingScreen = new LoadingScreen(this.Scene);
-
 
     }
 
@@ -32,6 +32,7 @@ class MapHandler {
     }
     
     public load(url: string): void {
+        
         $.getJSON(url, (mapJson) => {
             var preloadInfo = eg.MapLoaders.JSONLoader.Load(mapJson,
                 (result: eg.MapLoaders.IMapLoadedResult) => {
@@ -48,13 +49,31 @@ class MapHandler {
         this.loadingScreen.clearScreen();
     }
 
+    public loadNewMap(url: string) {
+        this.loadingScreen.StartLoad();
+        this.unloadMap();
+        this.load(url);;
+    }
+
     public unloadMap() {
         for (var i in this.walls) {
             this.walls[i].Dispose();
         }
+        for (var i in this.entrances) {
+            this.entrances[i].Dispose;
+        }
+        for (var i in this.mapLayers) {
+            this.mapLayers[i].Dispose();
+        }
+        for (var i in this.enemies) {
+            this.enemies[i].Dispose();
+        }
+
+        this.enemies = [];
         this.walls = [];
         this.entrances = [];
         this.mapLayers = [];
+        
     }
 
     private loadLayers(layers: eg.Graphics.SquareTileMap[]): void {
@@ -85,8 +104,9 @@ class MapHandler {
     }
     private createEntrance(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
-        this.entrances.push(new Entrance(tile.Position, this, this.collisionManager));
-
+        if (propertyValue == "store") {
+            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Store.json", this, this.collisionManager));
+        }
 
     }
 

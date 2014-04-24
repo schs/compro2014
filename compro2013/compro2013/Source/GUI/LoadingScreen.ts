@@ -39,6 +39,13 @@ class LoadingScreen implements eg.IUpdateable{
         this.picture.Visible = false;
     }
 
+    StartLoad() {
+        this.text.Text = "Loading... ";
+        this.loading = true;
+        this.text.Visible = true;
+        this.picture.Visible = true;
+    }
+
 
 
 
