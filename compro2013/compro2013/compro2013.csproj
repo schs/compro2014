@@ -20,6 +20,7 @@
     <Content Include="default.htm" />
     <Content Include="Resources\Images\Black.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
+    <Content Include="Resources\Images\Enemies\CarlTheSnake.png" />
     <Content Include="Resources\Images\Enemies\Landipus.png" />
     <Content Include="Resources\Images\Items\GoldPile.png" />
     <Content Include="Resources\Images\Items\Weapons\Arrow.png" />
