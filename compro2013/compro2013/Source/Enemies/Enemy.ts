@@ -101,10 +101,14 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
     Die() {
-        this.enemies.splice(this.enemies.indexOf(this, 0), 1);
         this.Dispose();
-        this.range.Dispose();
+    }
+
+    Dispose() {
         this.sprite.Dispose();
+        super.Dispose();
+        this.range.Dispose();
+        this.enemies.splice(this.enemies.indexOf(this, 0), 1);
     }
 
     Collided(data: eg.Collision.CollisionData) {

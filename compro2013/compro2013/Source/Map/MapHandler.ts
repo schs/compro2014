@@ -6,24 +6,31 @@ class MapHandler {
     enemies: Enemy[];
     loadingScreen: LoadingScreen;
     zone: string;
-
+    players: Player[];
+    items: Item[];
     public entrances: Entrance[];
     public walls: Wall[];
+    input: eg.Input.InputManager;
 
-    constructor(Scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    
+
+    constructor(Scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, input: eg.Input.InputManager) {
         this.mapLayers = new Array<eg.Graphics.SquareTileMap>();
         this.Scene = Scene;
         this.collisionManager = collisionManager;
+        this.enemies = [];
+        this.players = [];
+        this.items = [];
         this.walls = new Array();
         this.entrances = new Array();
-        this.enemies = [];
+        this.input = input;
         this.propertyHooks = {
             ResourceTileHooks: { "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this)  },
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
+        
         this.loadingScreen = new LoadingScreen(this.Scene);
-
 
     }
 
@@ -32,6 +39,7 @@ class MapHandler {
     }
     
     public load(url: string): void {
+        
         $.getJSON(url, (mapJson) => {
             var preloadInfo = eg.MapLoaders.JSONLoader.Load(mapJson,
                 (result: eg.MapLoaders.IMapLoadedResult) => {
@@ -48,13 +56,31 @@ class MapHandler {
         this.loadingScreen.clearScreen();
     }
 
+    public loadNewMap(url: string) {
+        this.loadingScreen.StartLoad();
+        this.unloadMap();
+        this.load(url);;
+    }
+
     public unloadMap() {
         for (var i in this.walls) {
             this.walls[i].Dispose();
         }
+        for (var i in this.entrances) {
+            this.entrances[i].Dispose;
+        }
+        for (var i in this.mapLayers) {
+            this.mapLayers[i].Dispose();
+        }
+        while (this.enemies.length > 0) {
+            this.enemies[this.enemies.length-1].Dispose();
+        }
+
+        this.enemies = [];
         this.walls = [];
         this.entrances = [];
         this.mapLayers = [];
+        
     }
 
     private loadLayers(layers: eg.Graphics.SquareTileMap[]): void {
@@ -85,8 +111,9 @@ class MapHandler {
     }
     private createEntrance(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
-        this.entrances.push(new Entrance(tile.Position, this, this.collisionManager));
-
+        if (propertyValue == "store") {
+            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Store.json", this, this.collisionManager));
+        }
 
     }
 
@@ -100,12 +127,39 @@ class MapHandler {
             if (Math.random() > .95)
                 this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
         }
+        if(propertyValue == "Player") {
+            if (this.players.length > 0) {
+                this.players[0].movementController.Position = tile.Position.Clone();
+            }
+            else {
+                this.players.push(new Player(tile.Position.X, tile.Position.Y, ["Up", "W"], ["Down", "S"], ["Left", "A"], ["Right", "D"], this.input, this.Scene, this.collisionManager));
 
+            }
+
+        }
     }
 
     public Update(gameTime: eg.GameTime) {
         
         this.loadingScreen.Update(gameTime);
+        
+        if (!this.loadingScreen.loading) {
+
+            for (var index in this.players) {
+                this.players[index].Update(gameTime);
+            }
+
+            for (var i in this.enemies) {
+                this.enemies[i].Update(gameTime, this.players);
+
+
+
+            }
+        } 
+
+
+
+        
     }
 
 
