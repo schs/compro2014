@@ -51,6 +51,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Items\Gold.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapon.ts">
       <SubType>Code</SubType>
