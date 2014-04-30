@@ -21,6 +21,17 @@
          "width":10,
          "x":0,
          "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 203, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "name":"Spawn Tiles",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":10,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":
@@ -42,6 +53,13 @@
             },
          "spacing":0,
          "tileheight":64,
+         "tileproperties":
+            {
+             "66":
+                {
+                 "entrance":"OverWorld"
+                }
+            },
          "tilewidth":64
         }, 
         {
@@ -57,6 +75,36 @@
             },
          "spacing":0,
          "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "firstgid":201,
+         "image":"..\/..\/..\/Resources\/Images\/Locations\/tileset_spawn.png",
+         "imageheight":640,
+         "imagewidth":640,
+         "margin":0,
+         "name":"tileset_spawn",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":64,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "spawn":"BrownSmear"
+                },
+             "1":
+                {
+                 "spawn":"Landipus"
+                },
+             "2":
+                {
+                 "spawn":"Player"
+                }
+            },
          "tilewidth":64
         }],
  "tilewidth":64,
