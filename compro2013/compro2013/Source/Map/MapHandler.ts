@@ -6,17 +6,24 @@ class MapHandler {
     enemies: Enemy[];
     loadingScreen: LoadingScreen;
     zone: string;
-
+    players: Player[];
+    items: Item[];
     public entrances: Entrance[];
     public walls: Wall[];
+    input: eg.Input.InputManager;
 
-    constructor(Scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    
+
+    constructor(Scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, input: eg.Input.InputManager) {
         this.mapLayers = new Array<eg.Graphics.SquareTileMap>();
         this.Scene = Scene;
         this.collisionManager = collisionManager;
+        this.enemies = [];
+        this.players = [];
+        this.items = [];
         this.walls = new Array();
         this.entrances = new Array();
-        this.enemies = [];
+        this.input = input;
         this.propertyHooks = {
             ResourceTileHooks: { "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this)  },
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
@@ -65,8 +72,8 @@ class MapHandler {
         for (var i in this.mapLayers) {
             this.mapLayers[i].Dispose();
         }
-        for (var i in this.enemies) {
-            this.enemies[i].Dispose();
+        while (this.enemies.length > 0) {
+            this.enemies[this.enemies.length-1].Dispose();
         }
 
         this.enemies = [];
@@ -120,12 +127,39 @@ class MapHandler {
             if (Math.random() > .95)
                 this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
         }
+        if(propertyValue == "Player") {
+            if (this.players.length > 0) {
+                this.players[0].movementController.Position = tile.Position.Clone();
+            }
+            else {
+                this.players.push(new Player(tile.Position.X, tile.Position.Y, ["Up", "W"], ["Down", "S"], ["Left", "A"], ["Right", "D"], this.input, this.Scene, this.collisionManager));
 
+            }
+
+        }
     }
 
     public Update(gameTime: eg.GameTime) {
         
         this.loadingScreen.Update(gameTime);
+        
+        if (!this.loadingScreen.loading) {
+
+            for (var index in this.players) {
+                this.players[index].Update(gameTime);
+            }
+
+            for (var i in this.enemies) {
+                this.enemies[i].Update(gameTime, this.players);
+
+
+
+            }
+        } 
+
+
+
+        
     }
 
 
