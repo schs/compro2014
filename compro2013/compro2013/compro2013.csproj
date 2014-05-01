@@ -26,6 +26,7 @@
     <Content Include="Resources\Images\Items\Weapons\Arrow.png" />
     <Content Include="Resources\Images\Items\Weapons\Axe.png" />
     <Content Include="Resources\Images\Items\Weapons\BattleAxe.png" />
+    <Content Include="Resources\Images\Items\Weapons\BlueLightsaber.png" />
     <Content Include="Resources\Images\Items\Weapons\BrownBane.png" />
     <Content Include="Resources\Images\Items\Weapons\Crossbow.png" />
     <Content Include="Resources\Images\Items\Weapons\Lightsaber.png" />
