@@ -17,6 +17,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     animation: eg.Graphics.SpriteAnimation;
     enemies: Enemy[];
     goldDrop: number;
+    items: Item[];
 
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
@@ -28,10 +29,12 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         x: number, y: number, imageSource: eg.Graphics.ImageSource,
         frameCount: number, fps: number, imageSize: number,
         scene: eg.Rendering.Scene2d, collisionManager:
-        eg.Collision.CollisionManager, enemies: Enemy[])
+        eg.Collision.CollisionManager, enemies: Enemy[],
+        items: Item[])
     {
         this.collisionManager = collisionManager;
         this.collisionType = CollisionType.Enemy;
+        this.items = items;
         this.attackTimer = 60;
         this.attacking = false;
         this.sprite = new eg.Graphics.Sprite2d(x, y, imageSource, imageSize, imageSize);
@@ -104,9 +107,11 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
 
     Die() {
         this.Dispose();
+        this.DropGold();
     }
 
     DropGold() {
+        this.items.push(new Gold(this.movementController.Position.X, this.movementController.Position.Y, this.goldDrop, this.scene, this.collisionManager, this.items));
         
     }
 
