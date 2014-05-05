@@ -75,11 +75,15 @@ class MapHandler {
         while (this.enemies.length > 0) {
             this.enemies[this.enemies.length-1].Dispose();
         }
+        while (this.items.length > 0) {
+            this.items[this.items.length - 1].Dispose();
+        }
 
         this.enemies = [];
         this.walls = [];
         this.entrances = [];
         this.mapLayers = [];
+        this.items = [];
         
     }
 
@@ -124,18 +128,26 @@ class MapHandler {
         var tile: eg.Graphics.Sprite2d = details.Tile;
         if (propertyValue == "BrownSmear") {
             if(Math.random() > .95)
-            this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
+            this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
         }
         if (propertyValue == "Landipus") {
             if (Math.random() > .95)
-                this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
+                this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
+        }
+        if (propertyValue == "CarlTheSnake") {
+            if (Math.random() > .95)
+                this.enemies.push(new CarlTheSnake(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
+        }
+        if (propertyValue == "Slug") {
+            if (Math.random() > .95)
+                this.enemies.push(new Slug(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
         }
         if(propertyValue == "Player") {
             if (this.players.length > 0) {
                 this.players[0].movementController.Position = tile.Position.Clone();
             }
             else {
-                this.players.push(new Player(tile.Position.X, tile.Position.Y, ["Up", "W"], ["Down", "S"], ["Left", "A"], ["Right", "D"], this.input, this.Scene, this.collisionManager));
+                this.players.push(new Player(tile.Position.X, tile.Position.Y, ["Up", "W"], ["Down", "S"], ["Left", "A"], ["Right", "D"], this.input, this.Scene, this.collisionManager, this.items));
 
             }
 

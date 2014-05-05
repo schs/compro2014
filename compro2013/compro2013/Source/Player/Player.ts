@@ -6,6 +6,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     score: number;
     pet: Pet;
     hud: HUD;
+    items: Item[];
     inventory: Item[];
     projectiles: Projectile[];
     handLocation: eg.Vector2d;
@@ -25,8 +26,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     attacking: boolean;
     pickUpItem: boolean;
 
-    constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, items: Item[]) {
         this.inventory = [];
+        this.items = items;
         this.projectiles = [];
         this.collisionType = CollisionType.Player;
         this.scene = scene;
@@ -46,7 +48,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.boundingShape.AddChild(this.sprite);
         this.health = 100;
         this.gold = 0;
-        this.inventory.push(new Sword(0, 0, scene, collisionManager));
+        this.inventory.push(new Sword(0, 0, scene, collisionManager, this.items));
         this.EquipItem(0);
         this.attackRotation = 0;
 
@@ -77,7 +79,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
 
     pickUpItems(item: Item) {
-        if (this.inventory.length < 10) { 
+        if (item.type == "Gold") {
+            this.gold += (<Gold>item).amount;
+            item.PickUp();
+        }
+        else if (this.inventory.length < 10) { 
             item.PickUp();
             this.inventory.push(item);
         }
