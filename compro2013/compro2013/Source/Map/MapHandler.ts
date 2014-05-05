@@ -140,7 +140,7 @@ class MapHandler {
         }
         if (propertyValue == "Slug") {
             if (Math.random() > .95)
-                this.enemies.push(new Slug(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
+                this.enemies.push(new Slug(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
         }
         if(propertyValue == "Player") {
             if (this.players.length > 0) {
