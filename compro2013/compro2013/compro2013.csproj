@@ -22,6 +22,7 @@
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Enemies\CarlTheSnake.png" />
     <Content Include="Resources\Images\Enemies\Landipus.png" />
+    <Content Include="Resources\Images\Enemies\Slug.png" />
     <Content Include="Resources\Images\Items\GoldPile.png" />
     <Content Include="Resources\Images\Items\Weapons\Arrow.png" />
     <Content Include="Resources\Images\Items\Weapons\Axe.png" />
@@ -54,6 +55,7 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\CarlTheSnake.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Slug.ts" />
     <TypeScriptCompile Include="Source\Items\Gold.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapon.ts">
