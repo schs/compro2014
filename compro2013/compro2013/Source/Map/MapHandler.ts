@@ -134,6 +134,10 @@ class MapHandler {
             if (Math.random() > .95)
                 this.enemies.push(new CarlTheSnake(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
         }
+        if (propertyValue == "Slug") {
+            if (Math.random() > .95)
+                this.enemies.push(new Slug(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies));
+        }
         if(propertyValue == "Player") {
             if (this.players.length > 0) {
                 this.players[0].movementController.Position = tile.Position.Clone();
