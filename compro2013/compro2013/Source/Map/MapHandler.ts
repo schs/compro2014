@@ -121,6 +121,12 @@ class MapHandler {
         if (propertyValue == "OverWorld") {
             this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/OverWorld.json", this, this.collisionManager));
         }
+        if (propertyValue == "Dungeon01") {
+            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Dungeon01.json", this, this.collisionManager));
+        }
+        if (propertyValue == "Dungeon03") {
+            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Dungeon04.json", this, this.collisionManager));
+        }
 
     }
 

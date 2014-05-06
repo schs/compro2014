@@ -47,7 +47,7 @@
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
-    <Content Include="Source\Map\Maps\Medium Dungeon02.json" />
+    <Content Include="Source\Map\Maps\Dungeon02.json" />
     <Content Include="Source\Map\Maps\OverWorld.json" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -100,9 +100,8 @@
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <Content Include="Source\Map\Maps\Dungeon01.json" />
     <Content Include="Source\Map\Maps\Store.json" />
-    <Content Include="Source\Map\Maps\Easy Dungeon01.json" />
-    <Content Include="Source\Map\Maps\Hard Dungeon03.json" />
-    <Content Include="Source\Map\Maps\Hard Dungeon04.json" />
+    <Content Include="Source\Map\Maps\Dungeon03.json" />
+    <Content Include="Source\Map\Maps\Dungeon04.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
