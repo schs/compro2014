@@ -5,13 +5,13 @@ class Weapon extends Item {
     attackRotation: number;
     attacking: boolean;
 
-    constructor(x: number, y: number, damage: number, knockback: number, type: string, name: string, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager) {
+    constructor(x: number, y: number, damage: number, knockback: number, type: string, name: string, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager, items: Item[]) {
         this.name = name;
         this.damage = damage;
         this.knockback = knockback;
         this.attackRotation = 0;
         this.attacking = false;
-        super(x, y, type, scene, spriteImage, collisionManager);
+        super(x, y, type, scene, spriteImage, collisionManager, items);
     }
 
     Equip() {

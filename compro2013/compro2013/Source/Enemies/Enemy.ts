@@ -16,7 +16,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     sprite: eg.Graphics.Sprite2d;
     animation: eg.Graphics.SpriteAnimation;
     enemies: Enemy[];
-    goldDrop: number;
+    gold: number;
+    items: Item[];
 
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
@@ -28,10 +29,12 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         x: number, y: number, imageSource: eg.Graphics.ImageSource,
         frameCount: number, fps: number, imageSize: number,
         scene: eg.Rendering.Scene2d, collisionManager:
-        eg.Collision.CollisionManager, enemies: Enemy[])
+        eg.Collision.CollisionManager, enemies: Enemy[],
+        items: Item[])
     {
         this.collisionManager = collisionManager;
         this.collisionType = CollisionType.Enemy;
+        this.items = items;
         this.attackTimer = 60;
         this.attacking = false;
         this.sprite = new eg.Graphics.Sprite2d(x, y, imageSource, imageSize, imageSize);
@@ -51,7 +54,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
-        this.goldDrop = Math.floor(Math.random()*10);
+        this.gold = Math.floor(Math.random()*10);
     }
 
     Move() {
@@ -104,9 +107,12 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
 
     Die() {
         this.Dispose();
+        if(this.gold > 0)
+            this.DropGold();
     }
 
     DropGold() {
+        this.items.push(new Gold(this.movementController.Position.X, this.movementController.Position.Y, this.gold, this.scene, this.collisionManager, this.items));
         
     }
 

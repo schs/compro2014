@@ -22,11 +22,13 @@
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Enemies\CarlTheSnake.png" />
     <Content Include="Resources\Images\Enemies\Landipus.png" />
+    <Content Include="Resources\Images\Enemies\Slug.png" />
     <Content Include="Resources\Images\Items\GoldPile.png" />
     <Content Include="Resources\Images\Items\Potions\healthboost.png" />
     <Content Include="Resources\Images\Items\Weapons\Arrow.png" />
     <Content Include="Resources\Images\Items\Weapons\Axe.png" />
     <Content Include="Resources\Images\Items\Weapons\BattleAxe.png" />
+    <Content Include="Resources\Images\Items\Weapons\BlueLightsaber.png" />
     <Content Include="Resources\Images\Items\Weapons\BrownBane.png" />
     <Content Include="Resources\Images\Items\Weapons\Crossbow.png" />
     <Content Include="Resources\Images\Items\Weapons\Lightsaber.png" />
@@ -53,6 +55,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\CarlTheSnake.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Slug.ts" />
     <TypeScriptCompile Include="Source\Items\Gold.ts" />
     <TypeScriptCompile Include="Source\Items\Potions\HealthPotion.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
