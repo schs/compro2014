@@ -10,6 +10,11 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
     collisionManager: eg.Collision.CollisionManager;
 
     constructor(x: number, y: number, type: String, scene: eg.Rendering.Scene2d, spriteImage: eg.Graphics.ImageSource, collisionManager: eg.Collision.CollisionManager, items: Item[], cost?: number) {
+        if (cost)
+            this.cost = cost;
+        else
+            this.cost = 0;
+    
         this.collisionType = CollisionType.Item;
         this.type = type;
         this.items = items;

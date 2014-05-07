@@ -21,8 +21,8 @@ class Game extends eg.Game {
 
     Update(gameTime: eg.GameTime) {
 
-  
-        this.updateCanvasSize();
+        if(!this.mapHandler.loadingScreen.loading)
+            this.updateCanvasSize();
         this.mapHandler.Update(gameTime);
       
     }

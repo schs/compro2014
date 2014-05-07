@@ -80,26 +80,33 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     pickUpItems(item: Item) {
         if (item.type == "Gold") {
-            this.gold += (<Gold>item).amount;
+            this.gold -= item.cost;
             item.PickUp();
         }
         else if (this.inventory.length < 10) { 
             item.PickUp();
+            this.gold -= item.cost;
             this.inventory.push(item);
         }
+
     }
 
 
 
     EquipItem(inventoryindex: number) {
         if (this.inventory.length > inventoryindex) {
-            var tempItem = <MeleeWeapon>this.inventory.splice(inventoryindex, 1)[0];
-            if (this.hand) {
-                this.hand.UnEquip();
-                this.inventory.push(this.hand);
+            var tempItem = <Item>this.inventory.splice(inventoryindex, 1)[0];
+            if (tempItem.type == "HealthPotion") {
+                this.health+=(<HealthPotion>tempItem).DrinkPotion();
             }
-            this.hand = tempItem;
-            this.hand.Equip();
+            else {
+                if (this.hand) {
+                    this.hand.UnEquip();
+                    this.inventory.push(this.hand);
+                }
+                this.hand = (<Weapon>tempItem);
+                this.hand.Equip();
+            }
         }
     }
 

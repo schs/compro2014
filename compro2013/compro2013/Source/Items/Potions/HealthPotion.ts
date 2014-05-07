@@ -1,12 +1,13 @@
 class HealthPotion extends Item {
     name: string;
     using: boolean;
+    potionStrength: number;
 
-    constructor(x: number, y: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager) {
+    constructor(x: number, y: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, items:Item[]) {
         this.name = name;
-
+        this.potionStrength = 15;
         this.using = false;
-        super(x, y, "HealthPotion", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Potions/healthboost.png", 64, 64), collisionManager);
+        super(x, y, "HealthPotion", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Potions/healthboost.png", 64, 64), collisionManager,items);
     }
     Equip() {
         super.Equip();
@@ -15,13 +16,13 @@ class HealthPotion extends Item {
     UnEquip() {
         super.UnEquip();
     }
-    DrinkPotion() {
-        //abstract method
+
+    DrinkPotion(): number {
+        this.Dispose();
+        return this.potionStrength;
+        
     }
 
-    EndPotion() {
-        //abstract method
-    }
 
     Update(gameTime: eg.GameTime, handLocation: eg.Vector2d, playerRotation: number) {
         this.sprite.Position = handLocation.Add(new eg.Vector2d(this.sprite.Size.HalfWidth, 0)).RotateAround(handLocation, playerRotation);
