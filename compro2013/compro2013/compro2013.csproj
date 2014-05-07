@@ -19,6 +19,7 @@
     <Content Include="app.css" />
     <Content Include="default.htm" />
     <Content Include="Resources\Images\Black.png" />
+    <Content Include="Resources\Images\Enemies\Bosses\ToastMonster.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Enemies\CarlTheSnake.png" />
     <Content Include="Resources\Images\Enemies\LandiCrab.png" />
@@ -34,6 +35,8 @@
     <Content Include="Resources\Images\Items\Weapons\BlueLightsaber.png" />
     <Content Include="Resources\Images\Items\Weapons\BrownBane.png" />
     <Content Include="Resources\Images\Items\Weapons\Crossbow.png" />
+    <Content Include="Resources\Images\Items\Weapons\FrostBolt.png" />
+    <Content Include="Resources\Images\Items\Weapons\FrostTome.png" />
     <Content Include="Resources\Images\Items\Weapons\Lightsaber.png" />
     <Content Include="Resources\Images\Items\Weapons\Sword.png" />
     <Content Include="Resources\Images\Locations\Store\tileset_store.png" />
@@ -59,6 +62,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\ToastMonster.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\CarlTheSnake.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiCrab.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slug.ts" />
@@ -120,7 +124,6 @@
     <Folder Include="Resources\Audio\Enemies\" />
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
-    <Folder Include="Source\Enemies\Mobs\Bosses\" />
     <Folder Include="Source\Items\Projectiles\" />
   </ItemGroup>
   <PropertyGroup>
