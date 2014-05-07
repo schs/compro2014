@@ -19,6 +19,7 @@
     <Content Include="app.css" />
     <Content Include="default.htm" />
     <Content Include="Resources\Images\Black.png" />
+    <Content Include="Resources\Images\Enemies\Bosses\ToastMonster.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Enemies\CarlTheSnake.png" />
     <Content Include="Resources\Images\Enemies\LandiCrab.png" />
@@ -60,6 +61,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\ToastMonster.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\CarlTheSnake.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiCrab.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slug.ts" />
@@ -121,7 +123,6 @@
     <Folder Include="Resources\Audio\Enemies\" />
     <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
-    <Folder Include="Source\Enemies\Mobs\Bosses\" />
     <Folder Include="Source\Items\Projectiles\" />
   </ItemGroup>
   <PropertyGroup>
