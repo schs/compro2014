@@ -132,23 +132,24 @@ class MapHandler {
 
     private spawn(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
-        if (propertyValue == "BrownSmear") {
-            if(Math.random() > .95)
-            this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
-        }
-        if (propertyValue == "Landipus") {
-            if (Math.random() > .95)
-                this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
-        }
-        if (propertyValue == "CarlTheSnake") {
-            if (Math.random() > .95)
-                this.enemies.push(new CarlTheSnake(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
-        }
-        if (propertyValue == "Slug") {
-            if (Math.random() > .95)
-                this.enemies.push(new Slug(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
-        }
-        if(propertyValue == "Player") {
+
+        //if (propertyValue == "BrownSmear") {
+        //    if(Math.random() > .95)
+        //    this.enemies.push(new BrownSmear(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
+        //}
+        //if (propertyValue == "Landipus") {
+        //    if (Math.random() > .95)
+        //        this.enemies.push(new Landipus(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
+        //}
+        //if (propertyValue == "CarlTheSnake") {
+        //    if (Math.random() > .95)
+        //        this.enemies.push(new CarlTheSnake(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
+        //}
+        //if (propertyValue == "Slug") {
+        //    if (Math.random() > .95)
+        //        this.enemies.push(new Slug(tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items));
+        //}
+        if (propertyValue == "Player") {
             if (this.players.length > 0) {
                 this.players[0].movementController.Position = tile.Position.Clone();
             }
@@ -157,6 +158,13 @@ class MapHandler {
 
             }
 
+        } else {
+
+            if (Math.random() > .95) {
+                var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items);
+                if (tempEnemy.collisionType == CollisionType.Enemy) 
+                    this.enemies.push(tempEnemy);
+            }
         }
     }
 
