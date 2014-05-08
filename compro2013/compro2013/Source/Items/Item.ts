@@ -28,6 +28,11 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
         this.collisionManager.Monitor(this, true);
     }
 
+    generatePrice(setPrice?: number) {
+        if (setPrice)
+            this.cost = setPrice;
+    }
+
     Dispose() {
         this.sprite.Dispose();
         super.Dispose();
@@ -36,6 +41,7 @@ class Item extends eg.Collision.Collidable implements ICollidableTyped {
 
     PickUp() {
         this.collisionManager.Unmonitor(this);
+        this.items.splice(this.items.indexOf(this, 0), 1);
     }
 
     Equip() {

@@ -84,9 +84,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             item.PickUp();
         }
         else if (this.inventory.length < 10) { 
-            item.PickUp();
-            this.gold -= item.cost;
-            this.inventory.push(item);
+            if (item.cost < this.gold) {
+                item.PickUp();
+                this.gold -= item.cost;
+                this.inventory.push(item);
+            }
         }
 
     }

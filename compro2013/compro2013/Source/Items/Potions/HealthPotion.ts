@@ -9,6 +9,14 @@ class HealthPotion extends Item {
         this.using = false;
         super(x, y, "HealthPotion", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Potions/healthboost.png", 64, 64), collisionManager,items);
     }
+
+    generatePrice(setPrice?: number) {
+        if (setPrice)
+            super.generatePrice(setPrice);
+        else
+            this.cost = this.potionStrength * 2;
+    }
+
     Equip() {
         super.Equip();
     }
