@@ -84,6 +84,7 @@
     <TypeScriptCompile Include="Source\Items\Weapons\Crossbow.ts" />
     <TypeScriptCompile Include="Source\Items\Projectile.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\BattleAxe.ts" />
+    <TypeScriptCompile Include="Source\Items\Weapons\FrostTome.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Lightsaber.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
