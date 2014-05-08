@@ -108,12 +108,14 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     Die() {
         this.Dispose();
         if(this.gold > 0)
-            this.DropGold();
+            this.ItemDrop();
     }
 
-    DropGold() {
+    ItemDrop() {
         this.items.push(new Gold(this.movementController.Position.X, this.movementController.Position.Y, this.gold, this.scene, this.collisionManager, this.items));
-        
+        var rand = Math.floor(Math.random() * 10);
+        if (rand == 1)
+            this.items.push(new HealthPotion(this.movementController.Position.X, this.movementController.Position.Y, this.scene, this.collisionManager, this.items));
     }
 
     Dispose() {
