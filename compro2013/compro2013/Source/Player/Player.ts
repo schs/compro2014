@@ -48,7 +48,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.boundingShape.AddChild(this.sprite);
         this.health = 100;
         this.gold = 0;
-        this.inventory.push(new Sword(0, 0, scene, collisionManager, this.items));
+        this.inventory.push(new Lightsaber(0, 0, scene, collisionManager, this.items));
         this.EquipItem(0);
         this.attackRotation = 0;
 
@@ -84,9 +84,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             item.PickUp();
         }
         else if (this.inventory.length < 10) { 
-            item.PickUp();
-            this.gold -= item.cost;
-            this.inventory.push(item);
+            if (item.cost < this.gold) {
+                item.PickUp();
+                this.gold -= item.cost;
+                this.inventory.push(item);
+            }
         }
 
     }

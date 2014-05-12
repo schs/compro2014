@@ -26,7 +26,7 @@ class MapHandler {
         this.input = input;
         this.propertyHooks = {
             ResourceTileHooks: {
-                "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this), "spawnBoss": this.spawnBoss.bind(this)  },
+                "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this), "spawnBoss": this.spawnBoss.bind(this), "item": this.spawnItem.bind(this) },
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
@@ -158,6 +158,16 @@ class MapHandler {
         var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items);
         if (tempEnemy.collisionType == CollisionType.Enemy)
             this.enemies.push(tempEnemy);
+    }
+
+    private spawnItem(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
+        var tile: eg.Graphics.Sprite2d = details.Tile;
+
+        var tempItem: Item = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.items);
+        if (tempItem.collisionType == CollisionType.Item) {
+            tempItem.generatePrice();
+            this.items.push(tempItem);
+        }
     }
 
     public Update(gameTime: eg.GameTime) {
