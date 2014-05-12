@@ -116,19 +116,7 @@ class MapHandler {
     }
     private createEntrance(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
-        if (propertyValue == "Store") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Store.json", this, this.collisionManager));
-        }
-        if (propertyValue == "OverWorld") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/OverWorld.json", this, this.collisionManager));
-        }
-        if (propertyValue == "Dungeon01") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Dungeon01.json", this, this.collisionManager));
-        }
-        if (propertyValue == "Dungeon03") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Dungeon04.json", this, this.collisionManager));
-        }
-
+            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/" + propertyValue +".json", this, this.collisionManager));
     }
 
     private spawn(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
