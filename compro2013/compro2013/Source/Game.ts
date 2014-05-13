@@ -9,8 +9,6 @@ class Game extends eg.Game {
 
     constructor() {
         super();
-        
-
         this.Scene.DrawArea.style.backgroundColor = "black";
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager, this.Input);
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json");
@@ -20,9 +18,6 @@ class Game extends eg.Game {
     }
 
     Update(gameTime: eg.GameTime) {
-
-        if(!this.mapHandler.loadingScreen.loading)
-            this.updateCanvasSize();
         this.mapHandler.Update(gameTime);
       
     }
