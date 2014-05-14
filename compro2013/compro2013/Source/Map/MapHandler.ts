@@ -55,6 +55,7 @@ class MapHandler {
 
     public loadComplete() {
         this.loadingScreen.clearScreen();
+        
     }
 
     public loadNewMap(url: string) {
@@ -101,11 +102,6 @@ class MapHandler {
         // Add all of the layers to the scenery (so they're drawn)
         for (var i = 0; i < this.mapLayers.length; i++) {
             this.Scene.Add(this.mapLayers[i]);
-        }
-
-        // Update the camera to be in the middle of the map
-        if (this.mapLayers.length > 0) {
-            this.Scene.Camera.Position = this.mapLayers[0].Position;
         }
     }
 

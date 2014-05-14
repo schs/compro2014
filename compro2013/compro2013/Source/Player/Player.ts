@@ -41,8 +41,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.boundingShape = new eg.Graphics.Rectangle(x, y, 64, 64, eg.Graphics.Color.Transparent);
         this.boundingShape.ZIndex = ZIndexing.Player;
         this.sprite = new eg.Graphics.Sprite2d(0, 0, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
-        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
         this.sprite.ZIndex = ZIndexing.Player;
+        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
+        
         super(this.boundingShape.GetDrawBounds());
         this.scene.Add(this.boundingShape);
         this.boundingShape.AddChild(this.sprite);

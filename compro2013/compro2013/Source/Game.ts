@@ -12,12 +12,13 @@ class Game extends eg.Game {
         this.Scene.DrawArea.style.backgroundColor = "black";
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager, this.Input);
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json");
-        
+       
 
        
     }
 
     Update(gameTime: eg.GameTime) {
+        this.updateCanvasSize();
         this.mapHandler.Update(gameTime);
       
     }
