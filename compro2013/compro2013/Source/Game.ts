@@ -15,7 +15,7 @@ class Game extends eg.Game {
         this.mapHandler.load("/Source/Map/Maps/OverWorld.json");
         this.Scene.DrawArea.height = 720;
         this.Scene.DrawArea.width = 1280;
-
+        
 
        
     }

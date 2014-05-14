@@ -15,10 +15,9 @@ class Weapon extends Item {
     }
 
     generatePrice(setPrice?: number) {
-        if (setPrice)
-            super.generatePrice(setPrice);
-        else
+        if (!setPrice) 
             this.cost = (this.damage + this.knockback) * 2;
+        super.generatePrice(setPrice);
     }
 
     Equip() {
