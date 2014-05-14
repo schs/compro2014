@@ -69,7 +69,7 @@ class MapHandler {
             this.walls[i].Dispose();
         }
         for (var i in this.entrances) {
-            this.entrances[i].Dispose;
+            this.entrances[i].Dispose();
         }
         for (var i in this.mapLayers) {
             this.mapLayers[i].Dispose();
