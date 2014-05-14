@@ -41,14 +41,15 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.boundingShape = new eg.Graphics.Rectangle(x, y, 64, 64, eg.Graphics.Color.Transparent);
         this.boundingShape.ZIndex = ZIndexing.Player;
         this.sprite = new eg.Graphics.Sprite2d(0, 0, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
-        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
         this.sprite.ZIndex = ZIndexing.Player;
+        this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
+        
         super(this.boundingShape.GetDrawBounds());
         this.scene.Add(this.boundingShape);
         this.boundingShape.AddChild(this.sprite);
         this.health = 100;
         this.gold = 0;
-        this.inventory.push(new Sword(0, 0, scene, collisionManager, this.items));
+        this.inventory.push(new Lightsaber(0, 0, scene, collisionManager, this.items));
         this.EquipItem(0);
         this.attackRotation = 0;
 
@@ -84,9 +85,11 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
             item.PickUp();
         }
         else if (this.inventory.length < 10) { 
-            item.PickUp();
-            this.gold -= item.cost;
-            this.inventory.push(item);
+            if (item.cost < this.gold) {
+                item.PickUp();
+                this.gold -= item.cost;
+                this.inventory.push(item);
+            }
         }
 
     }

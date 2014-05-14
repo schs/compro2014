@@ -26,7 +26,7 @@ class MapHandler {
         this.input = input;
         this.propertyHooks = {
             ResourceTileHooks: {
-                "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this), "spawnBoss": this.spawnBoss.bind(this)  },
+                "entrance": this.createEntrance.bind(this), "spawn": this.spawn.bind(this), "spawnBoss": this.spawnBoss.bind(this), "item": this.spawnItem.bind(this) },
             ResourceSheetHooks: { "impassable": this.createCollisionMap.bind(this)  },
             LayerHooks: {}
         };
@@ -55,6 +55,7 @@ class MapHandler {
 
     public loadComplete() {
         this.loadingScreen.clearScreen();
+        
     }
 
     public loadNewMap(url: string) {
@@ -102,11 +103,6 @@ class MapHandler {
         for (var i = 0; i < this.mapLayers.length; i++) {
             this.Scene.Add(this.mapLayers[i]);
         }
-
-        // Update the camera to be in the middle of the map
-        if (this.mapLayers.length > 0) {
-            this.Scene.Camera.Position = this.mapLayers[0].Position;
-        }
     }
 
     private createCollisionMap(details: eg.Graphics.Assets.ITileDetails, propertyValue: string){
@@ -116,19 +112,7 @@ class MapHandler {
     }
     private createEntrance(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
-        if (propertyValue == "Store") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Store.json", this, this.collisionManager));
-        }
-        if (propertyValue == "OverWorld") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/OverWorld.json", this, this.collisionManager));
-        }
-        if (propertyValue == "Dungeon01") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Dungeon01.json", this, this.collisionManager));
-        }
-        if (propertyValue == "Dungeon03") {
-            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/Dungeon04.json", this, this.collisionManager));
-        }
-
+            this.entrances.push(new Entrance(tile.Position, "/Source/Map/Maps/" + propertyValue +".json", this, this.collisionManager));
     }
 
     private spawn(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
@@ -158,6 +142,16 @@ class MapHandler {
         var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items);
         if (tempEnemy.collisionType == CollisionType.Enemy)
             this.enemies.push(tempEnemy);
+    }
+
+    private spawnItem(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
+        var tile: eg.Graphics.Sprite2d = details.Tile;
+
+        var tempItem: Item = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.items);
+        if (tempItem.collisionType == CollisionType.Item) {
+            tempItem.generatePrice();
+            this.items.push(tempItem);
+        }
     }
 
     public Update(gameTime: eg.GameTime) {

@@ -14,6 +14,12 @@ class Weapon extends Item {
         super(x, y, type, scene, spriteImage, collisionManager, items);
     }
 
+    generatePrice(setPrice?: number) {
+        if (!setPrice) 
+            this.cost = (this.damage + this.knockback) * 2;
+        super.generatePrice(setPrice);
+    }
+
     Equip() {
         super.Equip();
     }
