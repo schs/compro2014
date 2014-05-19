@@ -25,6 +25,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     attackRotation: number;
     attacking: boolean;
     pickUpItem: boolean;
+    spawnPoint: eg.Vector2d;
+    spawning: boolean;
 
     constructor(x: number, y: number, upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, items: Item[]) {
         this.inventory = [];
@@ -35,6 +37,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.collisions = 0;
         this.handLocation = new eg.Vector2d(x, y);
         this.collisionManager = collisionManager;
+        this.spawnPoint = new eg.Vector2d(x, y);
         this.speed = 200;
         this.score = 0;
         this.pickingUp = false;
@@ -43,7 +46,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.sprite = new eg.Graphics.Sprite2d(0, 0, new eg.Graphics.ImageSource("/Resources/Images/Player/Player.png", 768, 64), 64, 64);
         this.sprite.ZIndex = ZIndexing.Player;
         this.animation = new eg.Graphics.SpriteAnimation(this.sprite.Image, 12, new eg.Size2d(64), 12);
-        
+        this.spawning = false;
         super(this.boundingShape.GetDrawBounds());
         this.scene.Add(this.boundingShape);
         this.boundingShape.AddChild(this.sprite);
@@ -63,8 +66,25 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.pet = new Dennis(x, y, this, scene, collisionManager);
     }
 
-    TakeDamage(amount: number) {
-        this.health -= amount;
+    TakeDamage(amount: number) { 
+        if (!this.spawning) {
+
+            this.health -= amount;
+            if (this.health <= 0)
+                this.Die();
+        }
+        }
+
+    Die() {
+        this.spawning = true;
+
+        this.movementController.Position = this.spawnPoint.Clone();
+        this.health = 100;
+        if (this.gold > 15)
+            this.gold -= 15;
+
+        
+
     }
 
     Attack() {
@@ -163,6 +183,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         for (var projectile in this.projectiles) {
             this.projectiles[projectile].Update(gameTime);
         }
+
+        this.spawning = false;
+
     }
 
     BindInputs(upKeys: string[], downKeys: string[], leftKeys: string[], rightKeys: string[], input: eg.Input.InputManager) {
