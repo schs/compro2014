@@ -143,7 +143,7 @@ class MapHandler {
     private spawnBoss(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
 
-        var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items);
+        var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items, this);
         if (tempEnemy.collisionType == CollisionType.Enemy)
             this.enemies.push(tempEnemy);
     }
