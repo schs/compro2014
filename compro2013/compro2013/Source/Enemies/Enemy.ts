@@ -174,6 +174,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         for (var i in players) {
             if (this.range.IsCollidingWith(players[i]))
                 this.TargetPlayer(players[i]);
+            else this.attacking = false;
         }
 
         this.attackTimer += gameTime.Elapsed.Seconds;
