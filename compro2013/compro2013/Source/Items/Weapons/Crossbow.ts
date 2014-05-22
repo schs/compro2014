@@ -9,7 +9,7 @@
         if (setPrice)
             super.generatePrice(setPrice);
         else
-            super.generatePrice(1000);
+            super.generatePrice(10);
     }
 
     ExecuteAttack(projectiles?: Projectile[]) {

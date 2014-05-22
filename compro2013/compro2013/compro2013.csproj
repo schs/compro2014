@@ -42,6 +42,7 @@
     <Content Include="Resources\Images\Items\Weapons\Sword.png" />
     <Content Include="Resources\Images\Locations\Store\tileset_store.png" />
     <Content Include="Resources\Images\Locations\Store\tileset_store_walls.png" />
+    <Content Include="Resources\Images\Locations\teleporter.png" />
     <Content Include="Resources\Images\Locations\tileset_dungeon.png" />
     <Content Include="Resources\Images\Locations\tileset_dungeon_walls.png" />
     <Content Include="Resources\Images\Locations\tileset_items.png" />
@@ -89,6 +90,7 @@
     <TypeScriptCompile Include="Source\Items\Weapons\BattleAxe.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\FrostTome.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Lightsaber.ts" />
+    <TypeScriptCompile Include="Source\Map\Entrances\BossEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\Walls\Wall.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
@@ -99,7 +101,6 @@
     <TypeScriptCompile Include="Source\Items\Item.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Sword.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\Entrance.ts" />
-    <TypeScriptCompile Include="Source\Map\Entrances\DungeonEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\TentEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\MapHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Enemy.ts" />
