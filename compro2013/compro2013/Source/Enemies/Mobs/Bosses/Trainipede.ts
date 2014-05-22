@@ -7,7 +7,7 @@ class Trainipede extends Enemy {
         this.mapHandler = mapHandler;
     }
     ItemDrop() {
-        this.mapHandler.entrances.push(new Entrance(this.movementController.Position, "/Source/Map/Maps/OverWorld.json", this.mapHandler, this.collisionManager));
+        this.mapHandler.entrances.push(new BossEntrance(this.movementController.Position, this.mapHandler, this.collisionManager, this.scene));
 
     }
 } 
