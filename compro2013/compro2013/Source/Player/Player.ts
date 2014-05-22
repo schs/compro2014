@@ -52,7 +52,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.boundingShape.AddChild(this.sprite);
         this.health = 100;
         this.gold = 0;
-        this.inventory.push(new FrostTome(0, 0, scene, collisionManager, this.items));
+        this.inventory.push(new Sword(0, 0, scene, collisionManager, this.items));
         this.EquipItem(0);
         this.attackRotation = 0;
 
