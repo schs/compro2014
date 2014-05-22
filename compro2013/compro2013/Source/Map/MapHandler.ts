@@ -11,7 +11,7 @@ class MapHandler {
     public entrances: Entrance[];
     public walls: Wall[];
     input: eg.Input.InputManager;
-
+    music: eg.Sound.AudioClip;
     
 
     constructor(Scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, input: eg.Input.InputManager) {
@@ -32,7 +32,8 @@ class MapHandler {
         };
         
         this.loadingScreen = new LoadingScreen(this.Scene);
-
+        
+        
     }
 
     public mapLoadTick(percent: number) {
@@ -51,17 +52,30 @@ class MapHandler {
         }).fail((d, textStatus, error) => {
                 console.error("getJSON failed, status: " + textStatus + ", error: " + error)
         });
+
+        if (this.music) {
+            this.music.Stop();
+            this.music.Dispose();
+
+        }
+
+        if (url.indexOf("OverWorld") > -1)
+            this.music = new eg.Sound.AudioClip("/Resources/Audio/Music/Dungeon.mp3", new eg.Sound.AudioSettings(true, 100, true));
+        else
+            this.music = new eg.Sound.AudioClip("/Resources/Audio/Music/Dub.mp3", new eg.Sound.AudioSettings(true, 100, true));
     }
 
     public loadComplete() {
         this.loadingScreen.clearScreen();
-        
+        this.music.Play();
     }
 
     public loadNewMap(url: string) {
         this.loadingScreen.StartLoad();
         this.unloadMap();
         this.load(url);;
+
+        
     }
 
     public unloadMap() {

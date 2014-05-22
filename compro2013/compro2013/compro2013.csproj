@@ -18,6 +18,8 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="default.htm" />
+    <Content Include="Resources\Audio\Music\Dub.mp3" />
+    <Content Include="Resources\Audio\Music\Dungeon.mp3" />
     <Content Include="Resources\Images\Black.png" />
     <Content Include="Resources\Images\Enemies\Bosses\ToastMonster.png" />
     <Content Include="Resources\Images\Enemies\Bosses\Trainipede.png" />
@@ -103,7 +105,6 @@
     <TypeScriptCompile Include="Source\Items\Item.ts" />
     <TypeScriptCompile Include="Source\Items\Weapons\Sword.ts" />
     <TypeScriptCompile Include="Source\Map\Entrances\Entrance.ts" />
-    <TypeScriptCompile Include="Source\Map\Entrances\TentEntrance.ts" />
     <TypeScriptCompile Include="Source\Map\MapHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Enemy.ts" />
     <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
@@ -129,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Audio\Enemies\" />
-    <Folder Include="Resources\Audio\Music\" />
     <Folder Include="Resources\Audio\Player\" />
     <Folder Include="Source\Items\Projectiles\" />
   </ItemGroup>
