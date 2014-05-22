@@ -119,7 +119,11 @@ class MapHandler {
         var tile: eg.Graphics.Sprite2d = details.Tile;
         if (propertyValue == "Player") {
             if (this.players.length > 0) {
-                this.players[0].movementController.Position = tile.Position.Clone();
+                for (var i in this.players) { 
+                this.players[i].movementController.Position = tile.Position.Clone();
+                    this.players[i].spawnPoint = tile.Position.Clone();
+                    this.players[i].pet.movementController.Position = tile.Position.Clone();
+                    }
             }
             else {
                 this.players.push(new Player(tile.Position.X, tile.Position.Y, ["Up", "W"], ["Down", "S"], ["Left", "A"], ["Right", "D"], this.input, this.Scene, this.collisionManager, this.items));
@@ -139,7 +143,7 @@ class MapHandler {
     private spawnBoss(details: eg.Graphics.Assets.ITileDetails, propertyValue: string) {
         var tile: eg.Graphics.Sprite2d = details.Tile;
 
-        var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items);
+        var tempEnemy: Enemy = new window[propertyValue](tile.Position.X, tile.Position.Y, this.Scene, this.collisionManager, this.enemies, this.items, this);
         if (tempEnemy.collisionType == CollisionType.Enemy)
             this.enemies.push(tempEnemy);
     }

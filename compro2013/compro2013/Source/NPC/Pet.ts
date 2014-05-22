@@ -38,7 +38,7 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         this.speed = speed;
         this.knockback = 2;
         this.scene.Add(this.sprite);
-        this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 75));
+        this.range = new eg.Collision.Collidable(new eg.Bounds.BoundingCircle(this.sprite.Position, 350));
         this.collisionManager.Monitor(this);
         this.movementController = new eg.MovementControllers.LinearMovementController(new Array<eg.IMoveable>(this.range.Bounds, this.Bounds, this.sprite), this.speed, true);
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
@@ -70,15 +70,23 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
         
 }
 
-    Move(position: eg.Vector2d) {
+    Move(position: eg.Vector2d, player?: boolean) {
+
         var xSide: number = this.movementController.Position.X - position.X;
         var ySide: number = this.movementController.Position.Y - position.Y;
         var rotation: number = Math.atan2(xSide, ySide);
         this.movementController.Rotation = -rotation - 1.5;
-        this.movementController.Position.X -= this.speed * Math.sin(rotation);
-        this.movementController.Position.Y -= this.speed * Math.cos(rotation);
+        if (player) {
+            this.movementController.Position.X -= Math.min((Math.abs(xSide)/12),this.speed) * Math.sin(rotation);
+            this.movementController.Position.Y -= Math.min((Math.abs(ySide)/12),this.speed) * Math.cos(rotation);
+        }
+        else{
+            this.movementController.Position.X -= this.speed * Math.sin(rotation);
+            this.movementController.Position.Y -= this.speed * Math.cos(rotation);
+        }
         if (!this.animation.IsPlaying())
             this.animation.Play(true);
+  
     }
 
     
@@ -135,8 +143,8 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
                 this.movementController.Position = new eg.Vector2d(tempPostion.X + depth.X, this.movementController.Position.Y + this.pathfind.Y);
             }
         }
-        if (collider == this.targetedPlayer) {
-            this.attacking = false;
+        if (collider == this.targetedEnemy) {
+            this.attacking = true;
 
         }
     }
@@ -145,24 +153,35 @@ class Pet extends eg.Collision.Collidable implements ICollidableTyped {
     Update(gameTime: eg.GameTime) {
         this.movementController.Update(gameTime);
       
+
         
 
         this.attackTimer += gameTime.Elapsed.Seconds;
-        if (this.attacking && this.attackTimer > .5 / this.attackspeed) {
-            this.targetedEnemy.TakeDamage(this.damage, this.knockback);
-            this.attackTimer = 0;
-        }
 
         if (!this.range.IsCollidingWith(this.targetedPlayer)) {
-            this.Move(this.targetedPlayer.movementController.Position);
+            this.targetedEnemy = null;
+            
+            this.Move(this.targetedPlayer.movementController.Position, true);
 
         }
-        else if (this.targetedEnemy) {
-            this.Move(this.targetedEnemy.movementController.Position);
+        else if (this.targetedEnemy && this.targetedEnemy.alive) {
+            if (this.IsCollidingWith(this.targetedEnemy)) {
+                if (this.attacking && this.attackTimer > this.attackspeed) {
+                    this.targetedEnemy.TakeDamage(this.damage, this.knockback);
+                    this.attackTimer = 0;
+
+                }
+            }
+            else 
+             this.Move(this.targetedEnemy.movementController.Position);
+        }
+        else if (this.range.IsCollidingWith(this.targetedPlayer) && !this.IsCollidingWith(this.targetedPlayer)) {
+            this.Move(this.targetedPlayer.movementController.Position, true);
         }
         else {
-            this.animation.Stop(true);   
+            this.animation.Stop(true);
         }
+        
 
 
         this.animation.Update(gameTime);
