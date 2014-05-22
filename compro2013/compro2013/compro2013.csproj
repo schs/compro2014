@@ -21,6 +21,7 @@
     <Content Include="Resources\Audio\Music\Dub.mp3" />
     <Content Include="Resources\Audio\Music\Dungeon.mp3" />
     <Content Include="Resources\Images\Black.png" />
+    <Content Include="Resources\Images\Enemies\Bosses\DooDooChicken.png" />
     <Content Include="Resources\Images\Enemies\Bosses\ToastMonster.png" />
     <Content Include="Resources\Images\Enemies\Bosses\Trainipede.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
@@ -67,6 +68,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\DooDooChicken.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Kipper.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiRay.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\ToastMonster.ts" />
