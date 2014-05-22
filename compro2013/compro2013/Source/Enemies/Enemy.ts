@@ -3,6 +3,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     circle: eg.Graphics.Circle;
     attacking: boolean;
     health: number;
+    alive: boolean;
     damage: number;
     attackspeed: number;
     speed: number;
@@ -54,7 +55,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
-        this.gold = Math.floor(Math.random()*10);
+        this.gold = Math.floor(Math.random() * 10);
+        this.alive = true;
     }
 
     Move() {
@@ -106,9 +108,12 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     }
 
     Die() {
-        this.Dispose();
-        if(this.gold > 0)
-            this.ItemDrop();
+        if (this.alive) {
+            this.alive = false;
+            this.Dispose();
+            if (this.gold > 0)
+                this.ItemDrop();
+        }
     }
 
     ItemDrop() {
@@ -174,10 +179,11 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         for (var i in players) {
             if (this.range.IsCollidingWith(players[i]))
                 this.TargetPlayer(players[i]);
+            else this.attacking = false;
         }
 
         this.attackTimer += gameTime.Elapsed.Seconds;
-        if (this.attacking && this.attackTimer > .5 / this.attackspeed) {
+        if (this.attacking && this.attackTimer > this.attackspeed) {
             this.targetedPlayer.TakeDamage(this.damage);
             this.attackTimer = 0;
         }

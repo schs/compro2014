@@ -23,6 +23,7 @@
     <Content Include="Resources\Images\Enemies\Bosses\Trainipede.png" />
     <Content Include="Resources\Images\Enemies\BrownSmear.png" />
     <Content Include="Resources\Images\Enemies\CarlTheSnake.png" />
+    <Content Include="Resources\Images\Enemies\Kipper.png" />
     <Content Include="Resources\Images\Enemies\LandiCrab.png" />
     <Content Include="Resources\Images\Enemies\Landipus.png" />
     <Content Include="Resources\Images\Enemies\Landiray.png" />
@@ -64,6 +65,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Kipper.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiRay.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\ToastMonster.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\Trainipede.ts" />
