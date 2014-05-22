@@ -2,7 +2,7 @@
 
     constructor(x: number, y: number, scene: eg.Rendering.Scene2d, collisionManager: eg.Collision.CollisionManager, items: Item[]) {
         
-        super(x, y, 50, 15, "Crossbow", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Weapons/Crossbow.png", 64, 64), collisionManager, items);
+        super(x, y, 35, 15, "Crossbow", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Weapons/Crossbow.png", 64, 64), collisionManager, items);
     }
 
     generatePrice(setPrice?: number) {
