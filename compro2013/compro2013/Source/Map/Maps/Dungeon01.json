@@ -42,7 +42,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/..\/Resources\/Images\/Locations\/tileset_dungeon.png",
+         "image":"Resources\/Images\/Locations\/tileset_dungeon.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,
@@ -57,7 +57,7 @@
         }, 
         {
          "firstgid":101,
-         "image":"..\/..\/..\/Resources\/Images\/Locations\/tileset_dungeon_walls.png",
+         "image":"Resources\/Images\/Locations\/tileset_dungeon_walls.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,
@@ -72,7 +72,7 @@
         }, 
         {
          "firstgid":201,
-         "image":"..\/..\/..\/Resources\/Images\/Locations\/tileset_spawn.png",
+         "image":"Resources\/Images\/Locations\/tileset_spawn.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,

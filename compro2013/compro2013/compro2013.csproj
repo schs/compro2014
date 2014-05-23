@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="Source\Enemies\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\DooDooChicken.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Kipper.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiRay.ts" />

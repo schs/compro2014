@@ -19,7 +19,6 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     enemies: Enemy[];
     gold: number;
     items: Item[];
-
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
@@ -55,7 +54,8 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.pathfind = new eg.Vector2d(this.speed, this.speed);
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
-        this.gold = Math.floor(Math.random() * 10);
+        this.gold = Math.floor(Math.random() * (this.health / 2));
+
         this.alive = true;
     }
 

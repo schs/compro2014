@@ -4,7 +4,7 @@ class BossEntrance extends Entrance {
 
     constructor(position: eg.Vector2d, mapHandler: MapHandler, collisionManager: eg.Collision.CollisionManager, scene: eg.Rendering.Scene2d) {
 
-        this.sprite = new eg.Graphics.Sprite2d(position.X, position.Y, new eg.Graphics.ImageSource("../../../Resources/Images/Locations/teleporter.png", 64, 64), 64,64);
+        this.sprite = new eg.Graphics.Sprite2d(position.X, position.Y, new eg.Graphics.ImageSource("Resources/Images/Locations/teleporter.png", 64, 64), 64,64);
         this.sprite.ZIndex = ZIndexing.Entrance;
         scene.Add(this.sprite);
 

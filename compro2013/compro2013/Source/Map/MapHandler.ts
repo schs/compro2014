@@ -60,9 +60,9 @@ class MapHandler {
         }
 
         if (url.indexOf("OverWorld") > -1)
-            this.music = new eg.Sound.AudioClip("../../Resources/Audio/Music/Dungeon.mp3", new eg.Sound.AudioSettings(true, 100, true));
+            this.music = new eg.Sound.AudioClip("Resources/Audio/Music/Dungeon.mp3", new eg.Sound.AudioSettings(true, 100, true));
         else
-            this.music = new eg.Sound.AudioClip("../../Resources/Audio/Music/Dub.mp3", new eg.Sound.AudioSettings(true, 100, true));
+            this.music = new eg.Sound.AudioClip("Resources/Audio/Music/Dub.mp3", new eg.Sound.AudioSettings(true, 100, true));
     }
 
     public loadComplete() {
