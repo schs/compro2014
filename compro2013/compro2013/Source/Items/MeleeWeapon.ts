@@ -47,7 +47,7 @@ class MeleeWeapon extends Weapon {
 
     Update(gameTime: eg.GameTime, handLocation: eg.Vector2d, playerRotation: number) {
         if (this.attacking)
-            this.attackRotation += .6;
+            this.attackRotation += .3;
 
         if (this.attackRotation >= 0) {
             this.EndAttack();

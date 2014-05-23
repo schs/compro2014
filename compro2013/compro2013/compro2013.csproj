@@ -84,7 +84,6 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
-    <TypeScriptCompile Include="Source\Enemies\Mobs\EnemyHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Landipus.ts" />
     <TypeScriptCompile Include="Source\Helpers\BoundsHelper.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\CollisionType.ts" />
@@ -101,7 +100,6 @@
     <TypeScriptCompile Include="Source\Map\Weather\DayNight.ts" />
     <TypeScriptCompile Include="Scripts\endgate-0.2.1.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Source\Enemies\Mobs\Slime.ts" />
     <TypeScriptCompile Include="Source\Game.ts" />
     <TypeScriptCompile Include="Source\GUI\LoadingScreen.ts" />
     <TypeScriptCompile Include="Source\Items\Item.ts" />
@@ -109,7 +107,6 @@
     <TypeScriptCompile Include="Source\Map\Entrances\Entrance.ts" />
     <TypeScriptCompile Include="Source\Map\MapHandler.ts" />
     <TypeScriptCompile Include="Source\Enemies\Enemy.ts" />
-    <TypeScriptCompile Include="Source\Map\Weather\Weather.ts" />
     <TypeScriptCompile Include="Source\GUI\HUD.ts" />
     <TypeScriptCompile Include="Source\NPC\Dennis.ts" />
     <TypeScriptCompile Include="Source\NPC\Pet.ts" />

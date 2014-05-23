@@ -12,7 +12,7 @@ class Game extends eg.Game {
         super(canvas);
         this.Scene.DrawArea.style.backgroundColor = "black";
         this.mapHandler = new MapHandler(this.Scene, this.CollisionManager, this.Input);
-        this.mapHandler.load("/Source/Map/Maps/OverWorld.json");
+        this.mapHandler.load("Source/Map/Maps/OverWorld.json");
         this.Scene.DrawArea.height = 720;
         this.Scene.DrawArea.width = 1280;
         

@@ -7,7 +7,7 @@ class HealthPotion extends Item {
         this.name = name;
         this.potionStrength = 15;
         this.using = false;
-        super(x, y, "HealthPotion", scene, new eg.Graphics.ImageSource("/Resources/Images/Items/Potions/healthboost.png", 64, 64), collisionManager,items);
+        super(x, y, "HealthPotion", scene, new eg.Graphics.ImageSource("../../../Resources/Images/Items/Potions/healthboost.png", 64, 64), collisionManager,items);
     }
 
     generatePrice(setPrice?: number) {
