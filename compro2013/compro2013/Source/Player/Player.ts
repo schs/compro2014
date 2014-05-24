@@ -80,8 +80,8 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
         this.movementController.Position = this.spawnPoint.Clone();
         this.health = 100;
-        if (this.gold >= 100)
-            this.gold -= 100;
+        if (this.gold >= 500)
+            this.gold -= 500;
         else
             this.gold = 0;
 
