@@ -194,7 +194,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         }, upKeys, rightKeys, downKeys, leftKeys);
 
         input.Mouse.OnClick.Bind(this.Attack.bind(this));
-        input.Keyboard.OnCommandUp("Enter", this.Attack.bind(this));
+        input.Keyboard.OnCommandUp("Return", this.Attack.bind(this));
 
         input.Keyboard.OnCommandDown("e", () => {
             this.pickingUp = true;

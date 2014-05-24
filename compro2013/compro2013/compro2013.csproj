@@ -29,7 +29,7 @@
     <Content Include="Resources\Images\Enemies\Kipper.png" />
     <Content Include="Resources\Images\Enemies\LandiCrab.png" />
     <Content Include="Resources\Images\Enemies\Landipus.png" />
-    <Content Include="Resources\Images\Enemies\Landiray.png" />
+    <Content Include="Resources\Images\Enemies\LandiRay.png" />
     <Content Include="Resources\Images\Enemies\Slug.png" />
     <Content Include="Resources\Images\Items\GoldPile.png" />
     <Content Include="Resources\Images\Items\Potions\healthboost.png" />
@@ -68,6 +68,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\DooDooChicken.ts" />
+    <TypeScriptCompile Include="Source\Enemies\Mobs\Landipus.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Kipper.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiRay.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Bosses\ToastMonster.ts" />
@@ -83,7 +84,6 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Source\Items\Weapons\Axe.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\BrownSmear.ts" />
-    <TypeScriptCompile Include="Source\Enemies\Mobs\Landipus.ts" />
     <TypeScriptCompile Include="Source\Helpers\BoundsHelper.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\CollisionType.ts" />
     <TypeScriptCompile Include="Source\Helpers\Enums\ZIndexing.ts" />
