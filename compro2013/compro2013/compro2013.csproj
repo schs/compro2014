@@ -77,6 +77,7 @@
     <TypeScriptCompile Include="Source\Enemies\Mobs\LandiCrab.ts" />
     <TypeScriptCompile Include="Source\Enemies\Mobs\Slug.ts" />
     <TypeScriptCompile Include="Source\Items\Gold.ts" />
+    <TypeScriptCompile Include="Source\Items\Potions\SpeedBoost.ts" />
     <TypeScriptCompile Include="Source\Items\Potions\HealthPotion.ts" />
     <TypeScriptCompile Include="Source\Items\RangedWeapon.ts" />
     <TypeScriptCompile Include="Source\Items\Weapon.ts">

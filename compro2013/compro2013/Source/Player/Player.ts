@@ -21,6 +21,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
     collisionManager: eg.Collision.CollisionManager;
     health: number;
     gold: number;
+    speedTimer: number;
     pickingUp: boolean;
     attackRotation: number;
     attacking: boolean;
@@ -40,6 +41,7 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         this.spawnPoint = new eg.Vector2d(x, y);
         this.speed = 200;
         this.score = 0;
+        this.speedTimer = 0;
         this.pickingUp = false;
         this.boundingShape = new eg.Graphics.Rectangle(x, y, 64, 64, eg.Graphics.Color.Transparent);
         this.boundingShape.ZIndex = ZIndexing.Player;
@@ -117,11 +119,22 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
 
     EquipItem(inventoryindex: number) {
         if (this.inventory.length > inventoryindex) {
-            var tempItem = <Item>this.inventory.splice(inventoryindex, 1)[0];
-            if (tempItem.type == "HealthPotion") {
+
+            if (this.inventory[inventoryindex].type == "HealthPotion") {
+                var tempItem = <Item>this.inventory.splice(inventoryindex, 1)[0];
                 this.health+=(<HealthPotion>tempItem).DrinkPotion();
             }
+            else if (this.inventory[inventoryindex].type == "SpeedBoost") {
+
+                if (this.movementController.MoveSpeed() <= this.speed && this.speedTimer > 15) {
+                    var tempItem = <Item>this.inventory.splice(inventoryindex, 1)[0];
+                    this.speedTimer = 0;
+                    this.movementController.MoveSpeed(this.movementController.MoveSpeed() + (<SpeedBoost>tempItem).DrinkPotion());
+                  
+                }
+                }
             else {
+                var tempItem = <Item>this.inventory.splice(inventoryindex, 1)[0];
                 if (this.hand) {
                     this.hand.UnEquip();
                     this.inventory.push(this.hand);
@@ -182,7 +195,9 @@ class Player extends eg.Collision.Collidable implements eg.IUpdateable, ICollida
         for (var projectile in this.projectiles) {
             this.projectiles[projectile].Update(gameTime);
         }
-
+        this.speedTimer += gameTime.Elapsed.Seconds;
+        if (this.speedTimer > 15)
+            this.movementController.MoveSpeed(this.speed);
         this.spawning = false;
 
     }

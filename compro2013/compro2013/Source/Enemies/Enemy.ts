@@ -22,7 +22,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
     imageSource: eg.Graphics.ImageSource;
     scene: eg.Rendering.Scene2d;
     movementController: eg.MovementControllers.LinearMovementController;
-
+    score: number;
 
     constructor(health: number, damage: number,
         attackspeed: number, speed: number,
@@ -55,7 +55,7 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         this.lastPosition = this.movementController.Position.Clone();
         this.animation.Play(true);
         this.gold = Math.floor(Math.random() * (this.health / 2));
-
+        this.score = this.health + this.damage + this.speed;
         this.alive = true;
     }
 
@@ -113,7 +113,9 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
             this.Dispose();
             if (this.gold > 0)
                 this.ItemDrop();
+            this.targetedPlayer.score += this.score;
         }
+
     }
 
     ItemDrop() {
@@ -121,6 +123,9 @@ class Enemy extends eg.Collision.Collidable implements ICollidableTyped {
         var rand = Math.floor(Math.random() * 10);
         if (rand == 1)
             this.items.push(new HealthPotion(this.movementController.Position.X, this.movementController.Position.Y, this.scene, this.collisionManager, this.items));
+        else if (rand == 2)
+            this.items.push(new SpeedBoost(this.movementController.Position.X, this.movementController.Position.Y, this.scene, this.collisionManager, this.items));
+    
     }
 
     Dispose() {
