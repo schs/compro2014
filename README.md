@@ -1,7 +1,7 @@
-compro2013
+compro2014
 ==========
 
-ComPro 2013 Semester Game
+ComPro 2014 Semester Game
 
 This game was created by students of SCHS.
 
